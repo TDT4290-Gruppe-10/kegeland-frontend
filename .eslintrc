@@ -1,0 +1,108 @@
+{
+	"settings": {
+		"import/resolver": {
+			"typescript": {
+				"extensions": [".ts", ".tsx", ".js", ".jsx", ".d.ts"]
+			}
+		}
+	},
+	"env": {
+		"browser": true,
+		"es2021": true,
+		"jest/globals": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:react/recommended",
+		"airbnb",
+		"prettier"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"plugins": ["react", "@typescript-eslint", "react-hooks", "jest"],
+	"globals": {
+		"React": true,
+		"JSX": true
+	},
+	"rules": {
+		"import/extensions": [
+			"error",
+			"ignorePackages",
+			{
+				"ts": "never",
+				"tsx": "never"
+			}
+		],
+		"jsx-a11y/label-has-associated-control": [
+			2,
+			{
+				"labelComponents": ["Label"],
+				"labelAttributes": ["label"],
+				"depth": 3
+			}
+		],
+		"jsx-a11y/anchor-is-valid": [
+			"error",
+			{
+				"components": ["Link"],
+				"specialLink": ["to", "navTo"]
+			}
+		],
+		"linebreak-style": 0,
+		"no-tabs": [
+			"warn",
+			{
+				"allowIndentationTabs": true
+			}
+		],
+		"no-console": "warn",
+		"no-shadow": "off",
+		"no-unused-vars": "off",
+		"no-use-before-define": "off",
+		"no-undef": "off",
+		"react-hooks/exhaustive-deps": "warn",
+		"react-hooks/rules-of-hooks": "error",
+		"camelcase": "off",
+		"@typescript-eslint/camelcase": "off",
+		"react/jsx-filename-extension": [
+			"warn",
+			{
+				"extensions": [".tsx"]
+			}
+		],
+		"react/jsx-indent-props": [2, "tab"],
+		"react/require-default-props": ["warn"],
+		"spaced-comment": "off",
+		"semi": ["error", "always"],
+		"@typescript-eslint/ban-types": [
+			"warn",
+			{
+				"types": {
+					"object": false,
+					"Object": false
+				},
+				"extendDefaults": true
+			}
+		],
+		"@typescript-eslint/explicit-module-boundary-types": "off",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/no-shadow": ["error"],
+		"@typescript-eslint/no-use-before-define": [
+			"error",
+			{
+				"functions": false
+			}
+		],
+		"@typescript-eslint/no-unused-vars": "warn",
+		"no-continue": 0,
+		"no-bitwise": 0
+	}
+}
