@@ -1,25 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { arrayBuffer } from "stream/consumers";
+import SidePanel from "./components/SidePanel";
 
 function App() {
+  const menyItems = ["All patients", "! Low Activity", "FemFit Patients"]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>Hello</div>
+
+      {SidePanel(menyItems, "All patients")}
+    </>
   );
 }
 
