@@ -1,27 +1,34 @@
-function sidepanel(menyItems: string[], valgt: string) {
-    console.log(menyItems, valgt)
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { menuItemsType } from '../pages/Patients/Patients'
+
+
+
+function Sidepanel(menuItems: menuItemsType, activePage: string) {
+
     return (
         <div className="sidepanel">
             <div style={{ height: "100px" }}></div>
-            {menyItems.map((element) => (
-                <div className="sidepanelElement" >
-                    {element === valgt ? (
-                        <>
+            {Object.entries(menuItems).map(([menuItem, menuItemText]) => (
+                <>
+                    {menuItem === activePage ? (
+                        <div className="sidepanelElement" >
                             <div className="bluebox"></div>
-                            <div className="sidepanelText">
-                                {element}
+                            <div className="sidepanelText" >
+                                {menuItemText}
                             </div>
-                        </>
-                    ) : (
-                        <div className="sidepanelText">
-                            {element}
                         </div>
+                    ) : (
+                        <Link className="sidepanelElement" to={"/" + menuItem}>
+                            <div className="sidepanelText" >
+                                {menuItemText}
+                            </div>
+                        </Link>
                     )}
-                </div>
+                </>
             ))
             }
         </div >
     );
 }
 
-export default sidepanel;
+export default Sidepanel;
