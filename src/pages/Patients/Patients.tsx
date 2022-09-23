@@ -1,55 +1,44 @@
 import { useState } from "react";
-import { Route, Routes, useLinkClickHandler, useLocation } from "react-router-dom";
+import { Route, Routes, useLinkClickHandler, useLocation, useNavigate } from "react-router-dom";
 import SidePanel from "../../components/SidePanel";
-import FemFitOverviewPage from "../Patient/FemFit";
+import FemFitOverviewPage from "../Patient/FemFitPatient";
 import AllPatientsPage from "./AllPatients";
 import LowActivityPatients from "./LowActivityPatients";
+import Header from "../../components/Header";
+import { getTextFromkey, menuItemsType } from "../../utils/Things";
 
-export type menuItemsType = {
-    AllPatients: string;
-    LowActivityPatients: string;
-    FemFitPatients: string;
-}
 
-const menuItems = {
+export const patientsMenuItems: menuItemsType = {
     AllPatients: "All my patients",
     LowActivityPatients: "! Low activity patients",
     FemFitPatients: "Femfit patitents",
     More: "More..."
 }
 
-const keys = Object.keys(menuItems)
+export const patientsMenuItemskeys = Object.keys(patientsMenuItems)
 
 
 const PatientsPage = () => {
     const pathname = useLocation().pathname.split('/')
-    console.log("pathname", pathname, pathname[1] === keys[0])
+    const activePage: string = pathname[1] === '' ? patientsMenuItemskeys[0] : pathname[1]
 
-    const activePage = pathname[1] === '' ? Object.keys(menuItems)[0] : pathname[1]
+    const navigate = useNavigate()
 
+    const handleChangePath = (menuItem: string) => {
+        navigate('/' + menuItem)
+    }
     return (
         <div className="container">
-            {SidePanel(menuItems, activePage)}
-            {pathname[1] === '' || pathname[1] === keys[0] ? <AllPatientsPage /> : <></>}
-            {pathname[1] === keys[1] ? <LowActivityPatients /> : <></>}
-            {pathname[1] === keys[2] ? <FemFitOverviewPage /> : <></>}
+            {SidePanel(patientsMenuItems, activePage, handleChangePath)}
+            {Header(getTextFromkey(patientsMenuItems, activePage))}
+            <div className="content">
+                {activePage === '' || activePage === patientsMenuItemskeys[0] ? <AllPatientsPage /> : <></>}
+                {activePage === patientsMenuItemskeys[1] ? <LowActivityPatients /> : <></>}
+                {activePage === patientsMenuItemskeys[2] ? <FemFitOverviewPage /> : <></>}
+            </div>
         </div>
     )
 
 }
 
-const DefaultPatientsPage = () => {
-
-
-
-    return (
-        <Routes>
-            <Route path="/*" element={<PatientsPage />} />
-            <Route path={menuItems.AllPatients} element={<PatientsPage />} />
-            <Route path={menuItems.LowActivityPatients} element={<PatientsPage />} />
-            <Route path={menuItems.FemFitPatients} element={<PatientsPage />} />
-        </Routes>
-    );
-}
-
-export default DefaultPatientsPage;
+export default PatientsPage;

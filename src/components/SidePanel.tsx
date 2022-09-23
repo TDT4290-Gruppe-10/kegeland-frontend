@@ -1,9 +1,13 @@
+import { MouseEventHandler } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { menuItemsType } from '../pages/Patients/Patients'
+import { menuItemsType } from "../utils/Things";
 
 
 
-function Sidepanel(menuItems: menuItemsType, activePage: string) {
+function Sidepanel(menuItems: menuItemsType, activePage: string, handleNavigation: (menuItem: string) => void) {
+
+    const navigate = useNavigate()
+
 
     return (
         <div className="sidepanel">
@@ -18,11 +22,11 @@ function Sidepanel(menuItems: menuItemsType, activePage: string) {
                             </div>
                         </div>
                     ) : (
-                        <Link className="sidepanelElement" to={"/" + menuItem}>
+                        <div key={menuItem} className="sidepanelElement" onClick={() => handleNavigation(menuItem)}>
                             <div className="sidepanelText" >
                                 {menuItemText}
                             </div>
-                        </Link>
+                        </div>
                     )}
                 </>
             ))
