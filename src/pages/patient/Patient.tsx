@@ -15,11 +15,12 @@ export const patientMenuItems: menuItemsType = {
 export const patientMenuItemskeys = Object.keys(patientMenuItems)
 
 const PatientPage = () => {
-    const pathname = useLocation().pathname.split('/').pop()
-    const activePage = pathname === undefined || pathname === '' ? patientMenuItems.Overview : pathname
+    const pathname = useLocation().pathname.split('/')
+    const activePage = pathname.pop() ?? patientMenuItemskeys[0]
     const navigate = useNavigate()
     const handleChangePath = (menuItem: string) => {
-        navigate(menuItem)
+        const path = pathname.join('/') + '/' + menuItem
+        navigate(path)
     }
 
     return (
