@@ -1,8 +1,6 @@
-import { WrapText } from "@material-ui/icons";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Patient from "../../components/Patient";
-import { patientsMenuItemskeys } from "./Patients";
-import { Wrap, WrapItem } from '@chakra-ui/react'
+import { Wrap} from '@chakra-ui/react'
 
 function AllPatientsPage() {
     const navigation = useNavigate()
