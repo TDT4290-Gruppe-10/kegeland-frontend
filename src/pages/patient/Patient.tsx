@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import SidePanel from "../../components/SidePanel";
 import { getTextFromkey, menuItemsType } from "../../utils/Things";
@@ -7,9 +7,9 @@ import OverviewPatientPage from "./OverviewPatient";
 
 
 export const patientMenuItems: menuItemsType = {
-    Overview: "Overview",
-    AllExcersices: "All Excercises",
-    FemFitExcersicees: "Femfit patitents",
+    overview: "Overview",
+    allexcersies: "All Excercises",
+    femfitexcersies: "Femfit Excercises",
 }
 
 export const patientMenuItemskeys = Object.keys(patientMenuItems)
@@ -19,13 +19,14 @@ const PatientPage = () => {
     const activePage = pathname.pop() ?? patientMenuItemskeys[0]
     const navigate = useNavigate()
     const handleChangePath = (menuItem: string) => {
-        const path = pathname.join('/') + '/' + menuItem
-        navigate(path)
+        return pathname.join('/') + '/' + menuItem
     }
-
+    const handleBack = () => {
+        return '/' + pathname[1]
+    }
     return (
         <div className="container">
-            {SidePanel(patientMenuItems, activePage, handleChangePath)}
+            {SidePanel(patientMenuItems, activePage, handleChangePath, true, handleBack)}
             {Header(getTextFromkey(patientMenuItems, activePage))}
             <div className="content">
                 {activePage === patientMenuItemskeys[0] ? <OverviewPatientPage /> : <></>}

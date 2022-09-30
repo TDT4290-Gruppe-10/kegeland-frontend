@@ -1,7 +1,5 @@
-import { Box, Flex, SimpleGrid, Text, WrapItem, Divider, theme, LinkBox, LinkOverlay } from "@chakra-ui/react";
-import { colors } from "@material-ui/core";
-import { info } from "console";
-import { useNavigate, useLocation } from 'react-router-dom'
+import { Box, Text, WrapItem, Divider, theme, LinkBox, LinkOverlay } from "@chakra-ui/react";
+import { useLocation } from 'react-router-dom'
 
 function Patient( Patient: string, workout: any) {
     const pathname = useLocation().pathname.split('/')

@@ -10,16 +10,16 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='*' element={<NotFoundPage />} />
-        <Route path={'/'} element={<Navigate to={'/AllPatients'} replace />} />
+        <Route path={'/'} element={<Navigate to={'/allpatients'} replace />} />
         {patientsMenuItemskeys.map((key1) => (
           <>
             <Route path={key1} element={<PatientsPage />} />
             {patientMenuItemskeys.map((key2) => (
               <>
                 {console.log(key1, key2)}
-                <Route path={key1 + "/Patient/:patientId/"} element={<Navigate to={key1 + "/Patient/:patientId/Overview"} />} />
-                <Route path={key1 + "/Patient/:patientId/" + key2} element={<PatientPage />} />
-                <Route path={key1 + "/Patient/:patientId/" + key2 + "/Excercise/"} element={<ExcerciseSessionPage />} />
+                <Route path={key1 + "/patient/:patientId/"} element={<Navigate to={key1 + "/patient/:patientId/overview"} />} />
+                <Route path={key1 + "/patient/:patientId/" + key2} element={<PatientPage />} />
+                <Route path={key1 + "/patient/:patientId/" + key2 + "/excercise/"} element={<ExcerciseSessionPage />} />
               </>
             ))}
           </>
