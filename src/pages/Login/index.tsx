@@ -24,18 +24,12 @@ const validateSchema = Yup.object({
     .label("Password"),
 });
 
+
+
 function LogIn() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const returnTo = useMemo(() => {
-    // If ?returnTo=... is specified in the URL, go back to that page
-    const urlParams = new URLSearchParams(search);
-    return (
-      urlParams.get("returnTo") ??
-      // Otherwise, we go to the main page
-      "/"
-    );
-  });
+ 
   const userContext = useUserInfoContext();
   return (
     <Center width="100%" height="100vh">
@@ -46,13 +40,13 @@ function LogIn() {
               // Use the userContext to log in
               userContext
                 .logIn(values.email, values.password)
-                .then(() => navigate(returnTo))
+                .then(() => navigate('/'))
                 // If something goes wrong, set form errors
                 .catch((error: { response: { data: FormikErrors<{}> } }) =>
                   setErrors(error.response.data)
                 )
             }
-            initialValues={{}}
+            initialValues={{email: '', password: ''}}
             validationSchema={validateSchema}
           >
             {(formProps) => (
@@ -64,23 +58,25 @@ function LogIn() {
                 p={6}
                 m="10px auto"
                 as="form"
-                onSubmit={formProps.handleSubmit}
+                onSubmit={() => formProps.handleSubmit}
               >
                 <VStack spacing={5} align="stretch">
                   <Box>
                     <Heading>Log in </Heading>
                   </Box>
                   <Box>
-                    <Heading size={5}>
+                    <Heading>
                       Please enter email and password to log in.
                     </Heading>
                   </Box>
                   <Box>
                     <InputControl
-                      type="email"
+                    inputProps={{
+                      type: "email",
+                    }}
                       name="email"
                       placeholder="ola.nordmann@example.com"
-                      required
+                      isRequired
                       label="Email address"
                       data-testid="email-input"
                     />

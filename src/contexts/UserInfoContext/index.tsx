@@ -1,8 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
-const UserInfoContext:any = React.createContext(null);
+type userInfoContextType = {
+  currentUser: null;
+  logOut: () => Promise<AxiosResponse<any, any>>;
+  logIn: (email: any, password: any) => Promise<void>;
+};
+
+const UserInfoContext = React.createContext<userInfoContextType>(
+  {} as userInfoContextType
+);
 
 function UserInfoContextProvider({ children }: any) {
   const [currentUser, setCurrentUser] = React.useState(null);
@@ -22,20 +30,10 @@ function UserInfoContextProvider({ children }: any) {
     });
   }, []);
 
-
-
-  const ctxValue = React.useMemo(() => ({ currentUser, logOut, logIn }), [
-    currentUser,
-    logOut,
-    logIn,
-  ]);
-
-  const type userInfoContextType = {
-    currentUser: null,
-    logOut: () => Promise<AxiosResponse<any, any>,
-    logIn: (email: any, password: any) => Promise<void>,
-  }
-
+  const ctxValue: userInfoContextType = React.useMemo(
+    () => ({ currentUser, logOut, logIn }),
+    [currentUser, logOut, logIn]
+  );
 
   React.useEffect(function checkIfLoggedIn() {
     axios
@@ -65,9 +63,9 @@ UserInfoContextProvider.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-export const useUserInfoContext: = () => React.useContext(UserInfoContext);
+export const useUserInfoContext = () => React.useContext(UserInfoContext);
 
-//export const useCurrentUser = () =>
-  //React.useContext(UserInfoContext)?.currentUser;
+export const useCurrentUser = () =>
+  React.useContext(UserInfoContext)?.currentUser;
 
 export default UserInfoContextProvider;

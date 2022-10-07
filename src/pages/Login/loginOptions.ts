@@ -4,3 +4,5 @@ export type TypeOptions = {
 export const defaultTypeOptions = {
 	key: ''
 } as TypeOptions;
+
+
