@@ -24,12 +24,10 @@ const validateSchema = Yup.object({
     .label("Password"),
 });
 
-
-
 function LogIn() {
   const navigate = useNavigate();
   const { search } = useLocation();
- 
+
   const userContext = useUserInfoContext();
   return (
     <Center width="100%" height="100vh">
@@ -40,13 +38,13 @@ function LogIn() {
               // Use the userContext to log in
               userContext
                 .logIn(values.email, values.password)
-                .then(() => navigate('/'))
+                .then(() => navigate("/"))
                 // If something goes wrong, set form errors
                 .catch((error: { response: { data: FormikErrors<{}> } }) =>
                   setErrors(error.response.data)
                 )
             }
-            initialValues={{email: '', password: ''}}
+            initialValues={{ email: "", password: "" }}
             validationSchema={validateSchema}
           >
             {(formProps) => (
@@ -71,11 +69,11 @@ function LogIn() {
                   </Box>
                   <Box>
                     <InputControl
-                    inputProps={{
-                      type: "email",
-                    }}
+                      inputProps={{
+                        type: "email",
+                        placeholder: "ola.nordmann@example.com",
+                      }}
                       name="email"
-                      placeholder="ola.nordmann@example.com"
                       isRequired
                       label="Email address"
                       data-testid="email-input"
