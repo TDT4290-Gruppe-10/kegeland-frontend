@@ -60,10 +60,12 @@ function LogIn() {
               >
                 <VStack spacing={5} align="stretch">
                   <Box>
-                    <Heading>Log in </Heading>
+                    <Heading as="h3" size="lg" textAlign="center">
+                      Log in{" "}
+                    </Heading>
                   </Box>
                   <Box>
-                    <Heading>
+                    <Heading as="h3" size="lg" textAlign="center">
                       Please enter email and password to log in.
                     </Heading>
                   </Box>
@@ -96,15 +98,15 @@ function LogIn() {
                     <SubmitButton
                       isLoading={formProps.isSubmitting}
                       isDisabled={!formProps.isValid}
-                      style={{ backgroundColor: "#87A8A4", color: "#FFFFFF" }}
+                      style={{ backgroundColor: "#273587", color: "#FFFFFF" }}
                     >
                       Log in
                     </SubmitButton>
                   </Box>
                   <Box textAlign="left">
-                    <Text color="#87A8A4">
+                    <Text color="#black">
                       Not a member yet?
-                      <Link color="#87A8A4" href="/register">
+                      <Link color="#273587" href="/register">
                         <b> Register!</b>
                       </Link>
                     </Text>

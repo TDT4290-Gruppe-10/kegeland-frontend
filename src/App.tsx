@@ -4,6 +4,7 @@ import PatientsPage, { patientsMenuItemskeys } from "./pages/patients/Patients";
 import PatientPage, { patientMenuItemskeys } from "./pages/patient/Patient";
 import NotFoundPage from "./pages/NotFound";
 import LogIn from "./pages/Login/index";
+import RegisterUser from "./pages/RegisterPage/index";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
         <Route path={"/"} element={<Navigate to={"/allpatients"} replace />} />
         <Route path={"/login"} element={<LogIn />} />
+        <Route path={"/register"} element={<RegisterUser />} />
         {patientsMenuItemskeys.map((key1) => (
           <>
             <Route path={key1} element={<PatientsPage />} />
