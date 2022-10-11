@@ -1,7 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
+import Header from "../../components/header";
 import SidePanel from "../../components/SidePanel";
 import { getTextFromkey, menuItemsType } from "../../utils/Things";
+import AllExcersies from "./AllExercises";
 import FemFitOverviewPage from "./FemfitOverview";
 import OverviewPatientPage from "./OverviewPatient";
 
@@ -30,7 +31,7 @@ const PatientPage = () => {
             {Header(getTextFromkey(patientMenuItems, activePage))}
             <div className="content">
                 {activePage === patientMenuItemskeys[0] ? <OverviewPatientPage /> : <></>}
-                {/*pathname[1] === patientMenuItemskeys[1] ? <FemFitOverviewPage /> : <></>*/}
+                {activePage === patientMenuItemskeys[1] ? <AllExcersies /> : <></>}
                 {activePage === patientMenuItemskeys[2] ? <FemFitOverviewPage /> : <></>}
             </div>
         </div>

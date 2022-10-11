@@ -30,7 +30,17 @@ function AllPatientsPage() {
                 intencity: 3,
                 missedDays: 1
             }
-        }
+        },
+            patientid3: {
+                name: "Ole Nordmann",
+                age: 35,
+                workoutSummery: {
+                    numberOfExcersisees: 10,
+                    point: 35,
+                    intencity: 3,
+                    missedDays: 1
+                }
+            }
     }
 
 
