@@ -1,14 +1,10 @@
-import ExcerciseSessionPage, {
-  exerciseMenuItems,
-  exerciseMenuItemskeys,
-} from "./pages/patient/Excercise/ExerciseSession";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import PatientsPage, { patientsMenuItemskeys } from "./pages/patients/Patients";
 import PatientPage, { patientMenuItemskeys } from "./pages/patient/Patient";
 import NotFoundPage from "./pages/NotFound";
 import LogIn from "./pages/Login/index";
 import RegisterUser from "./pages/RegisterPage/index";
-import ExerciseSessionPage from "./pages/patient/Excercise/ExerciseSession";
+import ExerciseSessionPage, { exerciseMenuItemskeys } from "./pages/patient/Exercise/ExerciseSession";
 
 function App() {
   return (

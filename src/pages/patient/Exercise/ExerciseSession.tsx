@@ -24,12 +24,17 @@ const ExerciseSessionPage = () => {
   };
 
   const handleBack = () => {
-    pathname.slice()
-    return pathname.join("/");
-}
+    return pathname.slice(0, 5).join("/");
+  };
   return (
     <div className="container">
-      {SidePanel(exerciseMenuItems, activePage, handleChangePath, true, handleBack)}
+      {SidePanel(
+        exerciseMenuItems,
+        activePage,
+        handleChangePath,
+        true,
+        handleBack
+      )}
       {Header(getTextFromkey(exerciseMenuItems, activePage))}
       <div className="content">
         {activePage === "" || activePage === exerciseMenuItemskeys[0] ? (
