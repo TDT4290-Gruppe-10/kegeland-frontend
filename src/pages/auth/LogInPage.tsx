@@ -7,12 +7,16 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { Formik, FormikErrors } from "formik";
+import { sign } from "crypto";
+import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { useUserInfoContext } from "../../contexts/UserInfoContext";
+import { signInUser } from "../../state/ducks/auth/auth.actions";
+import { LoginDTO } from "../../state/ducks/auth/auth.interface";
+import { AppDispatch, RootState } from "../../state/store";
 
 const validateSchema = Yup.object({
   email: Yup.string()
@@ -27,23 +31,30 @@ const validateSchema = Yup.object({
 function LogIn() {
   const navigate = useNavigate();
   const { search } = useLocation();
+  const { error, loading } = useSelector((state: RootState) => state.auth)
+  const dispatch = useDispatch<AppDispatch>()
 
-  const userContext = useUserInfoContext();
+  const signIn = (data: LoginDTO) => {
+    dispatch(signInUser(data))
+  }
+  const { isSignedIn } = useSelector((state: RootState) => state.auth)
+  const nav = useNavigate()
+  console.log(isSignedIn)
+  useEffect(() => {
+      if (isSignedIn) {
+          nav("/")
+      }
+  }, [])
+
   return (
     <Center width="100%" height="100vh">
       <Container>
         <Container paddingTop="1em">
           <Formik
-            onSubmit={(values, { setErrors }) =>
-              // Use the userContext to log in
-              userContext
-                .logIn(values.email, values.password)
-                .then(() => navigate("/"))
-                // If something goes wrong, set form errors
-                .catch((error: { response: { data: FormikErrors<{}> } }) =>
-                  setErrors(error.response.data)
-                )
-            }
+            onSubmit={async (values, { setErrors }) => {
+              signIn(values)
+              // setErrors()
+            }}
             initialValues={{ email: "", password: "" }}
             validationSchema={validateSchema}
           >
@@ -56,7 +67,10 @@ function LogIn() {
                 p={6}
                 m="10px auto"
                 as="form"
-                onSubmit={() => formProps.handleSubmit}
+                onSubmit={(e: any) => {
+                  e.preventDefault()
+                  formProps.handleSubmit()
+                }}
               >
                 <VStack spacing={5} align="stretch">
                   <Box>
@@ -115,6 +129,7 @@ function LogIn() {
               </Box>
             )}
           </Formik>
+          <Box>{error}</Box>
         </Container>
       </Container>
     </Center>
