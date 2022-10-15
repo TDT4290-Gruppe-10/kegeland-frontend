@@ -1,45 +1,24 @@
-import ExcerciseSessionPage from "./pages/patient/Excercise/ExcerxiseSession";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import PatientsPage, { patientsMenuItemskeys } from "./pages/patients/Patients";
-import PatientPage, { patientMenuItemskeys } from "./pages/patient/Patient";
-import NotFoundPage from "./pages/NotFound";
-import LogIn from "./pages/Login/index";
-import RegisterUser from "./pages/RegisterPage/index";
+import { Provider } from "react-redux";
+import { store, persistor } from './state/store';
+import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+import { PersistGate } from "redux-persist/integration/react";
+import RoutesRoute from "./Routes";
+const theme = extendTheme({
+  colors: {
+    default: {
+      100: "blue",
+      200: "green"
+    }
+  }
+})
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="*" element={<NotFoundPage />} />
-        <Route path={"/"} element={<Navigate to={"/allpatients"} replace />} />
-        <Route path={"/login"} element={<LogIn />} />
-        <Route path={"/register"} element={<RegisterUser />} />
-        {patientsMenuItemskeys.map((key1) => (
-          <>
-            <Route path={key1} element={<PatientsPage />} />
-            {patientMenuItemskeys.map((key2) => (
-              <>
-                {console.log(key1, key2)}
-                <Route
-                  path={key1 + "/patient/:patientId/"}
-                  element={
-                    <Navigate to={key1 + "/patient/:patientId/overview"} />
-                  }
-                />
-                <Route
-                  path={key1 + "/patient/:patientId/" + key2}
-                  element={<PatientPage />}
-                />
-                <Route
-                  path={key1 + "/patient/:patientId/" + key2 + "/excercise/"}
-                  element={<ExcerciseSessionPage />}
-                />
-              </>
-            ))}
-          </>
-        ))}
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store} >
+      <PersistGate loading={null} persistor={persistor}>
+          <RoutesRoute/>
+      </PersistGate>
+    </Provider>
   );
 }
 
