@@ -4,7 +4,7 @@ import PatientsPage, { patientsMenuItemskeys } from "./pages/patients/Patients";
 import PatientPage, { patientMenuItemskeys } from "./pages/patient/Patient";
 import NotFoundPage from "./pages/NotFound";
 import LogIn from "./pages/auth/LogInPage";
-import RegisterUser from "./pages/RegisterPage/index";
+import RegisterUser from "./pages/auth/RegisterPage";
 import RequireAuthPage from "./pages/auth/RequireAuthPage"
 
 const RoutesRoute = () => {

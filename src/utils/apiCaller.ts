@@ -5,7 +5,6 @@ import { Token } from '../state/ducks/auth/auth.helpers';
 import { isApiError } from './isApiError';
 import { retrieveToken } from './storage';
 
-const API_URL = 'localhost:8000'
 
 const httpInstance = axios.create({
   baseURL: "http://localhost:8000/api/",

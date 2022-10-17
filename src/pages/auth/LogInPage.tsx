@@ -7,15 +7,15 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { sign } from "crypto";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
-import React, { useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { signInUser } from "../../state/ducks/auth/auth.actions";
 import { LoginDTO } from "../../state/ducks/auth/auth.interface";
+import { clearError } from "../../state/ducks/auth/auth.reducer";
 import { AppDispatch, RootState } from "../../state/store";
 
 const validateSchema = Yup.object({
@@ -30,30 +30,28 @@ const validateSchema = Yup.object({
 
 function LogIn() {
   const navigate = useNavigate();
-  const { search } = useLocation();
   const { error, loading } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch<AppDispatch>()
+  const { isSignedIn } = useSelector((state: RootState) => state.auth)
 
   const signIn = (data: LoginDTO) => {
     dispatch(signInUser(data))
   }
-  const { isSignedIn } = useSelector((state: RootState) => state.auth)
-  const nav = useNavigate()
-  console.log(isSignedIn)
+
   useEffect(() => {
-      if (isSignedIn) {
-          nav("/")
-      }
-  }, [])
+    dispatch(clearError())
+    if (isSignedIn) {
+      navigate("/")
+    }
+  }, [navigate, isSignedIn])
 
   return (
     <Center width="100%" height="100vh">
       <Container>
         <Container paddingTop="1em">
           <Formik
-            onSubmit={async (values, { setErrors }) => {
+            onSubmit={async (values) => {
               signIn(values)
-              // setErrors()
             }}
             initialValues={{ email: "", password: "" }}
             validationSchema={validateSchema}
@@ -108,9 +106,10 @@ function LogIn() {
                       }}
                     />
                   </Box>
+                  <Box color={"red"}>{error}</Box>
                   <Box textAlign="right">
                     <SubmitButton
-                      isLoading={formProps.isSubmitting}
+                      isLoading={formProps.isSubmitting || loading}
                       isDisabled={!formProps.isValid}
                       style={{ backgroundColor: "#273587", color: "#FFFFFF" }}
                     >
@@ -120,7 +119,7 @@ function LogIn() {
                   <Box textAlign="left">
                     <Text color="#black">
                       Not a member yet?
-                      <Link color="#273587" href="/register">
+                      <Link color="#273587" href="/register" >
                         <b> Register!</b>
                       </Link>
                     </Text>
@@ -129,7 +128,6 @@ function LogIn() {
               </Box>
             )}
           </Formik>
-          <Box>{error}</Box>
         </Container>
       </Container>
     </Center>

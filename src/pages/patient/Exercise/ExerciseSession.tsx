@@ -1,5 +1,3 @@
-import { Link, Text } from "@chakra-ui/react";
-import { RiArrowGoBackLine } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
 import Header from "../../../components/Header";
 import SidePanel from "../../../components/SidePanel";

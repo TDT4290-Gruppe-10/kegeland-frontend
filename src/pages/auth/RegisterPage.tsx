@@ -6,17 +6,29 @@ import {
   HStack,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
-import axios from "axios";
+import { useCallback, useEffect } from "react";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { AppDispatch, RootState } from "../../state/store";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpUser } from "../../state/ducks/auth/auth.actions";
+import { RegisterDTO, UserRole } from "../../state/ducks/auth/auth.interface";
+import { clearError } from "../../state/ducks/auth/auth.reducer";
+
+type FormData = {
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 const validationSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
-  first_name: Yup.string().required().label("First name"),
-  last_name: Yup.string().required().label("Last name"),
+  firstName: Yup.string().required().label("First name"),
+  lastName: Yup.string().required().label("Last name"),
   password: Yup.string().required().label("Password"),
   confirmPassword: Yup.string().when("password", {
     is: (val: string | any[]) => !!(val && val.length > 0),
@@ -28,19 +40,44 @@ const validationSchema = Yup.object({
 });
 
 function RegisterUser() {
-  const navigate = useNavigate();
+  const { error, loading } = useSelector((state: RootState) => state.auth)
+  const dispatch = useDispatch<AppDispatch>()
+  const { isSignedIn } = useSelector((state: RootState) => state.auth)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    dispatch(clearError())
+    if (isSignedIn) {
+      navigate("/")
+    }
+  }, [navigate, isSignedIn])
+
+  const register = (data: FormData) => {
+    const { firstName, lastName, email, password } = data;
+    const payload: RegisterDTO = {
+      email,
+      password,
+      roles: [UserRole.PHYSICIAN],
+    };
+    if (firstName && lastName) {
+      payload.name = { firstName, lastName };
+    }
+    dispatch(signUpUser(payload));
+  };
+
   return (
     <div>
       <Center width="100%" height="100vh">
         <Container>
           <Container paddingTop="1em">
             <Formik
-              onSubmit={() => {}}
+              onSubmit={(values) => { register(values) }
+              }
               initialValues={{
                 email: "",
                 password: "",
-                first_name: "",
-                last_name: "",
+                firstName: "",
+                lastName: "",
                 confirmPassword: "",
               }}
               validationSchema={validationSchema}
@@ -54,7 +91,10 @@ function RegisterUser() {
                   p={6}
                   m="10px auto"
                   as="form"
-                  onSubmit={() => formProps.handleSubmit}
+                  onSubmit={(e: any) => {
+                    e.preventDefault()
+                    formProps.handleSubmit()
+                  }}
                 >
                   <VStack spacing={5} align="stretch">
                     <Box>
@@ -86,7 +126,7 @@ function RegisterUser() {
                             type: "text",
                             placeholder: "Ola",
                           }}
-                          name="first_name"
+                          name="firstName"
                           isRequired
                           label="First name"
                           data-testid="firstname-input"
@@ -101,7 +141,7 @@ function RegisterUser() {
                           isRequired
                           label="Last name"
                           data-testid="lastname-input"
-                          name={"last_name"}
+                          name="lastName"
                         />
                       </Box>
                     </HStack>
@@ -132,9 +172,10 @@ function RegisterUser() {
                         helperText="Repeat your password."
                       />
                     </Box>
+                    <Box color={"red"}>{error}</Box>
                     <Box textAlign="right">
                       <SubmitButton
-                        isLoading={formProps.isSubmitting}
+                        isLoading={formProps.isSubmitting && loading}
                         isDisabled={!formProps.isValid}
                         style={{ backgroundColor: "#273587", color: "#FFFFFF" }}
                       >

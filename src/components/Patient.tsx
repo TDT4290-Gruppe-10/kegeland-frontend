@@ -3,7 +3,6 @@ import {
   Text,
   WrapItem,
   Divider,
-  theme,
   LinkBox,
   LinkOverlay,
 } from "@chakra-ui/react";

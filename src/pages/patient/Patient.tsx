@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import SidePanel from "../../components/SidePanel";
 import { getTextFromkey, menuItemsType } from "../../utils/Things";
@@ -17,7 +17,6 @@ export const patientMenuItemskeys = Object.keys(patientMenuItems);
 const PatientPage = () => {
   const pathname = useLocation().pathname.split("/");
   const activePage = pathname.pop() ?? patientMenuItemskeys[0];
-  const navigate = useNavigate();
   const handleChangePath = (menuItem: string) => {
     return pathname.join("/") + "/" + menuItem;
   };
