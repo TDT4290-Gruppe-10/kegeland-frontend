@@ -1,5 +1,4 @@
 import { Text, Link, Box } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import { menuItemsType } from "../utils/Things";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import styles from "../index.module.scss";
@@ -11,7 +10,6 @@ function Sidepanel(
     back = false,
     handleNavigationBack: () => string = () => ""
 ) {
-    const navigate = useNavigate();
 
     return (
         <Box width={"300px"} height={"100%"} bgColor={"gray.100"} position={"fixed"} fontSize={"24px"}>

@@ -1,5 +1,3 @@
-import { reduce } from 'lodash';
-import { isToken } from 'typescript';
 import { Token } from '../state/ducks/auth/auth.helpers';
 import { AuthTokens } from '../state/ducks/auth/auth.interface';
 
@@ -21,7 +19,6 @@ export const retrieveToken = async (token: Token) => {
 };
 
 export const retrieveTokens = async () => {
-  let values = null;
   const accessToken = localStorage.getItem("access_token")
   const idToken = localStorage.getItem("is_token")
   const refreshToken = localStorage.getItem("refresh_token")
@@ -29,30 +26,11 @@ export const retrieveTokens = async () => {
     throw new Error('Failed to retrieve tokens');
   }
 
-  /* values = localStorage.multiGet(Object.values(Token), (err: any) => {
-    if (err) {
-      throw new Error('Failed to retrieve tokens');
-    }
-  }).then((res: any) =>
-    reduce(
-      res,
-      (prev, curr) => {
-        const [key, val] = curr;
-        if (val) {
-          prev[key as Token] = val;
-        }
-        return prev;
-      },
-      {} as Record<Token, string>,
-    ),
-  ); */
   return { "access_token": accessToken, "id_token": idToken, "refresh_token": refreshToken }
 };
 
 export const removeTokens = async () => {
-  await localStorage.multiRemove(Object.values(Token), (err: any) => {
-    if (err) {
-      throw new Error('Failed to remove tokens');
-    }
-  });
+  localStorage.removeItem('access_token')
+  localStorage.removeItem('id_token')
+  localStorage.removeItem('refresh_token')
 };

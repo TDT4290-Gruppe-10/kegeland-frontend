@@ -5,6 +5,7 @@ import { removeTokens, retrieveTokens, storeTokens } from '../../../utils/storag
 
 import { allTokensExist } from './auth.helpers';
 import {
+  AuthTokens,
   LoginDTO,
   LoginResponse,
   RegisterDTO,
@@ -29,6 +30,15 @@ export const signInUser = createAsyncThunk(
     }),
 );
 
+export const refresh = createAsyncThunk(
+  'auth/refresh',
+  async () =>
+    apiCaller<AuthTokens>('auth/refresh', 'POST').then(async (res) => {
+      await storeTokens(res);
+      return res;
+    }),
+);
+
 export const signOutUser = createAsyncThunk('auth/signOutUser', async () =>
   apiCaller<void>('auth/logout', 'POST').then(async (res) => {
     await removeTokens();
@@ -41,7 +51,7 @@ export const signUpUser = createAsyncThunk(
   async (data: RegisterDTO) =>
     apiCaller<RegisterResponse>('auth/register', 'POST', data).then(
       async (res) => {
-        // await storeTokens(res.tokens);
+        await storeTokens(res.tokens);
         return res;
       },
     ),
