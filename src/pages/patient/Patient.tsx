@@ -4,11 +4,12 @@ import SidePanel from "../../components/SidePanel";
 import { getTextFromkey, menuItemsType } from "../../utils/Things";
 import FemFitOverviewPage from "./FemfitOverview";
 import OverviewPatientPage from "./OverviewPatient";
+import styles from "../../index.module.scss";
 
 export const patientMenuItems: menuItemsType = {
   overview: "Overview",
-  allexercises: "All Exercises",
-  femfitexercises: "Femfit Exercises",
+  allexcersies: "All Excercises",
+  femfitexcersies: "Femfit Excercises",
 };
 
 export const patientMenuItemskeys = Object.keys(patientMenuItems);
@@ -24,7 +25,7 @@ const PatientPage = () => {
     return "/" + pathname[1];
   };
   return (
-    <div className="container">
+    <div className={styles.container}>
       {SidePanel(
         patientMenuItems,
         activePage,
@@ -33,7 +34,7 @@ const PatientPage = () => {
         handleBack
       )}
       {Header(getTextFromkey(patientMenuItems, activePage))}
-      <div className="content">
+      <div className={styles.content}>
         {activePage === patientMenuItemskeys[0] ? (
           <OverviewPatientPage />
         ) : (
