@@ -12,7 +12,6 @@ import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useUserInfoContext } from "../../contexts/UserInfoContext";
 
 const validationSchema = Yup.object({
   email: Yup.string().required().email("Email is not valid").label("Email"),
@@ -30,27 +29,13 @@ const validationSchema = Yup.object({
 
 function RegisterUser() {
   const navigate = useNavigate();
-  const userContext = useUserInfoContext();
   return (
     <div>
       <Center width="100%" height="100vh">
         <Container>
           <Container paddingTop="1em">
             <Formik
-              onSubmit={(values, { setErrors }) =>
-                // Post to /users/ to create a new user
-                axios
-                  .post("/users/", values)
-                  .then(() =>
-                    // Automatically log in the new user
-                    userContext
-                      .logIn(values.email, values.password)
-                      // After attempted login, navigate to main page
-                      .finally(() => navigate("/"))
-                  )
-                  // If something goes wrong with the registration, set form errors so user can fix it
-                  .catch((error) => setErrors(error.response.data))
-              }
+              onSubmit={() => {}}
               initialValues={{
                 email: "",
                 password: "",
