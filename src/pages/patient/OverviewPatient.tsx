@@ -1,6 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import Patient from "../../components/Patient";
-import { Wrap} from '@chakra-ui/react'
 import OverviewPatientCard from "../../components/OverviewPatientCard";
   
 

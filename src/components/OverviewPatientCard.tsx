@@ -2,31 +2,19 @@ import {
   Box,
   Badge,
   Text,
-  WrapItem,
   Divider,
 } from "@chakra-ui/react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function OverviewPatientCard(type: string, id: number, values: number) {
   const pathname = useLocation().pathname.split("/");
   const firstPage = pathname[1];
 
-  const patient = {
-    patientid: 1,
-    name: "Ola nordmann",
-    age: 23,
-    workoutSummery: {
-      numberOfExcersisees: 10,
-      point: 35,
-      intencity: 3,
-      missedDays: 4,
-    },
-  };
 
   return (
       <Box p="16">        
         {" "}
-        <Badge borderRadius='full' px='180' colorScheme= "#1a202c" style={{ fontSize: 25 }}>
+        <Badge borderRadius='full' px='180' colorScheme= "blue.100" style={{ fontSize: 25 }}>
        Overview of latest workout sessions
           </Badge>
         <Divider orientation="horizontal" borderColor={"blue.800"} />
@@ -40,7 +28,7 @@ function OverviewPatientCard(type: string, id: number, values: number) {
             </Box>
           </Box>
 
-        <Box as="span" ml="2" color="gray.600" fontSize="sm"></Box>
+        <Box as="span" ml="2" color="blue.100" fontSize="sm"></Box>
       </Box>
   );
 }
