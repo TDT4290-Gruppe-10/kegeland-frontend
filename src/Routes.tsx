@@ -1,10 +1,10 @@
-import ExcerciseSessionPage from "./pages/patient/Excercise/ExcerxiseSession";
+import ExerciseSessionPage from "./pages/patient/Exercise/ExerciseSession";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import PatientsPage, { patientsMenuItemskeys } from "./pages/patients/Patients";
 import PatientPage, { patientMenuItemskeys } from "./pages/patient/Patient";
 import NotFoundPage from "./pages/NotFound";
 import LogIn from "./pages/auth/LogInPage";
-import RegisterUser from "./pages/auth/RegisterPage";
+import RegisterUser from "./pages/RegisterPage/index";
 import RequireAuthPage from "./pages/auth/RequireAuthPage"
 
 const RoutesRoute = () => {
@@ -33,7 +33,7 @@ const RoutesRoute = () => {
                                     />
                                     <Route
                                         path={key1 + "/patient/:patientId/" + key2 + "/excercise/"}
-                                        element={<ExcerciseSessionPage />}
+                                        element={<ExerciseSessionPage />}
                                     />
                                 </>
                             ))}
