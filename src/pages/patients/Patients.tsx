@@ -6,10 +6,6 @@ import LowActivityPatients from "./LowActivityPatients";
 import styles from "../../index.module.scss";
 import { getTextFromkey, menuItemsType } from "../../utils/Things";
 import Header from "../../components/Header";
-import { Button } from "@chakra-ui/react";
-import { signOutUser } from "../../state/ducks/auth/auth.actions";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../state/store";
 
 export const patientsMenuItems: menuItemsType = {
   allpatients: "All my patients",
@@ -22,7 +18,6 @@ export const patientsMenuItemskeys = Object.keys(patientsMenuItems);
 
 const PatientsPage = () => {
   const pathname = useLocation().pathname.split("/");
-  const dispatch = useDispatch<AppDispatch>()
   const activePage: string =
     pathname[1] === "" ? patientsMenuItemskeys[0] : pathname[1];
 
@@ -44,7 +39,6 @@ const PatientsPage = () => {
         ) : (
           <></>
         )}
-        <Button onClick={() => dispatch(signOutUser())}>sign out</Button>
       </div>
     </div>
   );
