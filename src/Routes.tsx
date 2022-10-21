@@ -1,4 +1,4 @@
-import ExerciseSessionPage from "./pages/patient/Exercise/ExerciseSession";
+import ExerciseSessionPage, { exerciseMenuItemskeys} from "./pages/patient/Exercise/ExerciseSession";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import PatientsPage, { patientsMenuItemskeys } from "./pages/patients/Patients";
 import PatientPage, { patientMenuItemskeys } from "./pages/patient/Patient";
@@ -16,25 +16,31 @@ const RoutesRoute = () => {
                 <Route path={"/login"} element={<LogIn />} />
                 <Route path={"/register"} element={<RegisterUser />} />
                 <Route element={<RequireAuthPage />}>
-                    {patientsMenuItemskeys.map((key1) => (
+                    {patientsMenuItemskeys.map((patientsMenuKey) => (
                         <>
-                            <Route path={key1} element={<PatientsPage />} />
-                            {patientMenuItemskeys.map((key2) => (
+                            <Route path={patientsMenuKey} element={<PatientsPage />} />
+                            {patientMenuItemskeys.map((patientMenuKey) => (
                                 <>
                                     <Route
-                                        path={key1 + "/patient/:patientId/"}
+                                        path={patientsMenuKey + "/patient/:patientId/"}
                                         element={
-                                            <Navigate to={key1 + "/patient/:patientId/overview"} />
+                                            <Navigate to={patientsMenuKey + "/patient/:patientId/overview"} />
                                         }
                                     />
                                     <Route
-                                        path={key1 + "/patient/:patientId/" + key2}
+                                        path={patientsMenuKey + "/patient/:patientId/" + patientMenuKey}
                                         element={<PatientPage />}
                                     />
                                     <Route
-                                        path={key1 + "/patient/:patientId/" + key2 + "/excercise/"}
+                                        path={patientsMenuKey + "/patient/:patientId/" + patientMenuKey + "/exercise/:exerciseId"}
+                                        element={<Navigate to={patientsMenuKey + "/patient/:patientId/" + patientMenuKey + "/exercise/:exerciseId/overview"} />}
+                                    />
+                                    {exerciseMenuItemskeys.map((exerciseMenuKey) => (
+                                   <Route
+                                        path={patientsMenuKey + "/patient/:patientId/" + patientMenuKey + "/exercise/:exerciseId/" + exerciseMenuKey}
                                         element={<ExerciseSessionPage />}
                                     />
+                                    ))}
                                 </>
                             ))}
                         </>

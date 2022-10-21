@@ -1,42 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import Patient from "../../components/Patient";
-import { Wrap } from "@chakra-ui/react";
+import { Box, Wrap } from "@chakra-ui/react";
+import { apiCaller } from "../../utils/apiCaller";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPatients } from "../../state/ducks/patients/patients.actions";
+import { AppDispatch, RootState } from "../../state/store";
+import { useEffect } from "react";
 
 function AllPatientsPage() {
-  const navigation = useNavigate();
-  const handleChangePath = () => {
-    const path = "Patient/:p1I/Overview";
-    navigation(path);
+  const dispatch = useDispatch<AppDispatch>();
+  const { patients } = useSelector((state: RootState) => state.patients);
+
+  const fetchUsers = () => {
+    dispatch(getAllPatients());
   };
 
-  const liste = {
-    patientid1: {
-      name: "Ola nordmann",
-      age: 23,
-      workoutSummery: {
-        numberOfExercises: 10,
-        point: 35,
-        intencity: 3,
-        missedDays: 4,
-      },
-    },
-    patientid2: {
-      name: "Ole Nordmann",
-      age: 55,
-      workoutSummery: {
-        numberOfExercises: 10,
-        point: 35,
-        intencity: 3,
-        missedDays: 1,
-      },
-    },
-  };
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
     <Wrap spacing="30px">
-      {Object.entries(liste).map(([patientId, values]) =>
-        Patient(patientId, values)
-      )}
+      {patients.map((pat: any) => (
+          <Patient  key={pat.id} name={`${pat.firstName} ${pat.lastName}`} id={pat.id}/>
+      ))}
     </Wrap>
   );
 }
