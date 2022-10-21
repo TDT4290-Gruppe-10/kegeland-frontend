@@ -21,8 +21,8 @@ function Sidepanel(
             ) : (
                 <div style={{ height: "80px" }}></div>
             )}
-            {Object.entries(menuItems).map(([menuItem, menuItemText]) => (
-                <>
+            {Object.entries(menuItems).map(([menuItem, menuItemText], i) => (
+                <Box key={i}>
                     {menuItem === activePage ? (
                         <Box display={"flex"} margin={"auto"} borderBottomColor={"gray.400"} borderBottomStyle={"solid"} borderBottomWidth={"1px"}>
                             <Box w={"10px"} bgColor={"blue.200"}></Box>
@@ -38,7 +38,7 @@ function Sidepanel(
                             </Link>
                         </Box>
                     )}
-                </>
+                </Box>
             ))}
         </Box>
     );

@@ -8,10 +8,14 @@ import {
 } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 
-function Patient(Patient: string, workout: any) {
+interface PatientProps {
+  name: string
+  id: string
+}
+
+export const Patient: React.FC<PatientProps> = ({name, id}) => {
   const pathname = useLocation().pathname.split("/");
   const firstPage = pathname[1];
-  console.log(Patient, workout);
 
   return (
     <WrapItem>
@@ -23,12 +27,11 @@ function Patient(Patient: string, workout: any) {
         pb="4"
       >
         <LinkOverlay
-          href={firstPage + "/patient/" + Patient + "/overview"}
+          href={firstPage + "/patient/" + id + "/overview"}
           display="flex-center"
           justifyContent="space-between"
         >
-          <Box>{workout?.name} </Box>
-          <Box>{workout?.age} years old </Box>
+          <Box>{name}</Box>
         </LinkOverlay>
         <Divider orientation="horizontal" borderColor={"blue.900"} />
         <Text fontSize="lg" mb="4"></Text>
