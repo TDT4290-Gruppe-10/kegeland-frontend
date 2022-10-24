@@ -1,10 +1,10 @@
-import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import SidePanel from "../../components/SidePanel";
-import { getTextFromkey, menuItemsType } from "../../utils/Things";
+import { menuItemsType } from "../../utils/Things";
 import FemFitOverviewPage from "./FemfitOverview";
 import OverviewPatientPage from "./OverviewPatient";
 import styles from "../../index.module.scss";
+import { useState } from "react";
 
 export const patientMenuItems: menuItemsType = {
   overview: "Overview",
@@ -15,24 +15,22 @@ export const patientMenuItems: menuItemsType = {
 export const patientMenuItemskeys = Object.keys(patientMenuItems);
 
 const PatientPage = () => {
-  const pathname = useLocation().pathname.split("/");
-  const activePage = pathname.pop() ?? patientMenuItemskeys[0];
-  const handleChangePath = (menuItem: string) => {
-    return pathname.join("/") + "/" + menuItem;
-  };
+  const [activePage, setActivePage] = useState("overview");
+
+  const headerText = "patient name";
   const handleBack = () => {
-    return "/" + pathname[1];
+    return "/";
   };
   return (
     <div className={styles.container}>
-      {SidePanel(
-        patientMenuItems,
-        activePage,
-        handleChangePath,
-        true,
-        handleBack
-      )}
-      {Header(getTextFromkey(patientMenuItems, activePage))}
+      <SidePanel
+        menuItems={patientMenuItems}
+        activePage={activePage}
+        setActivePage={setActivePage}
+        back={true}
+        handleNavigationBack={handleBack}
+      />
+      <Header headerText={headerText} />
       <div className={styles.content}>
         {activePage === patientMenuItemskeys[0] ? (
           <OverviewPatientPage />

@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPatients, getAllPatientSessions, getPatientExercise } from "./patients.actions";
+import {
+  getAllPatients,
+  getAllPatientSessions,
+  getPatientExercise,
+} from "./patients.actions";
 
 const initialState: any = {
   patients: [],
@@ -65,7 +69,6 @@ const singlePatientSlice = createSlice({
   },
 });
 
-
 const exerciseInitialState: any = {
   exerciseData: {},
   loading: false,
@@ -101,5 +104,5 @@ const exerciseSlice = createSlice({
 export const { clearError } = patientsSlice.actions;
 
 export const patientReducer = patientsSlice.reducer;
-export const singlePatientReducer = singlePatientSlice.reducer
-export const exerciseReducer = exerciseSlice.reducer
+export const singlePatientReducer = singlePatientSlice.reducer;
+export const exerciseReducer = exerciseSlice.reducer;

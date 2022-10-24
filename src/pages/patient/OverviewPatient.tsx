@@ -1,17 +1,9 @@
-import {
-  Box,
-  Text,
-  WrapItem,
-  Divider,
-  LinkBox,
-  LinkOverlay,
-  Wrap,
-} from "@chakra-ui/react";
-import { useLocation, useParams } from "react-router-dom";
+import { Wrap } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPatientSessions } from "../../state/ducks/patients/patients.actions";
 import { AppDispatch, RootState } from "../../state/store";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Exercise from "../../components/Exercise";
 
 export const OverviewPatientPage = () => {
@@ -30,14 +22,9 @@ export const OverviewPatientPage = () => {
     fetchPatientData();
   }, []);
   return (
-    
     <Wrap>
       {patientData.map((data: any) => (
-        <Exercise
-          date={data.date}
-          id={data.id}
-          sensor={data.sensor}
-        />
+        <Exercise date={data.date} id={data.id} sensor={data.sensor} />
       ))}
     </Wrap>
   );

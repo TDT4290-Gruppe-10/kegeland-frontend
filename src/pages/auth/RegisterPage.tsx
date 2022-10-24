@@ -6,7 +6,7 @@ import {
   HStack,
   VStack,
 } from "@chakra-ui/react";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
 import * as Yup from "yup";
@@ -40,17 +40,17 @@ const validationSchema = Yup.object({
 });
 
 function RegisterUser() {
-  const { error, loading } = useSelector((state: RootState) => state.auth)
-  const dispatch = useDispatch<AppDispatch>()
-  const { isSignedIn } = useSelector((state: RootState) => state.auth)
-  const navigate = useNavigate()
+  const { error, loading } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
+  const { isSignedIn } = useSelector((state: RootState) => state.auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(clearError())
+    dispatch(clearError());
     if (isSignedIn) {
-      navigate("/")
+      navigate("/");
     }
-  }, [navigate, isSignedIn])
+  }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
     const { firstName, lastName, email, password } = data;
@@ -71,8 +71,9 @@ function RegisterUser() {
         <Container>
           <Container paddingTop="1em">
             <Formik
-              onSubmit={(values) => { register(values) }
-              }
+              onSubmit={(values) => {
+                register(values);
+              }}
               initialValues={{
                 email: "",
                 password: "",
@@ -92,8 +93,8 @@ function RegisterUser() {
                   m="10px auto"
                   as="form"
                   onSubmit={(e: any) => {
-                    e.preventDefault()
-                    formProps.handleSubmit()
+                    e.preventDefault();
+                    formProps.handleSubmit();
                   }}
                 >
                   <VStack spacing={5} align="stretch">

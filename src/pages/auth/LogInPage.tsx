@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -19,31 +19,26 @@ import { clearError } from "../../state/ducks/auth/auth.reducer";
 import { AppDispatch, RootState } from "../../state/store";
 
 const validateSchema = Yup.object({
-  email: Yup.string()
-    .required()
-    .email("Email is not valid")
-    .label("Email"),
-  password: Yup.string()
-    .required()
-    .label("Password"),
+  email: Yup.string().required().email("Email is not valid").label("Email"),
+  password: Yup.string().required().label("Password"),
 });
 
 function LogIn() {
   const navigate = useNavigate();
-  const { error, loading } = useSelector((state: RootState) => state.auth)
-  const dispatch = useDispatch<AppDispatch>()
-  const { isSignedIn } = useSelector((state: RootState) => state.auth)
+  const { error, loading } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
+  const { isSignedIn } = useSelector((state: RootState) => state.auth);
 
   const signIn = (data: LoginDTO) => {
-    dispatch(signInUser(data))
-  }
+    dispatch(signInUser(data));
+  };
 
   useEffect(() => {
-    dispatch(clearError())
+    dispatch(clearError());
     if (isSignedIn) {
-      navigate("/")
+      navigate("/");
     }
-  }, [navigate, isSignedIn])
+  }, [navigate, isSignedIn]);
 
   return (
     <Center width="100%" height="100vh">
@@ -51,7 +46,7 @@ function LogIn() {
         <Container paddingTop="1em">
           <Formik
             onSubmit={async (values) => {
-              signIn(values)
+              signIn(values);
             }}
             initialValues={{ email: "", password: "" }}
             validationSchema={validateSchema}
@@ -66,8 +61,8 @@ function LogIn() {
                 m="10px auto"
                 as="form"
                 onSubmit={(e: any) => {
-                  e.preventDefault()
-                  formProps.handleSubmit()
+                  e.preventDefault();
+                  formProps.handleSubmit();
                 }}
               >
                 <VStack spacing={5} align="stretch">
@@ -119,7 +114,7 @@ function LogIn() {
                   <Box textAlign="left">
                     <Text color="#black">
                       Not a member yet?
-                      <Link color="#273587" href="/register" >
+                      <Link color="#273587" href="/register">
                         <b> Register!</b>
                       </Link>
                     </Text>
