@@ -1,6 +1,6 @@
 export enum UserRole {
-  PATIENT = 'patient',
-  PHYSICIAN = 'physician',
+  PATIENT = "patient",
+  PHYSICIAN = "physician",
 }
 
 export type AuthTokens = {
@@ -46,4 +46,4 @@ export type RegisterDTO = LoginDTO & UserDetails;
 
 export type RegisterResponse = LoginResponse;
 
-export type ResetPasswordDTO = Pick<LoginDTO, 'email'>;
+export type ResetPasswordDTO = Pick<LoginDTO, "email">;

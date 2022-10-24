@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 
 import authReducer from './ducks/auth/auth.reducer';
 import {patientReducer, singlePatientReducer} from './ducks/patients/patients.reducer';
+import { sensorReducer } from './ducks/sensors/sensor.reducer';
 
 const persistConfig = {
   key: 'root',
@@ -25,7 +26,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authReducer,
   patients: patientReducer,
-  singlePatient: singlePatientReducer
+  singlePatient: singlePatientReducer,
+  sensorData: sensorReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

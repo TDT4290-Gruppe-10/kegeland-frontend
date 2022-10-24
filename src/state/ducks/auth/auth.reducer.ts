@@ -1,11 +1,11 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   initializeAuthState,
   signInUser,
   signOutUser,
   signUpUser,
-} from './auth.actions';
-import {AuthState} from './auth.interface';
+} from "./auth.actions";
+import { AuthState } from "./auth.interface";
 
 const initialState: AuthState = {
   ready: false,
@@ -17,7 +17,7 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     clearError: (state) => {
@@ -28,7 +28,7 @@ const authSlice = createSlice({
     builder.addCase(initializeAuthState.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(initializeAuthState.fulfilled, (state, {payload}) => {
+    builder.addCase(initializeAuthState.fulfilled, (state, { payload }) => {
       state.ready = true;
       if (!payload) {
         state.isSignedIn = false;
@@ -36,7 +36,7 @@ const authSlice = createSlice({
         state.userDetails = undefined;
       }
     });
-    builder.addCase(initializeAuthState.rejected, (state, {error}) => {
+    builder.addCase(initializeAuthState.rejected, (state, { error }) => {
       state.loading = false;
       state.error = error.message;
     });
@@ -45,11 +45,11 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = undefined;
       })
-      .addCase(signInUser.fulfilled, (state, {payload}) => {
-        const {id, email} = payload;
+      .addCase(signInUser.fulfilled, (state, { payload }) => {
+        const { id, email } = payload;
         state.loading = false;
         state.isSignedIn = true;
-        state.authUser = {id, email};
+        state.authUser = { id, email };
         state.userDetails = payload.details;
         state.error = undefined;
       })
@@ -76,22 +76,21 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = undefined;
       })
-      .addCase(signUpUser.fulfilled, (state, {payload}) => {
-        const {id, email} = payload;
+      .addCase(signUpUser.fulfilled, (state, { payload }) => {
+        const { id, email } = payload;
         state.loading = false;
         state.isSignedIn = true;
-        state.authUser = {id, email};
+        state.authUser = { id, email };
         state.userDetails = payload.details;
         state.error = undefined;
       })
-      .addCase(signUpUser.rejected, (state, {error}) => {
+      .addCase(signUpUser.rejected, (state, { error }) => {
         state.loading = false;
         state.error = error.message;
       });
   },
 });
 
-export const {clearError} = authSlice.actions;
+export const { clearError } = authSlice.actions;
 
 export default authSlice.reducer;
-

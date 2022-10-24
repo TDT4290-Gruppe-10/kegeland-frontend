@@ -1,52 +1,55 @@
-import { useLocation } from "react-router-dom";
+import { Box } from "@chakra-ui/react";
+import { useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import Header from "../../../components/Header";
 import SidePanel from "../../../components/SidePanel";
-import { getTextFromkey, menuItemsType } from "../../../utils/Things";
+import { menuItemsType } from "../../../utils/Things";
+import styles from "../../../index.module.scss";
 import ExerciseGraph from "./ExerciseGraph";
 import ExerciseQuestionnaries from "./ExerciseQuestionnaries";
 
 export const exerciseMenuItems: menuItemsType = {
-  graph: "graph",
-  questionnaries: "questionnaries",
+  graph: "Graphs",
+  questionnaries: "Questionnaries",
 };
 export const exerciseMenuItemskeys = Object.keys(exerciseMenuItems);
 
 const ExerciseSessionPage = () => {
   const pathname = useLocation().pathname.split("/");
-  const activePage: string =
-    pathname[7] === "" ? exerciseMenuItemskeys[0] : pathname[7];
-
-  const handleChangePath = (menuItem: string) => {
-    pathname.pop();
-    return pathname.join("/") + "/" + menuItem;
-  };
+  const [activePage, setActivePage] = useState("graph");
+  const { exerciseId } = useParams();
+  const hederText = exerciseId ?? "hei";
 
   const handleBack = () => {
-    return pathname.slice(0, 5).join("/");
+    return pathname.slice(0, 3).join("/");
   };
+  {
+    console.log(
+      activePage,
+      exerciseMenuItemskeys[0],
+      activePage === exerciseMenuItemskeys[0]
+    );
+  }
+
   return (
-    <div className="container">
-      {SidePanel(
-        exerciseMenuItems,
-        activePage,
-        handleChangePath,
-        true,
-        handleBack
-      )}
-      {Header(getTextFromkey(exerciseMenuItems, activePage))}
-      <div className="content">
-        {activePage === "" || activePage === exerciseMenuItemskeys[0] ? (
-          <ExerciseGraph />
-        ) : (
-          <></>
-        )}
+    <Box className={styles.container}>
+      <SidePanel
+        menuItems={exerciseMenuItems}
+        activePage={activePage}
+        setActivePage={setActivePage}
+        back={true}
+        handleNavigationBack={handleBack}
+      />
+      <Header headerText={hederText} />
+      <Box className={styles.content}>
+        {activePage === exerciseMenuItemskeys[0] ? <ExerciseGraph /> : <></>}
         {activePage === exerciseMenuItemskeys[1] ? (
           <ExerciseQuestionnaries />
         ) : (
           <></>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

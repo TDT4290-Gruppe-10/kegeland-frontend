@@ -1,7 +1,5 @@
 function LowActivityPatients() {
-    return (
-        <div>Low activity patients</div>
-    );
+  return <div>Low activity patients</div>;
 }
 
 export default LowActivityPatients;

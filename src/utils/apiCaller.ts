@@ -1,10 +1,9 @@
-import axios, { Method } from 'axios';
+import axios, { Method } from "axios";
 
-import { Token } from '../state/ducks/auth/auth.helpers';
+import { Token } from "../state/ducks/auth/auth.helpers";
 
-import { isApiError } from './isApiError';
-import { retrieveToken } from './storage';
-
+import { isApiError } from "./isApiError";
+import { retrieveToken } from "./storage";
 
 const httpInstance = axios.create({
   baseURL: "http://localhost:8000/api/",
@@ -15,18 +14,18 @@ httpInstance.interceptors.request.use(
   async (config) => {
     const token = await retrieveToken(Token.ACCESS_TOKEN);
     if (token) {
-      config.headers!.Authorization = 'Bearer ' + token;
+      config.headers!.Authorization = "Bearer " + token;
       console.log(config.headers);
     }
     return config;
   },
-  (err) => Promise.reject(err),
+  (err) => Promise.reject(err)
 );
 
 export const apiCaller = <T = unknown>(
   endpoint: string,
   method: Method,
-  data?: any,
+  data?: any
 ) =>
   httpInstance
     .request<T>({ url: endpoint, method, data })
@@ -44,5 +43,5 @@ export const apiCaller = <T = unknown>(
         }
         throw new Error(err.message);
       }
-      throw new Error('An unknown error has occurred');
+      throw new Error("An unknown error has occurred");
     });

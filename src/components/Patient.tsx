@@ -6,17 +6,13 @@ import {
   LinkBox,
   LinkOverlay,
 } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
 
 interface PatientProps {
-  name: string
-  id: string
+  name: string;
+  id: string;
 }
 
-export const Patient: React.FC<PatientProps> = ({name, id}) => {
-  const pathname = useLocation().pathname.split("/");
-  const firstPage = pathname[1];
-
+export const Patient: React.FC<PatientProps> = ({ name, id }) => {
   return (
     <WrapItem>
       <LinkBox
@@ -27,7 +23,7 @@ export const Patient: React.FC<PatientProps> = ({name, id}) => {
         pb="4"
       >
         <LinkOverlay
-          href={firstPage + "/patient/" + id + "/overview"}
+          href={"/patient/" + id}
           display="flex-center"
           justifyContent="space-between"
         >
@@ -38,6 +34,6 @@ export const Patient: React.FC<PatientProps> = ({name, id}) => {
       </LinkBox>
     </WrapItem>
   );
-}
+};
 
 export default Patient;
