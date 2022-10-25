@@ -25,9 +25,10 @@ const Sidepanel: React.FC<sidepanelProps> = ({
       height={"100%"}
       bgColor={"gray.100"}
       position={"fixed"}
+      top={"80px"}
       fontSize={"24px"}
     >
-      {back ? (
+      {back && (
         <Link
           className={styles.GoBack}
           href={handleNavigationBack()}
@@ -39,8 +40,6 @@ const Sidepanel: React.FC<sidepanelProps> = ({
           <RiArrowGoBackLine />
           <Text pl={2}>Go Back</Text>
         </Link>
-      ) : (
-        <div style={{ height: "80px" }}></div>
       )}
       {Object.entries(menuItems).map(([menuItem, menuItemText], i) => (
         <Box key={i}>

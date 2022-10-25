@@ -6,6 +6,7 @@ import styles from "../../index.module.scss";
 import { getTextFromkey, menuItemsType } from "../../utils/Things";
 import Header from "../../components/Header";
 import { useState } from "react";
+import { Box } from "@chakra-ui/react";
 
 export const patientsMenuItems: menuItemsType = {
   allpatients: "All my patients",
@@ -14,14 +15,14 @@ export const patientsMenuItems: menuItemsType = {
   more: "More...",
 };
 
-export const patientsMenuItemskeys = Object.keys(patientsMenuItems);
+const patientsMenuItemskeys = Object.keys(patientsMenuItems);
 
 const PatientsPage = () => {
   const [activePage, setActivePage] = useState("allpatients");
   const headerText = getTextFromkey(patientsMenuItems, activePage);
 
   return (
-    <div className={styles.container}>
+    <Box>
       <SidePanel
         menuItems={patientsMenuItems}
         activePage={activePage}
@@ -30,19 +31,13 @@ const PatientsPage = () => {
         handleNavigationBack={() => ""}
       />
       <Header headerText={headerText} />
-      <div className={styles.content}>
-        {activePage === "" || activePage === patientsMenuItemskeys[0] ? (
+      <Box className={styles.content}>
+        {(activePage === "" || activePage === patientsMenuItemskeys[0]) && (
           <AllPatientsPage />
-        ) : (
-          <></>
         )}
-        {activePage === patientsMenuItemskeys[1] ? (
-          <LowActivityPatients />
-        ) : (
-          <></>
-        )}
-      </div>
-    </div>
+        {activePage === patientsMenuItemskeys[1] && <LowActivityPatients />}
+      </Box>
+    </Box>
   );
 };
 
