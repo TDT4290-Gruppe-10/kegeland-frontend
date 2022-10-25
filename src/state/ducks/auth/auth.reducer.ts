@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   initializeAuthState,
+  refresh,
   signInUser,
   signOutUser,
   signUpUser,
@@ -64,9 +65,11 @@ const authSlice = createSlice({
         state.userDetails = undefined;
         state.error = undefined;
       })
-      .addCase(signOutUser.rejected, (state, action) => {
+      .addCase(signOutUser.rejected, (state) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.authUser = undefined;
+        state.userDetails = undefined;
+        state.isSignedIn = false;
       })
       .addCase(signOutUser.pending, (state) => {
         state.loading = true;
@@ -87,6 +90,13 @@ const authSlice = createSlice({
       .addCase(signUpUser.rejected, (state, { error }) => {
         state.loading = false;
         state.error = error.message;
+      })
+      .addCase(refresh.rejected, (state) => {
+        state.loading = false;
+        state.isSignedIn = false;
+        state.authUser = undefined;
+        state.userDetails = undefined;
+        state.error = undefined;
       });
   },
 });
