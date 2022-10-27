@@ -3,11 +3,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { apiCaller } from "../../../utils/apiCaller";
 import {
   removeTokens,
+  retrieveToken,
   retrieveTokens,
   storeTokens,
 } from "../../../utils/storage";
 
-import { allTokensExist } from "./auth.helpers";
+import { allTokensExist, Token } from "./auth.helpers";
 import {
   AuthTokens,
   LoginDTO,
@@ -36,14 +37,19 @@ export const signInUser = createAsyncThunk(
     )
 );
 
-export const refresh = createAsyncThunk("auth/refresh", async () =>
-  apiCaller<AuthTokens>({ url: "auth/refresh", method: "POST" }).then(
-    async (res) => {
-      await storeTokens(res);
-      return res;
-    }
-  )
-);
+export const refresh = createAsyncThunk("auth/refresh", async () => {
+  const token = await retrieveToken(Token.REFRESH_TOKEN);
+  if (!token) {
+    throw new Error("No refresh token found");
+  }
+  await apiCaller<AuthTokens>({
+    url: "auth/refresh",
+    method: "POST",
+    data: {
+      refreshToken: token,
+    },
+  }).then(async (res) => storeTokens(res));
+});
 
 export const signOutUser = createAsyncThunk("auth/signOutUser", async () =>
   apiCaller<void>({ url: "auth/logout", method: "POST" }).then(async (res) => {
