@@ -1,5 +1,5 @@
 import Patient from "../../components/Patient";
-import { Wrap } from "@chakra-ui/react";
+import { Box, Flex, Wrap } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPatients } from "../../state/ducks/patients/patients.actions";
 import { AppDispatch, RootState } from "../../state/store";
@@ -18,7 +18,7 @@ function AllPatientsPage() {
   }, []);
 
   return (
-    <Wrap spacing="30px">
+    <Wrap padding={5}>
       {patients.map((pat: any) => (
         <Patient
           key={pat.id}

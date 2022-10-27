@@ -6,6 +6,7 @@ import NotFoundPage from "./pages/NotFound";
 import LogIn from "./pages/auth/LogInPage";
 import RegisterUser from "./pages/auth/RegisterPage";
 import RequireAuthPage from "./pages/auth/RequireAuthPage";
+import Header from "./components/Header";
 
 const RoutesRoute = () => {
   return (

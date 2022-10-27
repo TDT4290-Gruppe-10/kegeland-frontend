@@ -1,11 +1,12 @@
 import { Box, Button, Text, Tooltip } from "@chakra-ui/react";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../state/ducks/auth/auth.actions";
-import { AppDispatch } from "../state/store";
+import { AppDispatch, RootState } from "../state/store";
 
-const Header: React.FC<{ headerText: string }> = ({ headerText }) => {
+const Header: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const {headerText} = useSelector((state: RootState) =>  state.headerText)
 
   return (
     <Box

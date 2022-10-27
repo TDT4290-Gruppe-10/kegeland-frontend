@@ -3,6 +3,7 @@ import {
   getAllPatients,
   getAllPatientSessions,
   getPatientExercise,
+  getPatientOverview
 } from "./patients.actions";
 
 const initialState: any = {
@@ -41,6 +42,7 @@ const singlePatientInitialState: any = {
   patientData: [],
   loading: false,
   error: undefined,
+  patientInformation: {}
 };
 
 const singlePatientSlice = createSlice({
@@ -65,7 +67,20 @@ const singlePatientSlice = createSlice({
       .addCase(getAllPatientSessions.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      });
+      })
+      .addCase(getPatientOverview.pending, (state) => {
+        state.loading = true;
+        state.error = undefined
+      })
+      .addCase(getPatientOverview.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.error = undefined;
+        state.patientInformation = payload;
+      })
+      .addCase(getPatientOverview.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
   },
 });
 
