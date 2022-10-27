@@ -3,7 +3,6 @@ body {
 }
 
 .GoBack {
-  margin-top: 80px;
   font-size: 20px;
   padding: 8px;
   display: inline-flex;
@@ -19,7 +18,10 @@ body {
 }
 
 .content {
-  margin-top: 80px;
-  margin-left: 300px;
+  position: fixed;
+  top:80px;
+  left:300px;
   padding: 8px;
+  height: 100%;
+  overflow: auto;
 }

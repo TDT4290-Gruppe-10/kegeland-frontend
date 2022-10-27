@@ -5,6 +5,7 @@ import FemFitOverviewPage from "./FemfitOverview";
 import OverviewPatientPage from "./OverviewPatient";
 import styles from "../../index.module.scss";
 import { useState } from "react";
+import { Box } from "@chakra-ui/react";
 
 export const patientMenuItems: menuItemsType = {
   overview: "Overview",
@@ -22,7 +23,8 @@ const PatientPage = () => {
     return "/";
   };
   return (
-    <div className={styles.container}>
+    <Box>
+      <Header headerText={headerText} />
       <SidePanel
         menuItems={patientMenuItems}
         activePage={activePage}
@@ -30,21 +32,12 @@ const PatientPage = () => {
         back={true}
         handleNavigationBack={handleBack}
       />
-      <Header headerText={headerText} />
-      <div className={styles.content}>
-        {activePage === patientMenuItemskeys[0] ? (
-          <OverviewPatientPage />
-        ) : (
-          <></>
-        )}
-        {/*pathname[1] === patientMenuItemskeys[1] ? <FemFitOverviewPage /> : <></>*/}
-        {activePage === patientMenuItemskeys[2] ? (
-          <FemFitOverviewPage />
-        ) : (
-          <></>
-        )}
-      </div>
-    </div>
+      <Box className={styles.content}>
+        {activePage === patientMenuItemskeys[0] && <OverviewPatientPage />}
+        {/*pathname[1] === patientMenuItemskeys[1] && <FemFitOverviewPage />*/}
+        {activePage === patientMenuItemskeys[2] && <FemFitOverviewPage />}
+      </Box>
+    </Box>
   );
 };
 

@@ -1,12 +1,13 @@
-import axios, { Method } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 import { Token } from "../state/ducks/auth/auth.helpers";
 
 import { isApiError } from "./isApiError";
 import { retrieveToken } from "./storage";
 
+const baseURL = "http://localhost:8000/api/"
+
 const httpInstance = axios.create({
-  baseURL: "http://localhost:8000/api/",
   timeout: 5000,
 });
 
@@ -15,20 +16,20 @@ httpInstance.interceptors.request.use(
     const token = await retrieveToken(Token.ACCESS_TOKEN);
     if (token) {
       config.headers!.Authorization = "Bearer " + token;
-      console.log(config.headers);
     }
     return config;
   },
   (err) => Promise.reject(err)
 );
 
-export const apiCaller = <T = unknown>(
-  endpoint: string,
-  method: Method,
-  data?: any
-) =>
+type ApiCallerProps = Pick<
+  AxiosRequestConfig,
+  'url' | 'method' | 'data' | 'params'
+>;
+
+export const apiCaller = <T = unknown>(config: ApiCallerProps) =>
   httpInstance
-    .request<T>({ url: endpoint, method, data })
+    .request<T>({baseURL: baseURL, ...config})
     .then((res) => res.data)
     .catch((err) => {
       if (err instanceof Error) {

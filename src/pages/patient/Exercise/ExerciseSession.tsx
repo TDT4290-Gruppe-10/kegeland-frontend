@@ -23,13 +23,6 @@ const ExerciseSessionPage = () => {
   const handleBack = () => {
     return pathname.slice(0, 3).join("/");
   };
-  {
-    console.log(
-      activePage,
-      exerciseMenuItemskeys[0],
-      activePage === exerciseMenuItemskeys[0]
-    );
-  }
 
   return (
     <Box className={styles.container}>
