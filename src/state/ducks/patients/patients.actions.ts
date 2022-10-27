@@ -31,3 +31,13 @@ export const getPatientExercise = createAsyncThunk(
       }
     )
 );
+
+export const getPatientOverview = createAsyncThunk(
+  "users/overview",
+  async (userId: string) => 
+    apiCaller<any>({url: `users/overview/${userId}`, method: "GET"}).then( 
+      async (res) => {
+        return res
+      }
+    )
+)

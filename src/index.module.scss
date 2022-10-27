@@ -1,5 +1,6 @@
 body {
   margin: 0px;
+  height: 100%;
 }
 
 .GoBack {
@@ -19,9 +20,10 @@ body {
 
 .content {
   position: fixed;
-  top:80px;
+  top: 80px;
   left:300px;
   padding: 8px;
   height: 100%;
   overflow: auto;
+  flex-grow: 1;
 }

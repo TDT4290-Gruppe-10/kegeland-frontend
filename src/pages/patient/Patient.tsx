@@ -1,42 +1,25 @@
-import Header from "../../components/Header";
-import SidePanel from "../../components/SidePanel";
-import { menuItemsType } from "../../utils/Things";
-import FemFitOverviewPage from "./FemfitOverview";
-import OverviewPatientPage from "./OverviewPatient";
-import styles from "../../index.module.scss";
-import { useState } from "react";
-import { Box } from "@chakra-ui/react";
-
-export const patientMenuItems: menuItemsType = {
-  overview: "Overview",
-  allexcersies: "All Excercises",
-  femfitexcersies: "Femfit Excercises",
-};
-
-export const patientMenuItemskeys = Object.keys(patientMenuItems);
+import Header from '../../components/Header';
+import SidePanel from '../../components/SidePanel';
+import { menuItemsType } from '../../utils/Things';
+import FemFitOverviewPage from './FemfitOverview';
+import OverviewPatientPage from './OverviewPatient';
+import styles from '../../index.module.scss';
+import { Box } from '@chakra-ui/react';
+import { AllExercises } from './AllExercises';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../state/store';
+import { patientMenuItems } from '../../state/ducks/layout/layout.reducer';
 
 const PatientPage = () => {
-  const [activePage, setActivePage] = useState("overview");
+  const {activePage} = useSelector(
+    (state: RootState) => state.sidePanel,
+  );
 
-  const headerText = "patient name";
-  const handleBack = () => {
-    return "/";
-  };
   return (
     <Box>
-      <Header headerText={headerText} />
-      <SidePanel
-        menuItems={patientMenuItems}
-        activePage={activePage}
-        setActivePage={setActivePage}
-        back={true}
-        handleNavigationBack={handleBack}
-      />
-      <Box className={styles.content}>
-        {activePage === patientMenuItemskeys[0] && <OverviewPatientPage />}
-        {/*pathname[1] === patientMenuItemskeys[1] && <FemFitOverviewPage />*/}
-        {activePage === patientMenuItemskeys[2] && <FemFitOverviewPage />}
-      </Box>
+      {activePage === patientMenuItems.overview && <OverviewPatientPage />}
+      {activePage === patientMenuItems.allexcersies && <AllExercises />}
+      {activePage === patientMenuItems.femfitexercises && <FemFitOverviewPage />}
     </Box>
   );
 };

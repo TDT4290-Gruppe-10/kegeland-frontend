@@ -4,6 +4,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import RoutesRoute from "./Routes";
 import refreshWrapper from "./refreshWrapper";
 import { Box } from "@chakra-ui/react";
+import { Layout } from "./components/Layout";
 
 const Wrapper = refreshWrapper(Box);
 
@@ -12,7 +13,7 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Wrapper>
-          <RoutesRoute />
+            <RoutesRoute />
         </Wrapper>
       </PersistGate>
     </Provider>
