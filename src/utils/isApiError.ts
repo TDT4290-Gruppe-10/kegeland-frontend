@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError } from 'axios';
 
 interface ApiErrorDTO {
   statusCode: number;
@@ -7,7 +7,7 @@ interface ApiErrorDTO {
 }
 
 export const isApiError = (
-  error: AxiosError<any>
+  error: AxiosError<any>,
 ): error is AxiosError<ApiErrorDTO> => {
   return error.response?.data && error.response.data.message;
 };

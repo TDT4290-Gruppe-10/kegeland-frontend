@@ -1,4 +1,4 @@
-import { DeviceType } from "../questionnaires/questionnaries.interface";
+import { DeviceType } from '../questionnaires/questionnaries.interface';
 
 export type ExerciseSession = {
   sensor: DeviceType;

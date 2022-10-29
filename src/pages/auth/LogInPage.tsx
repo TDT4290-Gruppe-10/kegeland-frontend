@@ -6,28 +6,29 @@ import {
   Link,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import { Formik } from "formik";
-import { InputControl, SubmitButton } from "formik-chakra-ui";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
-import { signInUser } from "../../state/ducks/auth/auth.actions";
-import { LoginDTO } from "../../state/ducks/auth/auth.interface";
-import { clearError } from "../../state/ducks/auth/auth.reducer";
-import { AppDispatch, RootState } from "../../state/store";
+} from '@chakra-ui/react';
+import { Formik } from 'formik';
+import { InputControl, SubmitButton } from 'formik-chakra-ui';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+
+import useAppDispatch from '../../hooks/useAppDispatch';
+import useAppSelector from '../../hooks/useAppSelector';
+import { signInUser } from '../../state/ducks/auth/auth.actions';
+import { LoginDTO } from '../../state/ducks/auth/auth.interface';
+import { clearError } from '../../state/ducks/auth/auth.reducer';
 
 const validateSchema = Yup.object({
-  email: Yup.string().required().email("Email is not valid").label("Email"),
-  password: Yup.string().required().label("Password"),
+  email: Yup.string().required().email('Email is not valid').label('Email'),
+  password: Yup.string().required().label('Password'),
 });
 
-function LogIn() {
+const LogIn = () => {
   const navigate = useNavigate();
-  const { error, loading } = useSelector((state: RootState) => state.auth);
-  const dispatch = useDispatch<AppDispatch>();
-  const { isSignedIn } = useSelector((state: RootState) => state.auth);
+  const { error, loading } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const { isSignedIn } = useAppSelector((state) => state.auth);
 
   const signIn = (data: LoginDTO) => {
     dispatch(signInUser(data));
@@ -36,7 +37,7 @@ function LogIn() {
   useEffect(() => {
     dispatch(clearError());
     if (isSignedIn) {
-      navigate("/");
+      navigate('/');
     }
   }, [navigate, isSignedIn]);
 
@@ -48,9 +49,8 @@ function LogIn() {
             onSubmit={async (values) => {
               signIn(values);
             }}
-            initialValues={{ email: "", password: "" }}
-            validationSchema={validateSchema}
-          >
+            initialValues={{ email: '', password: '' }}
+            validationSchema={validateSchema}>
             {(formProps) => (
               <Box
                 borderWidth="1px"
@@ -63,12 +63,11 @@ function LogIn() {
                 onSubmit={(e: any) => {
                   e.preventDefault();
                   formProps.handleSubmit();
-                }}
-              >
+                }}>
                 <VStack spacing={5} align="stretch">
                   <Box>
                     <Heading as="h3" size="lg" textAlign="center">
-                      Log in{" "}
+                      Log in{' '}
                     </Heading>
                   </Box>
                   <Box>
@@ -79,8 +78,8 @@ function LogIn() {
                   <Box>
                     <InputControl
                       inputProps={{
-                        type: "email",
-                        placeholder: "ola.nordmann@example.com",
+                        type: 'email',
+                        placeholder: 'ola.nordmann@example.com',
                       }}
                       name="email"
                       isRequired
@@ -95,19 +94,18 @@ function LogIn() {
                       label="Password"
                       data-testid="password-input"
                       inputProps={{
-                        type: "password",
-                        autoComplete: "password",
-                        placeholder: "• • • • • • • •",
+                        type: 'password',
+                        autoComplete: 'password',
+                        placeholder: '• • • • • • • •',
                       }}
                     />
                   </Box>
-                  <Box color={"red"}>{error}</Box>
+                  <Box color={'red'}>{error}</Box>
                   <Box textAlign="right">
                     <SubmitButton
                       isLoading={formProps.isSubmitting || loading}
                       isDisabled={!formProps.isValid}
-                      style={{ backgroundColor: "#273587", color: "#FFFFFF" }}
-                    >
+                      style={{ backgroundColor: '#273587', color: '#FFFFFF' }}>
                       Log in
                     </SubmitButton>
                   </Box>
@@ -127,6 +125,6 @@ function LogIn() {
       </Container>
     </Center>
   );
-}
+};
 
 export default LogIn;

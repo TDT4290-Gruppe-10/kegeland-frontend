@@ -5,17 +5,18 @@ import {
   Heading,
   HStack,
   VStack,
-} from "@chakra-ui/react";
-import { useEffect } from "react";
-import { Formik } from "formik";
-import { InputControl, SubmitButton } from "formik-chakra-ui";
-import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { AppDispatch, RootState } from "../../state/store";
-import { useDispatch, useSelector } from "react-redux";
-import { signUpUser } from "../../state/ducks/auth/auth.actions";
-import { RegisterDTO, UserRole } from "../../state/ducks/auth/auth.interface";
-import { clearError } from "../../state/ducks/auth/auth.reducer";
+} from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { Formik } from 'formik';
+import { InputControl, SubmitButton } from 'formik-chakra-ui';
+import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+
+import { signUpUser } from '../../state/ducks/auth/auth.actions';
+import { RegisterDTO, UserRole } from '../../state/ducks/auth/auth.interface';
+import { clearError } from '../../state/ducks/auth/auth.reducer';
+import useAppSelector from '../../hooks/useAppSelector';
+import useAppDispatch from '../../hooks/useAppDispatch';
 
 type FormData = {
   firstName?: string;
@@ -26,29 +27,29 @@ type FormData = {
 };
 
 const validationSchema = Yup.object({
-  email: Yup.string().required().email("Email is not valid").label("Email"),
-  firstName: Yup.string().required().label("First name"),
-  lastName: Yup.string().required().label("Last name"),
-  password: Yup.string().required().label("Password"),
-  confirmPassword: Yup.string().when("password", {
+  email: Yup.string().required().email('Email is not valid').label('Email'),
+  firstName: Yup.string().required().label('First name'),
+  lastName: Yup.string().required().label('Last name'),
+  password: Yup.string().required().label('Password'),
+  confirmPassword: Yup.string().when('password', {
     is: (val: string | any[]) => !!(val && val.length > 0),
     then: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "Both passwords need to be the same"
+      [Yup.ref('password')],
+      'Both passwords need to be the same',
     ),
   }),
 });
 
-function RegisterUser() {
-  const { error, loading } = useSelector((state: RootState) => state.auth);
-  const dispatch = useDispatch<AppDispatch>();
-  const { isSignedIn } = useSelector((state: RootState) => state.auth);
+const RegisterUser = () => {
+  const { error, loading } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const { isSignedIn } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(clearError());
     if (isSignedIn) {
-      navigate("/");
+      navigate('/');
     }
   }, [navigate, isSignedIn]);
 
@@ -75,14 +76,13 @@ function RegisterUser() {
                 register(values);
               }}
               initialValues={{
-                email: "",
-                password: "",
-                firstName: "",
-                lastName: "",
-                confirmPassword: "",
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                confirmPassword: '',
               }}
-              validationSchema={validationSchema}
-            >
+              validationSchema={validationSchema}>
               {(formProps) => (
                 <Box
                   borderWidth="1px"
@@ -95,8 +95,7 @@ function RegisterUser() {
                   onSubmit={(e: any) => {
                     e.preventDefault();
                     formProps.handleSubmit();
-                  }}
-                >
+                  }}>
                   <VStack spacing={5} align="stretch">
                     <Box>
                       <Heading as="h3" size="lg" textAlign="center">
@@ -111,8 +110,8 @@ function RegisterUser() {
                     <Box>
                       <InputControl
                         inputProps={{
-                          type: "email",
-                          placeholder: "ola.nordmann@example.com",
+                          type: 'email',
+                          placeholder: 'ola.nordmann@example.com',
                         }}
                         name="email"
                         isRequired
@@ -124,8 +123,8 @@ function RegisterUser() {
                       <Box>
                         <InputControl
                           inputProps={{
-                            type: "text",
-                            placeholder: "Ola",
+                            type: 'text',
+                            placeholder: 'Ola',
                           }}
                           name="firstName"
                           isRequired
@@ -136,8 +135,8 @@ function RegisterUser() {
                       <Box>
                         <InputControl
                           inputProps={{
-                            type: "text",
-                            placeholder: "Nordmann",
+                            type: 'text',
+                            placeholder: 'Nordmann',
                           }}
                           isRequired
                           label="Last name"
@@ -153,9 +152,9 @@ function RegisterUser() {
                         label="Password"
                         data-testid="password-input"
                         inputProps={{
-                          type: "password",
-                          autoComplete: "new-password",
-                          placeholder: "• • • • • • • •",
+                          type: 'password',
+                          autoComplete: 'new-password',
+                          placeholder: '• • • • • • • •',
                         }}
                         helperText="Create a new password."
                       />
@@ -166,20 +165,22 @@ function RegisterUser() {
                         name="confirmPassword"
                         data-testid="confirmPassword-input"
                         inputProps={{
-                          type: "password",
-                          autoComplete: "new-password",
-                          placeholder: "• • • • • • • •",
+                          type: 'password',
+                          autoComplete: 'new-password',
+                          placeholder: '• • • • • • • •',
                         }}
                         helperText="Repeat your password."
                       />
                     </Box>
-                    <Box color={"red"}>{error}</Box>
+                    <Box color={'red'}>{error}</Box>
                     <Box textAlign="right">
                       <SubmitButton
                         isLoading={formProps.isSubmitting && loading}
                         isDisabled={!formProps.isValid}
-                        style={{ backgroundColor: "#273587", color: "#FFFFFF" }}
-                      >
+                        style={{
+                          backgroundColor: '#273587',
+                          color: '#FFFFFF',
+                        }}>
                         Register user
                       </SubmitButton>
                     </Box>
@@ -192,6 +193,6 @@ function RegisterUser() {
       </Center>
     </div>
   );
-}
+};
 
 export default RegisterUser;

@@ -1,9 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+
 import {
   getAllAnswersForSession,
   getAssignedQuestionnaire,
-} from "./questionnaries.actions";
-import { AnswerState, QuestionnaireState } from "./questionnaries.interface";
+} from './questionnaries.actions';
+import { AnswerState, QuestionnaireState } from './questionnaries.interface';
 
 const initialQuestionnariresIdState: QuestionnaireState = {
   questionnaire: undefined,
@@ -12,7 +13,7 @@ const initialQuestionnariresIdState: QuestionnaireState = {
 };
 
 const questionnarieIdSlice = createSlice({
-  name: "questionnaireId",
+  name: 'questionnaireId',
   initialState: initialQuestionnariresIdState,
   reducers: {
     clearError: (state) => {
@@ -44,7 +45,7 @@ const initialAnswersState: AnswerState = {
 };
 
 const answersSlice = createSlice({
-  name: "answer",
+  name: 'answer',
   initialState: initialAnswersState,
   reducers: {
     clearError: (state) => {

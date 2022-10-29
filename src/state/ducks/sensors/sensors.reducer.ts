@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getSessionData } from "./sensors.actions";
-import { SensorState } from "./sensors.interface";
+import { createSlice } from '@reduxjs/toolkit';
+
+import { getSessionData } from './sensors.actions';
+import { SensorState } from './sensors.interface';
 
 const initialState: SensorState = {
   sessionData: undefined,
@@ -9,7 +10,7 @@ const initialState: SensorState = {
 };
 
 const sensorSlice = createSlice({
-  name: "sensors",
+  name: 'sensors',
   initialState,
   reducers: {
     clearError: (state) => {

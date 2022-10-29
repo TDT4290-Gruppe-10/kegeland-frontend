@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+
 import {
   initializeAuthState,
   refresh,
   signInUser,
   signOutUser,
   signUpUser,
-} from "./auth.actions";
-import { AuthState } from "./auth.interface";
+} from './auth.actions';
+import { AuthState } from './auth.interface';
 
 const initialState: AuthState = {
   ready: false,
@@ -18,7 +19,7 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     clearError: (state) => {

@@ -5,8 +5,8 @@ import {
   Divider,
   LinkBox,
   LinkOverlay,
-} from "@chakra-ui/react";
-import { useLocation, useParams } from "react-router-dom";
+} from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
 
 interface ExerciseProps {
   date: string;
@@ -14,27 +14,25 @@ interface ExerciseProps {
   sensor: string;
 }
 
-export const Exercise: React.FC<ExerciseProps> = ({ date, id, sensor }) => {
+const Exercise: React.FC<ExerciseProps> = ({ date, id, sensor }) => {
   const { patientId } = useParams();
 
   return (
     <WrapItem>
       <LinkBox
         w="500px"
-        p={["12", "12"]}
+        p={['12', '12']}
         bg="gray.100"
         borderRadius={20}
-        pb="4"
-      >
+        pb="4">
         <LinkOverlay
-          href={"/patient/" + patientId + "/exercise/" + id}
+          href={'/patient/' + patientId + '/exercise/' + id}
           display="flex-center"
-          justifyContent="space-between"
-        >
+          justifyContent="space-between">
           <Box>{date}</Box>
           <Box>{sensor}</Box>
         </LinkOverlay>
-        <Divider orientation="horizontal" borderColor={"blue.900"} />
+        <Divider orientation="horizontal" borderColor={'blue.900'} />
         <Text fontSize="lg" mb="4"></Text>
       </LinkBox>
     </WrapItem>

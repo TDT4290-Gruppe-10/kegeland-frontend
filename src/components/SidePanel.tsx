@@ -1,10 +1,9 @@
 import { Text, Link, Box } from '@chakra-ui/react';
-import { menuItemsType } from '../utils/Things';
 import { RiArrowGoBackLine } from 'react-icons/ri';
-import styles from '../index.module.scss';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../state/store';
+import { useParams } from 'react-router-dom';
+
+import styles from '../index.module.scss';
 import {
   exerciseMenuItems,
   patientMenuItems,
@@ -12,47 +11,52 @@ import {
   setSidePanelPath,
   setSidePanelProps,
 } from '../state/ducks/layout/layout.reducer';
-import { useParams } from 'react-router-dom';
-
+import useAppDispatch from '../hooks/useAppDispatch';
+import useAppSelector from '../hooks/useAppSelector';
 
 const Sidepanel: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const {back, backPath, activePage } = useSelector(
-    (state: RootState) => state.sidePanel,
+  const dispatch = useAppDispatch();
+  const { back, backPath, activePage } = useAppSelector(
+    (state) => state.sidePanel,
   );
   const { patientId, exerciseId } = useParams();
-  const [items, setItems] = useState(patientMenuItems)
+  const [items, setItems] = useState(patientMenuItems);
 
   const getMenuItems = () => {
     if (patientId && !exerciseId) {
-      dispatch(setSidePanelProps({
-        back: true,
-        activePage: patientMenuItems.overview,
-        backPath: "/"
-      }))
-      return patientMenuItems
+      dispatch(
+        setSidePanelProps({
+          back: true,
+          activePage: patientMenuItems.overview,
+          backPath: '/',
+        }),
+      );
+      return patientMenuItems;
     }
     if (patientId && exerciseId) {
-      dispatch(setSidePanelProps({
-        back: true,
-        activePage: exerciseMenuItems.graph,
-        backPath: "/patient/" + patientId
-      }))
-      return exerciseMenuItems
+      dispatch(
+        setSidePanelProps({
+          back: true,
+          activePage: exerciseMenuItems.graph,
+          backPath: '/patient/' + patientId,
+        }),
+      );
+      return exerciseMenuItems;
+    } else {
+      dispatch(
+        setSidePanelProps({
+          back: false,
+          activePage: patientsMenuItems.allpatients,
+          backPath: undefined,
+        }),
+      );
+      return patientsMenuItems;
     }
-    else {
-      dispatch(setSidePanelProps({
-        back: false,
-        activePage: patientsMenuItems.allpatients,
-        backPath: undefined
-      }))
-      return patientsMenuItems
-    }
-  }
+  };
 
-  useEffect(() =>{
-    setItems(getMenuItems())
-  },[patientId, exerciseId])
+  useEffect(() => {
+    setItems(getMenuItems());
+  }, [patientId, exerciseId]);
 
   return (
     <Box

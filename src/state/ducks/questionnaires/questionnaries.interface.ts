@@ -1,5 +1,5 @@
 export const _profiles = {
-  femfit: "femfit",
+  femfit: 'femfit',
 } as const;
 
 export type DeviceType = keyof typeof _profiles;

@@ -1,6 +1,8 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
-import SidePanel from './SidePanel';
+
 import { menuItemsType } from '../utils/Things';
+
+import SidePanel from './SidePanel';
 import Header from './Header';
 
 export const patientsMenuItems: menuItemsType = {
@@ -10,9 +12,11 @@ export const patientsMenuItems: menuItemsType = {
   more: 'More...',
 };
 
-const patientsMenuItemskeys = Object.keys(patientsMenuItems);
+type LayoutProps = {
+  children?: React.ReactNode;
+};
 
-export const Layout: React.FC<any> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Grid
       templateAreas={`"header header" "nav main" "footer footer"`}
@@ -26,8 +30,14 @@ export const Layout: React.FC<any> = ({ children }) => {
         <SidePanel />
       </GridItem>
       <GridItem pl="2" area={'main'}>
-        <Box position="fixed" height="100%" overflow="auto"  flexGrow={1} pb="200px" pt="10px">
-        {children}
+        <Box
+          position="fixed"
+          height="100%"
+          overflow="auto"
+          flexGrow={1}
+          pb="200px"
+          pt="10px">
+          {children}
         </Box>
       </GridItem>
       <GridItem
@@ -42,3 +52,5 @@ export const Layout: React.FC<any> = ({ children }) => {
     </Grid>
   );
 };
+
+export default Layout;

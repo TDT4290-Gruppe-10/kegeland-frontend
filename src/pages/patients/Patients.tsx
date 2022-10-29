@@ -1,15 +1,13 @@
-import AllPatientsPage from './AllPatients';
-import LowActivityPatients from './LowActivityPatients';
-import {Box, GridItem } from '@chakra-ui/react';
-import {useSelector } from 'react-redux';
-import {RootState } from '../../state/store';
-import { patientsMenuItems } from '../../state/ducks/layout/layout.reducer';
+import { Box } from '@chakra-ui/react';
 
+import { patientsMenuItems } from '../../state/ducks/layout/layout.reducer';
+import useAppSelector from '../../hooks/useAppSelector';
+
+import LowActivityPatients from './LowActivityPatients';
+import AllPatientsPage from './AllPatients';
 
 const PatientsPage = () => {
-  const {activePage } = useSelector(
-    (state: RootState) => state.sidePanel,
-  );
+  const { activePage } = useAppSelector((state) => state.sidePanel);
 
   return (
     <Box>

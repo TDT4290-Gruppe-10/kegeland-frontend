@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+
 import {
   getAllPatients,
   getAllPatientSessions,
   getPatientExercise,
-  getPatientOverview
-} from "./patients.actions";
+  getPatientOverview,
+} from './patients.actions';
 
 const initialState: any = {
   patients: [],
@@ -13,7 +14,7 @@ const initialState: any = {
 };
 
 const patientsSlice = createSlice({
-  name: "patients",
+  name: 'patients',
   initialState,
   reducers: {
     clearError: (state) => {
@@ -42,11 +43,11 @@ const singlePatientInitialState: any = {
   patientData: [],
   loading: false,
   error: undefined,
-  patientInformation: {}
+  patientInformation: {},
 };
 
 const singlePatientSlice = createSlice({
-  name: "patientData",
+  name: 'patientData',
   initialState: singlePatientInitialState,
   reducers: {
     clearError: (state) => {
@@ -70,7 +71,7 @@ const singlePatientSlice = createSlice({
       })
       .addCase(getPatientOverview.pending, (state) => {
         state.loading = true;
-        state.error = undefined
+        state.error = undefined;
       })
       .addCase(getPatientOverview.fulfilled, (state, { payload }) => {
         state.loading = false;
@@ -80,7 +81,7 @@ const singlePatientSlice = createSlice({
       .addCase(getPatientOverview.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      })
+      });
   },
 });
 
@@ -91,7 +92,7 @@ const exerciseInitialState: any = {
 };
 
 const exerciseSlice = createSlice({
-  name: "exerciseData",
+  name: 'exerciseData',
   initialState: exerciseInitialState,
   reducers: {
     clearError: (state) => {
