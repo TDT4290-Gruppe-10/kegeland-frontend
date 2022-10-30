@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { apiCaller } from "../../../utils/apiCaller";
+import { DeviceType, FetchQuestionnaireDTO } from "../questionnaires/questionnaries.interface";
+import { SessionsResopnseDTO } from "./patients.helper";
 
 export const getAllPatients = createAsyncThunk(
   "users/get-all-users",
@@ -10,6 +12,14 @@ export const getAllPatients = createAsyncThunk(
         return res;
       }
     )
+);
+
+export const getAllPatientSensorSessions = createAsyncThunk(
+  "sensors/sessions/sensor",
+  async (data: FetchQuestionnaireDTO) => {
+    const { userId, sensor } = data;
+    return apiCaller<any>({ url: `sensors/sessions/${userId}/${sensor}`, method: "GET" });
+  }
 );
 
 export const getAllPatientSessions = createAsyncThunk(
