@@ -60,7 +60,7 @@ export const AllExercises = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {patientData?.map((data: any) => (
+              {patientData?.map((data) => (
                 <Tr key={data.id}>
                   <Td>
                     <a

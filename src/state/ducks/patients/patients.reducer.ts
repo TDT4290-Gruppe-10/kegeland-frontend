@@ -5,6 +5,7 @@ import {
   getPatientExercise,
   getPatientOverview
 } from "./patients.actions";
+import { PatientsState } from "./patients.interface";
 
 const initialState: any = {
   patients: [],
@@ -38,7 +39,7 @@ const patientsSlice = createSlice({
   },
 });
 
-const singlePatientInitialState: any = {
+const singlePatientInitialState: PatientsState = {
   patientData: [],
   loading: false,
   error: undefined,
@@ -62,7 +63,7 @@ const singlePatientSlice = createSlice({
       .addCase(getAllPatientSessions.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = undefined;
-        state.patientData = payload.data;
+        state.patientData = payload;
       })
       .addCase(getAllPatientSessions.rejected, (state, action) => {
         state.loading = false;

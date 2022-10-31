@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { apiCaller } from "../../../utils/apiCaller";
+import { GetAllPatientSessionsResponse } from "./patients.interface";
 
 export const getAllPatients = createAsyncThunk(
   "users/get-all-users",
@@ -13,19 +14,15 @@ export const getAllPatients = createAsyncThunk(
 );
 
 export const getAllPatientSessions = createAsyncThunk(
-  "sensors/sessions",
+  "sessions",
   async (uid: string) =>
-    apiCaller<any>({ url: `sensors/sessions/${uid}`, method: "GET" }).then(
-      async (res) => {
-        return res;
-      }
-    )
+    apiCaller<GetAllPatientSessionsResponse>({ url: `sessions?userId=${uid}`, method: "GET" })
 );
 
 export const getPatientExercise = createAsyncThunk(
-  "sensors/sessions",
+  "sessions",
   async (sessionId: string) =>
-    apiCaller<any>({ url: `sensors/session/${sessionId}`, method: "GET" }).then(
+    apiCaller<any>({ url: `session/${sessionId}`, method: "GET" }).then(
       async (res) => {
         return res;
       }
