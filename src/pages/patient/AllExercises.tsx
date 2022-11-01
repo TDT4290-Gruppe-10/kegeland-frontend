@@ -16,6 +16,7 @@ import moment from 'moment';
 import { getAllPatientSessions } from '../../state/ducks/patients/patients.actions';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import useAppSelector from '../../hooks/useAppSelector';
+import { Session } from '../../state/ducks/sessions/sessions.interface';
 
 const AllExercises = () => {
   const { patientId } = useParams();
@@ -38,8 +39,6 @@ const AllExercises = () => {
     return <div>Loading....</div>;
   }
 
-  //   const displayList = patientData?.sort((a: sessionData, b: sessionData) => new Date(b.date).getTime() - new Date(a.date).getTime()) || []
-
   return (
     <Wrap>
       <Box maxWidth="900px" paddingBottom={100}>
@@ -52,11 +51,11 @@ const AllExercises = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {patientData?.map((data: any) => (
+              {patientData?.map((data: Session) => (
                 <Tr key={data.id}>
                   <Td>
                     <a href={'/patient/' + patientId + '/exercise/' + data.id}>
-                      {moment(data.date).format('DD.MM hh:mm')}
+                      {moment(data.createdAt).format('DD.MM hh:mm')}
                     </a>
                   </Td>
                   <Td>
