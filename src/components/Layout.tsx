@@ -30,13 +30,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <SidePanel />
       </GridItem>
       <GridItem pl="2" area={'main'}>
-        <Box
-          position="fixed"
-          height="100%"
-          overflow="auto"
-          flexGrow={1}
-          pb="200px"
-          pt="10px">
+        <Box overflow="hidden" padding={10}>
           {children}
         </Box>
       </GridItem>
