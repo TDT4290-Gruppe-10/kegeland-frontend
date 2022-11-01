@@ -6,7 +6,11 @@ import { store, persistor } from './state/store';
 import RoutesRoute from './Routes';
 import withSilentRefresh from './hoc/withSilentRefresh';
 
-const Wrapper = withSilentRefresh(Box);
+const Wrapper = withSilentRefresh(Box, {
+  backgroundColor: 'gray.100',
+  height: 'full',
+  width: 'full',
+});
 
 function App() {
   return (
