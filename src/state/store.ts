@@ -23,19 +23,23 @@ import {
   questionnairesIdReducer,
 } from './ducks/questionnaires/questionnaries.reducer';
 import { sensorReducer } from './ducks/sensors/sensors.reducer';
+import sessionsReducer from './ducks/sessions/sessions.reducer';
+import settingsReducer from './ducks/settings/settings.reducer';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['auth'],
+  whitelist: ['settings', 'auth'],
 };
 
 const rootReducer = combineReducers({
+  settings: settingsReducer,
   auth: authReducer,
+  sensors: sensorReducer,
+  sessions: sessionsReducer,
   patients: patientReducer,
   singlePatient: singlePatientReducer,
-  sensorData: sensorReducer,
   questionnaries: questionnairesIdReducer,
   answer: answerReducer,
   headerText: headerReducer,
