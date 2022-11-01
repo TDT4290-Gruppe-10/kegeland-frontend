@@ -1,7 +1,4 @@
 import {
-  Box,
-  Text,
-  Center,
   Flex,
   Avatar,
   Stack,
@@ -16,7 +13,7 @@ interface PatientProps {
   id: string;
 }
 
-export const Patient: React.FC<PatientProps> = ({ name, id }) => {
+const Patient: React.FC<PatientProps> = ({ name, id }) => {
   return (
     <WrapItem
       maxW={'270px'}
@@ -33,18 +30,18 @@ export const Patient: React.FC<PatientProps> = ({ name, id }) => {
           </Heading>
         </Stack>
         <Link href={'/patient/' + id}>
-        <Button
-          w={'full'}
-          rounded={'md'}
-          bgColor={'blue.200'}
-          _hover={{
-            transform: 'translateY(-2px)',
-            boxShadow: 's',
-            borderColor: 'black',
-            borderWidth: '2px',
-          }}>
-          Show profile
-        </Button>
+          <Button
+            w={'full'}
+            rounded={'md'}
+            bgColor={'blue.200'}
+            _hover={{
+              transform: 'translateY(-2px)',
+              boxShadow: 's',
+              borderColor: 'black',
+              borderWidth: '2px',
+            }}>
+            Show profile
+          </Button>
         </Link>
       </Flex>
     </WrapItem>

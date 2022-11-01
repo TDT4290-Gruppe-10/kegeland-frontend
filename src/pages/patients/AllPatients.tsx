@@ -1,13 +1,14 @@
-import Patient from "../../components/Patient";
-import { Box, Flex, Wrap } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllPatients } from "../../state/ducks/patients/patients.actions";
-import { AppDispatch, RootState } from "../../state/store";
-import { useEffect } from "react";
+import { Wrap } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
-function AllPatientsPage() {
-  const dispatch = useDispatch<AppDispatch>();
-  const { patients } = useSelector((state: RootState) => state.patients);
+import Patient from '../../components/Patient';
+import { getAllPatients } from '../../state/ducks/patients/patients.actions';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import useAppSelector from '../../hooks/useAppSelector';
+
+const AllPatientsPage = () => {
+  const dispatch = useAppDispatch();
+  const { patients } = useAppSelector((state) => state.patients);
 
   const fetchUsers = () => {
     dispatch(getAllPatients());
@@ -28,6 +29,6 @@ function AllPatientsPage() {
       ))}
     </Wrap>
   );
-}
+};
 
 export default AllPatientsPage;

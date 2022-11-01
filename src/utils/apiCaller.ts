@@ -1,11 +1,11 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from 'axios';
 
-import { Token } from "../state/ducks/auth/auth.helpers";
+import { Token } from '../state/ducks/auth/auth.helpers';
 
-import { isApiError } from "./isApiError";
-import { retrieveToken } from "./storage";
+import { isApiError } from './isApiError';
+import { retrieveToken } from './storage';
 
-const baseURL = "http://localhost:8000/api/"
+const baseURL = 'http://localhost:3000/api/';
 
 const httpInstance = axios.create({
   timeout: 5000,
@@ -15,11 +15,11 @@ httpInstance.interceptors.request.use(
   async (config) => {
     const token = await retrieveToken(Token.ACCESS_TOKEN);
     if (token) {
-      config.headers!.Authorization = "Bearer " + token;
+      config.headers!.Authorization = 'Bearer ' + token;
     }
     return config;
   },
-  (err) => Promise.reject(err)
+  (err) => Promise.reject(err),
 );
 
 type ApiCallerProps = Pick<
@@ -29,7 +29,7 @@ type ApiCallerProps = Pick<
 
 export const apiCaller = <T = unknown>(config: ApiCallerProps) =>
   httpInstance
-    .request<T>({baseURL: baseURL, ...config})
+    .request<T>({ baseURL, ...config })
     .then((res) => res.data)
     .catch((err) => {
       if (err instanceof Error) {
@@ -44,5 +44,5 @@ export const apiCaller = <T = unknown>(config: ApiCallerProps) =>
         }
         throw new Error(err.message);
       }
-      throw new Error("An unknown error has occurred");
+      throw new Error('An unknown error has occurred');
     });

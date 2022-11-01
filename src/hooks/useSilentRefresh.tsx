@@ -1,12 +1,14 @@
-import {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { refresh } from '../state/ducks/auth/auth.actions';
-import { AppDispatch, RootState } from '../state/store';
+import { useEffect, useState } from 'react';
 
-const REFRESH_INTERVAL_MS = 50 * 60 * 1000
+import { refresh } from '../state/ducks/auth/auth.actions';
+
+import useAppDispatch from './useAppDispatch';
+import useAppSelector from './useAppSelector';
+
+const REFRESH_INTERVAL_MS = 50 * 60 * 1000;
 const useSilentRefresh = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const {isSignedIn} = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const { isSignedIn } = useAppSelector((state) => state.auth);
   const [timer, setTimer] = useState<NodeJS.Timer | null>(null);
 
   useEffect(() => {

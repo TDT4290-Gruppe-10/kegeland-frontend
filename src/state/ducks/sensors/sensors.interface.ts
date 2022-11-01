@@ -1,12 +1,18 @@
-import { DeviceType } from "../questionnaires/questionnaries.interface";
+export enum SensorType {
+  FEMFIT = 'femfit',
+  EMPATICA = 'empatica',
+}
 
-export type ExerciseSession = {
-  sensor: DeviceType;
-  data: number[][];
+export type Sensor = {
+  id: string;
+  name: SensorType;
+  labels: string[];
 };
 
 export interface SensorState {
   loading: boolean;
-  error?: string;
-  sessionData: ExerciseSession | undefined;
+  data: {
+    [key in SensorType]?: Sensor;
+  };
+  error: string | undefined;
 }

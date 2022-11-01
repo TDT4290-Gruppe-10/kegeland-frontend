@@ -1,14 +1,14 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { apiCaller } from "../../../utils/apiCaller";
+import { apiCaller } from '../../../utils/apiCaller';
 import {
   removeTokens,
   retrieveToken,
   retrieveTokens,
   storeTokens,
-} from "../../../utils/storage";
+} from '../../../utils/storage';
 
-import { allTokensExist, Token } from "./auth.helpers";
+import { allTokensExist, Token } from './auth.helpers';
 import {
   AuthTokens,
   LoginDTO,
@@ -16,64 +16,64 @@ import {
   RegisterDTO,
   RegisterResponse,
   ResetPasswordDTO,
-} from "./auth.interface";
+} from './auth.interface';
 
 export const initializeAuthState = createAsyncThunk<boolean>(
-  "auth/initialize",
+  'auth/initialize',
   async () => {
     const tokens = await retrieveTokens();
     return allTokensExist(tokens);
-  }
+  },
 );
 
 export const signInUser = createAsyncThunk(
-  "auth/signInUser",
+  'auth/signInUser',
   async (data: LoginDTO) =>
-    apiCaller<LoginResponse>({ url: "auth/login", method: "POST", data }).then(
+    apiCaller<LoginResponse>({ url: 'auth/login', method: 'POST', data }).then(
       async (res) => {
         await storeTokens(res.tokens);
         return res;
-      }
-    )
+      },
+    ),
 );
 
-export const refresh = createAsyncThunk("auth/refresh", async () => {
+export const refresh = createAsyncThunk('auth/refresh', async () => {
   const token = await retrieveToken(Token.REFRESH_TOKEN);
   if (!token) {
-    throw new Error("No refresh token found");
+    throw new Error('No refresh token found');
   }
   await apiCaller<AuthTokens>({
-    url: "auth/refresh",
-    method: "POST",
+    url: 'auth/refresh',
+    method: 'POST',
     data: {
       refreshToken: token,
     },
   }).then(async (res) => storeTokens(res));
 });
 
-export const signOutUser = createAsyncThunk("auth/signOutUser", async () =>
-  apiCaller<void>({ url: "auth/logout", method: "POST" }).then(async (res) => {
+export const signOutUser = createAsyncThunk('auth/signOutUser', async () =>
+  apiCaller<void>({ url: 'auth/logout', method: 'POST' }).then(async (res) => {
     await removeTokens();
     return res;
-  })
+  }),
 );
 
 export const signUpUser = createAsyncThunk(
-  "auth/signUpUser",
+  'auth/signUpUser',
   async (data: RegisterDTO) =>
     apiCaller<RegisterResponse>({
-      url: "auth/register",
-      method: "POST",
+      url: 'auth/register',
+      method: 'POST',
       data,
     }).then(async (res) => {
       await storeTokens(res.tokens);
       return res;
-    })
+    }),
 );
 
 export const resetPassword = createAsyncThunk(
-  "auth/resetPassword",
+  'auth/resetPassword',
   async (data: ResetPasswordDTO) => {
-    apiCaller<void>({ url: "auth/reset", method: "POST", data });
-  }
+    apiCaller<void>({ url: 'auth/reset', method: 'POST', data });
+  },
 );

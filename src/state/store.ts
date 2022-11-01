@@ -14,26 +14,36 @@ import storage from 'redux-persist/lib/storage';
 
 import authReducer from './ducks/auth/auth.reducer';
 import { headerReducer, sidePanelReducer } from './ducks/layout/layout.reducer';
-import {patientReducer, singlePatientReducer} from './ducks/patients/patients.reducer';
-import { answerReducer, questionnairesIdReducer } from './ducks/questionnaires/questionnaries.reducer';
+import {
+  patientReducer,
+  singlePatientReducer,
+} from './ducks/patients/patients.reducer';
+import {
+  answerReducer,
+  questionnairesIdReducer,
+} from './ducks/questionnaires/questionnaries.reducer';
 import { sensorReducer } from './ducks/sensors/sensors.reducer';
+import sessionsReducer from './ducks/sessions/sessions.reducer';
+import settingsReducer from './ducks/settings/settings.reducer';
 
 const persistConfig = {
   key: 'root',
   version: 1,
-  storage: storage,
-  whitelist: ['auth'],
+  storage,
+  whitelist: ['settings', 'auth'],
 };
 
 const rootReducer = combineReducers({
+  settings: settingsReducer,
   auth: authReducer,
+  sensors: sensorReducer,
+  sessions: sessionsReducer,
   patients: patientReducer,
   singlePatient: singlePatientReducer,
-  sensorData: sensorReducer,
   questionnaries: questionnairesIdReducer,
   answer: answerReducer,
   headerText: headerReducer,
-  sidePanel: sidePanelReducer
+  sidePanel: sidePanelReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -45,8 +55,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    })
-      .concat(logger)
+    }).concat(logger);
   },
   devTools: process.env.NODE_ENV !== 'production',
 });
