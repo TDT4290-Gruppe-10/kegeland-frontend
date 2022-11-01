@@ -15,7 +15,7 @@ export const getAllPatients = createAsyncThunk(
 export const getAllPatientSessions = createAsyncThunk(
   'sensors/sessions',
   async (uid: string) =>
-    apiCaller<any>({ url: `sensors/sessions/${uid}`, method: 'GET' }).then(
+    apiCaller<any>({ url: `sessions?userId${uid}`, method: 'GET' }).then(
       async (res) => {
         return res;
       },
@@ -25,7 +25,7 @@ export const getAllPatientSessions = createAsyncThunk(
 export const getPatientExercise = createAsyncThunk(
   'sensors/sessions',
   async (sessionId: string) =>
-    apiCaller<any>({ url: `sensors/session/${sessionId}`, method: 'GET' }).then(
+    apiCaller<any>({ url: `session/${sessionId}`, method: 'GET' }).then(
       async (res) => {
         return res;
       },

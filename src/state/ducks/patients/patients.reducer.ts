@@ -63,7 +63,7 @@ const singlePatientSlice = createSlice({
       .addCase(getAllPatientSessions.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = undefined;
-        state.patientData = payload.data;
+        state.patientData = payload;
       })
       .addCase(getAllPatientSessions.rejected, (state, action) => {
         state.loading = false;

@@ -1,12 +1,8 @@
-export const _profiles = {
-  femfit: 'femfit',
-} as const;
-
-export type DeviceType = keyof typeof _profiles;
+import { SensorType } from '../sensors/sensors.interface';
 
 export type FetchQuestionnaireDTO = {
   userId: string;
-  sensor: DeviceType;
+  sensor: SensorType;
 };
 
 export type FetchSessionAnswerDTO = {
@@ -17,7 +13,7 @@ export type FetchSessionAnswerDTO = {
 export type Questionnaire = {
   id: string;
   name: string;
-  sensor: DeviceType;
+  sensor: SensorType;
   questions: {
     maxVal: string;
     minVal: string;

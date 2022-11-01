@@ -1,11 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getSessionData } from './sensors.actions';
+import {
+  isPendingAction,
+  isFulfilledAction,
+  isRejectedAction,
+} from '../../../utils/thunk.utils';
+
+import { fetchSensor } from './sensors.actions';
 import { SensorState } from './sensors.interface';
 
 const initialState: SensorState = {
-  sessionData: undefined,
   loading: false,
+  data: {},
   error: undefined,
 };
 
@@ -19,19 +25,30 @@ const sensorSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getSessionData.pending, (state) => {
-        state.loading = true;
-        state.error = undefined;
+      .addCase(fetchSensor.fulfilled, (state, { payload }) => {
+        state.data[payload.name] = payload;
       })
-      .addCase(getSessionData.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.error = undefined;
-        state.sessionData = payload;
-      })
-      .addCase(getSessionData.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
+      .addMatcher(
+        (action) => isPendingAction(action, 'sensors'),
+        (state) => {
+          state.loading = true;
+          state.error = undefined;
+        },
+      )
+      .addMatcher(
+        (action) => isFulfilledAction(action, 'sensors'),
+        (state) => {
+          state.loading = false;
+          state.error = undefined;
+        },
+      )
+      .addMatcher(
+        (action) => isRejectedAction(action, 'sensors'),
+        (state, { error }) => {
+          state.loading = false;
+          state.error = error.message;
+        },
+      );
   },
 });
 

@@ -20,31 +20,31 @@ import {
   getAssignedQuestionnaire as getAssignedQuestionnarie,
 } from '../../../state/ducks/questionnaires/questionnaries.actions';
 import { Answer } from '../../../state/ducks/questionnaires/questionnaries.interface';
-import { getSessionData } from '../../../state/ducks/sensors/sensors.actions';
+import { fetchSessionById } from '../../../state/ducks/sessions/sessions.actions';
 
 const ExerciseQuestionnaries = () => {
   const { patientId, exerciseId } = useParams();
   const dispatch = useAppDispatch();
   const { questionnaire } = useAppSelector((state) => state.questionnaries);
-  const { sessionData } = useAppSelector((state) => state.sensorData);
+  const { session } = useAppSelector((state) => state.sessions);
   const { answers } = useAppSelector((state) => state.answer);
   const [sortedAnswers, setSortedAnswers] = useState<Answer[] | undefined>(
     undefined,
   );
 
   const fetchQuestionnaire = () => {
-    if (patientId && sessionData?.sensor) {
+    if (patientId && session) {
       dispatch(
         getAssignedQuestionnarie({
           userId: patientId,
-          sensor: sessionData.sensor,
+          sensor: session.sensor,
         }),
       );
     }
   };
 
   const fetchSensorData = () => {
-    if (exerciseId && !sessionData) dispatch(getSessionData(exerciseId));
+    if (exerciseId && !session) dispatch(fetchSessionById(exerciseId));
   };
 
   const fetchAnswers = () => {
@@ -75,7 +75,7 @@ const ExerciseQuestionnaries = () => {
         }),
       );
     }
-  }, [questionnaire?.id, sessionData?.sensor, answers?.length]);
+  }, [questionnaire?.id, session?.sensor, answers?.length]);
 
   return (
     <Box>
