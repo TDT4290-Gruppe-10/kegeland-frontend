@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { chain } from 'lodash';
 
 import {
   isFulfilledAction,
@@ -7,7 +8,7 @@ import {
 } from '../../../utils/thunk.utils';
 
 import { fetchSessionById, fetchSessions } from './sessions.actions';
-import { Session, SessionsState } from './sessions.interface';
+import { SessionsState } from './sessions.interface';
 
 const initialState: SessionsState = {
   loading: false,
@@ -20,14 +21,18 @@ const sessionsSlice = createSlice({
   name: 'sessions',
   initialState,
   reducers: {
-    setCurrentSession: (state, action: PayloadAction<Session | undefined>) => {
-      state.session = action.payload;
+    clearSessionsState: (state) => {
+      state = initialState;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSessionById.fulfilled, (state, action) => {
-        state.session = action.payload;
+        const { data, ...payload } = action.payload;
+        state.session = {
+          ...payload,
+          data: chain(data).toPairs().sortBy(0).fromPairs().value(),
+        };
       })
       .addCase(fetchSessions.fulfilled, (state, action) => {
         state.data = action.payload;
@@ -56,6 +61,6 @@ const sessionsSlice = createSlice({
   },
 });
 
-export const { setCurrentSession } = sessionsSlice.actions;
+export const { clearSessionsState } = sessionsSlice.actions;
 
 export default sessionsSlice.reducer;
