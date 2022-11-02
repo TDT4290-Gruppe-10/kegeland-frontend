@@ -4,8 +4,10 @@ import moment from 'moment';
 import momentTimezone from 'moment-timezone';
 import 'moment/locale/en-gb';
 import './styles/reset.css';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
+import theme from './constants/theme.constants';
 
 // Global configuration for moment
 moment.locale('en-gb');
@@ -15,7 +17,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
-  <ChakraProvider>
-    <App />
-  </ChakraProvider>,
+  <BrowserRouter>
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  </BrowserRouter>,
 );
