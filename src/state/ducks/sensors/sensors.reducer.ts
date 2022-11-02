@@ -19,8 +19,8 @@ const sensorSlice = createSlice({
   name: 'sensors',
   initialState,
   reducers: {
-    clearError: (state) => {
-      state.error = undefined;
+    clearSensorsState: (state) => {
+      state = initialState;
     },
   },
   extraReducers: (builder) => {
@@ -52,6 +52,6 @@ const sensorSlice = createSlice({
   },
 });
 
-export const { clearError } = sensorSlice.actions;
+export const { clearSensorsState } = sensorSlice.actions;
 
 export const sensorReducer = sensorSlice.reducer;
