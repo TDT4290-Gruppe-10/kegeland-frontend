@@ -24,7 +24,7 @@ const validateSchema = Yup.object({
   password: Yup.string().required().label('Password'),
 });
 
-const LogIn = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const { error, loading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
@@ -103,16 +103,16 @@ const LogIn = () => {
                   <Box color={'red'}>{error}</Box>
                   <Box textAlign="right">
                     <SubmitButton
+                      colorScheme="primary"
                       isLoading={formProps.isSubmitting || loading}
-                      isDisabled={!formProps.isValid}
-                      style={{ backgroundColor: '#273587', color: '#FFFFFF' }}>
+                      isDisabled={!formProps.isValid}>
                       Log in
                     </SubmitButton>
                   </Box>
                   <Box textAlign="left">
                     <Text color="#black">
                       Not a member yet?
-                      <Link color="#273587" href="/register">
+                      <Link color="primary.600" href="/register">
                         <b> Register!</b>
                       </Link>
                     </Text>
@@ -127,4 +127,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default LoginPage;
