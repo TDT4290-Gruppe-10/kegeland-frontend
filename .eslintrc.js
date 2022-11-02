@@ -61,7 +61,7 @@ module.exports = {
     'import/no-unresolved': 0,
     'no-undef': 0,
     'no-unused-vars': 0,
-    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-unused-vars': 'error',
     'react/no-unstable-nested-components': 0,
     'react/prop-types': 0,
     'react/jsx-uses-react': 0,
