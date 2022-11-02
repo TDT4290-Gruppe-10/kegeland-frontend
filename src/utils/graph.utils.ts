@@ -2,7 +2,7 @@ import { ChartData } from 'chart.js';
 import { size } from 'lodash';
 import moment from 'moment';
 
-import { GRAPH_COLORS } from '../constants/graph.colors';
+import { GRAPH_COLORS } from '../constants/graph.constants';
 import { Sensor } from '../state/ducks/sensors/sensors.interface';
 import {
   Session,
