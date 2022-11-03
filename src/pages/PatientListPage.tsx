@@ -2,6 +2,7 @@ import Card from '../components/Card';
 import PatientsTable from '../components/PatientsTable';
 import SearchBar from '../components/SearchBar';
 import withLayout from '../hoc/withLayout';
+import withSpinner from '../hoc/withSpinner';
 import usePatientList from '../hooks/usePatientList';
 
 const PatientListPage: React.FC = () => {
@@ -27,4 +28,4 @@ const PatientListPage: React.FC = () => {
   );
 };
 
-export default withLayout(PatientListPage);
+export default withLayout(withSpinner(PatientListPage));

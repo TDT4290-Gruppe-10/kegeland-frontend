@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import ExerciseGraph from '../components/ExerciseGraph';
 import QuestionnaireResults from '../components/QuestionnaireResults';
 import withLayout from '../hoc/withLayout';
+import withSpinner from '../hoc/withSpinner';
 import useExercise from '../hooks/useExercise';
 
 type ExercisePageParams = {
@@ -33,4 +34,4 @@ const ExercisePage: React.FC = () => {
   );
 };
 
-export default withLayout(ExercisePage);
+export default withLayout(withSpinner(ExercisePage, 300));
