@@ -10,13 +10,17 @@ export type AuthTokens = {
   expiresIn: number;
 };
 
+export type Name = {
+  firstName: string;
+  lastName: string;
+};
+
 export type UserDetails = {
-  name?: {
-    firstName: string;
-    lastName: string;
-  };
+  name: Name;
   roles: UserRole[];
 };
+
+export type User = { id: string; email: string } & UserDetails;
 
 export interface AuthState {
   ready: boolean;

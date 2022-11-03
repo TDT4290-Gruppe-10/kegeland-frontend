@@ -129,8 +129,25 @@ const useGraphProfile = (sensor: Sensor, session: Session) => {
   };
 };
 
-const options: ChartOptions = {
+const options: ChartOptions<'line'> = {
   responsive: true,
+  animation: false,
+  spanGaps: true,
+  elements: {
+    line: {
+      tension: 0.1,
+    },
+  },
+  datasets: {
+    bar: {},
+    line: {
+      pointRadius: 0,
+      tension: 0.1,
+    },
+    scatter: {
+      showLine: false,
+    },
+  },
   interaction: {
     mode: 'index' as const,
     intersect: true,

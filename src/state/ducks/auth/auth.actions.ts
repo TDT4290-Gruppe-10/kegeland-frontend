@@ -4,11 +4,10 @@ import { apiCaller } from '../../../utils/apiCaller';
 import {
   removeTokens,
   retrieveToken,
-  retrieveTokens,
   storeTokens,
 } from '../../../utils/storage';
 
-import { allTokensExist, Token } from './auth.helpers';
+import { Token } from './auth.helpers';
 import {
   AuthTokens,
   LoginDTO,
@@ -17,14 +16,6 @@ import {
   RegisterResponse,
   ResetPasswordDTO,
 } from './auth.interface';
-
-export const initializeAuthState = createAsyncThunk<boolean>(
-  'auth/initialize',
-  async () => {
-    const tokens = await retrieveTokens();
-    return allTokensExist(tokens);
-  },
-);
 
 export const signInUser = createAsyncThunk(
   'auth/signInUser',

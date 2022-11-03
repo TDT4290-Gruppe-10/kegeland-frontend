@@ -23,7 +23,9 @@ const LabeledValue: React.FC<LabeledValueProps> = ({
           {label}:
         </Text>
         <HStack spacing={0.5}>
-          {icon && <Icon as={icon} {...iconProps} color="gray.700" />}
+          {icon && (
+            <Icon as={icon} {...iconProps} color="primary.700" fontSize={18} />
+          )}
           <Text marginBlockStart={0} marginBlockEnd={0} fontSize={14}>
             {value}
           </Text>

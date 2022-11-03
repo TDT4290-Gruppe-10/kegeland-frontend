@@ -1,15 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import {
-  getAllPatients,
-  getAllPatientSessions,
-  getPatientExercise,
-  getPatientOverview,
-} from './patients.actions';
+  isFulfilledAction,
+  isPendingAction,
+  isRejectedAction,
+} from '../../../utils/thunk.utils';
 
-const initialState: any = {
-  patients: [],
+import { fetchPatientById, fetchPatients } from './patients.actions';
+import { PatientsState } from './patients.interface';
+
+const initialState: PatientsState = {
   loading: false,
+  patient: undefined,
+  data: [],
   error: undefined,
 };
 
@@ -17,108 +20,45 @@ const patientsSlice = createSlice({
   name: 'patients',
   initialState,
   reducers: {
-    clearError: (state) => {
+    clearPatientsState: (state) => {
+      state.loading = false;
+      state.patient = undefined;
+      state.data = [];
       state.error = undefined;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllPatients.pending, (state) => {
-        state.loading = true;
-        state.error = undefined;
+      .addCase(fetchPatientById.fulfilled, (state, action) => {
+        state.patient = action.payload;
       })
-      .addCase(getAllPatients.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.error = undefined;
-        state.patients = payload;
+      .addCase(fetchPatients.fulfilled, (state, action) => {
+        state.data = action.payload;
       })
-      .addCase(getAllPatients.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
+      .addMatcher(
+        (action) => isPendingAction(action, 'patients'),
+        (state) => {
+          state.loading = true;
+          state.error = undefined;
+        },
+      )
+      .addMatcher(
+        (action) => isFulfilledAction(action, 'patients'),
+        (state) => {
+          state.loading = false;
+          state.error = undefined;
+        },
+      )
+      .addMatcher(
+        (action) => isRejectedAction(action, 'patients'),
+        (state, { error }) => {
+          state.loading = false;
+          state.error = error.message;
+        },
+      );
   },
 });
 
-const singlePatientInitialState: any = {
-  patientData: [],
-  loading: false,
-  error: undefined,
-  patientInformation: {},
-};
+export const { clearPatientsState } = patientsSlice.actions;
 
-const singlePatientSlice = createSlice({
-  name: 'patientData',
-  initialState: singlePatientInitialState,
-  reducers: {
-    clearError: (state) => {
-      state.error = undefined;
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getAllPatientSessions.pending, (state) => {
-        state.loading = true;
-        state.error = undefined;
-      })
-      .addCase(getAllPatientSessions.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.error = undefined;
-        state.patientData = payload;
-      })
-      .addCase(getAllPatientSessions.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      })
-      .addCase(getPatientOverview.pending, (state) => {
-        state.loading = true;
-        state.error = undefined;
-      })
-      .addCase(getPatientOverview.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.error = undefined;
-        state.patientInformation = payload;
-      })
-      .addCase(getPatientOverview.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-  },
-});
-
-const exerciseInitialState: any = {
-  exerciseData: {},
-  loading: false,
-  error: undefined,
-};
-
-const exerciseSlice = createSlice({
-  name: 'exerciseData',
-  initialState: exerciseInitialState,
-  reducers: {
-    clearError: (state) => {
-      state.error = undefined;
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getPatientExercise.pending, (state) => {
-        state.loading = true;
-        state.error = undefined;
-      })
-      .addCase(getPatientExercise.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.error = undefined;
-        state.exerciseData = payload;
-      })
-      .addCase(getPatientExercise.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-  },
-});
-
-export const { clearError } = patientsSlice.actions;
-
-export const patientReducer = patientsSlice.reducer;
-export const singlePatientReducer = singlePatientSlice.reducer;
-export const exerciseReducer = exerciseSlice.reducer;
+export default patientsSlice.reducer;

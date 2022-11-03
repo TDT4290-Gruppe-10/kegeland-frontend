@@ -17,8 +17,8 @@ import {
 } from '@chakra-ui/react';
 import { ChartType } from 'chart.js';
 
-import useGraphProfileSelector from '../../../../hooks/useGraphProfileSelector';
-import { Sensor } from '../../../../state/ducks/sensors/sensors.interface';
+import useGraphProfileSelector from '../../hooks/useGraphProfileSelector';
+import { Sensor } from '../../state/ducks/sensors/sensors.interface';
 
 export type GraphOptionsProps = {
   sensor: Sensor;
@@ -88,10 +88,10 @@ const GraphOptionsModal: React.FC<GraphOptionsProps> = ({
             <p>Loading</p>
           )}
           <ModalFooter justifyContent="space-between">
-            <Button colorScheme="blue" variant="ghost" onClick={resetPlot}>
+            <Button variant="ghost" onClick={resetPlot}>
               Reset to default
             </Button>
-            <Button colorScheme="blue" onClick={onClose}>
+            <Button color="white" onClick={onClose}>
               Close
             </Button>
           </ModalFooter>

@@ -13,15 +13,8 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import authReducer from './ducks/auth/auth.reducer';
-import { headerReducer, sidePanelReducer } from './ducks/layout/layout.reducer';
-import {
-  patientReducer,
-  singlePatientReducer,
-} from './ducks/patients/patients.reducer';
-import {
-  answerReducer,
-  questionnairesIdReducer,
-} from './ducks/questionnaires/questionnaries.reducer';
+import patientsReducer from './ducks/patients/patients.reducer';
+import questionnairesReducer from './ducks/questionnaires/questionnaires.reducer';
 import { sensorReducer } from './ducks/sensors/sensors.reducer';
 import sessionsReducer from './ducks/sessions/sessions.reducer';
 import settingsReducer from './ducks/settings/settings.reducer';
@@ -36,14 +29,10 @@ const persistConfig = {
 const rootReducer = combineReducers({
   settings: settingsReducer,
   auth: authReducer,
+  patients: patientsReducer,
   sensors: sensorReducer,
   sessions: sessionsReducer,
-  patients: patientReducer,
-  singlePatient: singlePatientReducer,
-  questionnaries: questionnairesIdReducer,
-  answer: answerReducer,
-  headerText: headerReducer,
-  sidePanel: sidePanelReducer,
+  questionnaires: questionnairesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

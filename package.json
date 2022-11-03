@@ -8,6 +8,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@reduxjs/toolkit": "^1.8.6",
+    "@tanstack/react-table": "^8.5.22",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -46,7 +47,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext .ts"
+    "lint": "prettier ./src --write && eslint ./src/**/* --fix"
   },
   "browserslist": {
     "production": [
@@ -63,7 +64,9 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/lodash": "^4.14.186",
+    "@types/react-chartjs-2": "^2.5.7",
     "@types/react-redux": "^7.1.24",
+    "@types/react-transition-group": "^4.4.5",
     "@types/redux-logger": "^3.0.9",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.41.0",

@@ -1,36 +1,46 @@
-import { Box, Button, Text, Tooltip } from '@chakra-ui/react';
-import { RiLogoutBoxLine } from 'react-icons/ri';
+import { Box, Flex, Icon, useMediaQuery } from '@chakra-ui/react';
+import { MdMenu } from 'react-icons/md';
 
-import useAppDispatch from '../hooks/useAppDispatch';
-import useAppSelector from '../hooks/useAppSelector';
-import { signOutUser } from '../state/ducks/auth/auth.actions';
+import Breadcrumbs from './Breadcrumbs';
 
-const Header: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { headerText } = useAppSelector((state) => state.headerText);
+type HeaderProps = {
+  toggleSidebar: () => void;
+};
+
+const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
+  const [isGreaterThanMd] = useMediaQuery('(min-width: 48em)');
 
   return (
     <Box
-      top={0}
-      left={0}
-      display={'flex'}
-      position={'fixed'}
+      display="flex"
+      paddingX={4}
       width={'100%'}
-      height={'80px'}
-      bgColor={'blue.200'}>
-      <Text fontWeight={500} fontSize={'24px'} margin={'auto'}>
-        {headerText}
-      </Text>
-      <Tooltip hasArrow label="Log out">
-        <Button
-          bgColor={'blue.200'}
-          margin={['auto', '20px']}
-          _hover={{ bgColor: 'blue.200' }}
-          justifyContent={'space-between'}
-          onClick={() => dispatch(signOutUser())}>
-          <RiLogoutBoxLine size={30} />
-        </Button>
-      </Tooltip>
+      height={'60px'}
+      flexDirection="row"
+      alignItems="center"
+      bgColor="white"
+      boxShadow="md"
+      zIndex={1001}>
+      <Flex
+        flexDirection="row"
+        alignItems="center"
+        width="full"
+        maxW="8xl"
+        justifyItems="flex-start"
+        justifyContent="flex-start"
+        alignContent="flex-start">
+        <Icon
+          as={MdMenu}
+          onClick={toggleSidebar}
+          color="primary.600"
+          transform="color 200ms"
+          _hover={{ cursor: 'pointer', color: 'primary.700' }}
+          aria-label="Toggle sidebar"
+          width="40px"
+          height="40px"
+        />
+        {isGreaterThanMd && <Breadcrumbs marginLeft="16" />}
+      </Flex>
     </Box>
   );
 };

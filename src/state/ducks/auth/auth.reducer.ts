@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import {
-  initializeAuthState,
-  refresh,
-  signInUser,
-  signOutUser,
-  signUpUser,
-} from './auth.actions';
+  isPendingAction,
+  isFulfilledAction,
+  isRejectedAction,
+} from '../../../utils/thunk.utils';
+
+import { signInUser, signOutUser, signUpUser, refresh } from './auth.actions';
+import { signOutReducer, signInReducer } from './auth.helpers';
 import { AuthState } from './auth.interface';
 
 const initialState: AuthState = {
@@ -18,7 +19,7 @@ const initialState: AuthState = {
   error: undefined,
 };
 
-const authSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -27,78 +28,33 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(initializeAuthState.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(initializeAuthState.fulfilled, (state, { payload }) => {
-      state.ready = true;
-      if (!payload) {
-        state.isSignedIn = false;
-        state.authUser = undefined;
-        state.userDetails = undefined;
-      }
-    });
-    builder.addCase(initializeAuthState.rejected, (state, { error }) => {
-      state.loading = false;
-      state.error = error.message;
-    });
     builder
-      .addCase(signInUser.pending, (state) => {
-        state.loading = true;
-        state.error = undefined;
-      })
-      .addCase(signInUser.fulfilled, (state, { payload }) => {
-        const { id, email } = payload;
-        state.loading = false;
-        state.isSignedIn = true;
-        state.authUser = { id, email };
-        state.userDetails = payload.details;
-        state.error = undefined;
-      })
-      .addCase(signInUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      })
-      .addCase(signOutUser.fulfilled, (state) => {
-        state.loading = false;
-        state.isSignedIn = false;
-        state.authUser = undefined;
-        state.userDetails = undefined;
-        state.error = undefined;
-      })
-      .addCase(signOutUser.rejected, (state) => {
-        state.loading = false;
-        state.authUser = undefined;
-        state.userDetails = undefined;
-        state.isSignedIn = false;
-      })
-      .addCase(signOutUser.pending, (state) => {
-        state.loading = true;
-        state.error = undefined;
-      })
-      .addCase(signUpUser.pending, (state) => {
-        state.loading = true;
-        state.error = undefined;
-      })
-      .addCase(signUpUser.fulfilled, (state, { payload }) => {
-        const { id, email } = payload;
-        state.loading = false;
-        state.isSignedIn = true;
-        state.authUser = { id, email };
-        state.userDetails = payload.details;
-        state.error = undefined;
-      })
-      .addCase(signUpUser.rejected, (state, { error }) => {
-        state.loading = false;
-        state.error = error.message;
-      })
-      .addCase(refresh.rejected, (state) => {
-        state.loading = false;
-        state.isSignedIn = false;
-        state.authUser = undefined;
-        state.userDetails = undefined;
-        state.error = undefined;
-      });
+      .addCase(signInUser.fulfilled, signInReducer)
+      .addCase(signOutUser.fulfilled, signOutReducer)
+      .addCase(signOutUser.rejected, signOutReducer)
+      .addCase(refresh.rejected, signOutReducer)
+      .addCase(signUpUser.fulfilled, signInReducer)
+      .addMatcher(
+        (action) => isPendingAction(action, 'auth'),
+        (state) => {
+          state.loading = true;
+          state.error = undefined;
+        },
+      )
+      .addMatcher(
+        (action) => isFulfilledAction(action, 'auth'),
+        (state) => {
+          state.loading = false;
+          state.error = undefined;
+        },
+      )
+      .addMatcher(
+        (action) => isRejectedAction(action, 'auth'),
+        (state, { error }) => {
+          state.loading = false;
+          state.error = error.message;
+        },
+      );
   },
 });
 

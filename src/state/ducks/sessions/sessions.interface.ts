@@ -2,13 +2,16 @@ import { SensorType } from '../sensors/sensors.interface';
 
 export type SessionDataPoint = number | null;
 
-export type Session = {
+export type LeanSession = {
   id: string;
   userId: string;
   sensor: SensorType;
-  data: Record<string, SessionDataPoint[]>;
   createdAt: number;
 };
+
+export interface Session extends LeanSession {
+  data: Record<string, SessionDataPoint[]>;
+}
 
 export type SessionsState = {
   loading: boolean;

@@ -1,50 +1,60 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Flex, useMediaQuery } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 
-import { menuItemsType } from '../utils/Things';
+import withAuthUser, { WithAuthUserProps } from '../hoc/withAuthUser';
 
-import SidePanel from './SidePanel';
 import Header from './Header';
-
-export const patientsMenuItems: menuItemsType = {
-  allpatients: 'All my patients',
-  lowactivity: '! Low activity',
-  femfit: 'Femfit',
-  more: 'More...',
-};
+import Sidebar from './Sidebar';
 
 type LayoutProps = {
   children?: React.ReactNode;
-};
+} & WithAuthUserProps;
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ user, children }) => {
+  const [isGreaterThanMd] = useMediaQuery('(min-width: 48em)');
+  const [openSidebar, setOpenSidebar] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!isGreaterThanMd && openSidebar) {
+      setOpenSidebar(false);
+    }
+
+    if (isGreaterThanMd && !openSidebar) {
+      setOpenSidebar(true);
+    }
+  }, [isGreaterThanMd]);
+
+  const toggle = () => {
+    setOpenSidebar(!openSidebar);
+  };
+
   return (
-    <Grid
-      templateAreas={`"header header" "nav main" "footer footer"`}
-      gridTemplateRows={'80px 1fr 30px'}
-      gridTemplateColumns={'300px 1fr'}
-      h="100%">
-      <GridItem pl="2" area={'header'}>
-        <Header />
-      </GridItem>
-      <GridItem area={'nav'} bgColor={'gray.100'}>
-        <SidePanel />
-      </GridItem>
-      <GridItem pl="2" area={'main'}>
-        <Box overflow="hidden" padding={10}>
-          {children}
+    <Box h="100%" w="100%">
+      <Flex flexDir="row">
+        <Box position={isGreaterThanMd ? 'relative' : 'absolute'}>
+          <Sidebar user={user} isOpen={openSidebar} />
         </Box>
-      </GridItem>
-      <GridItem
-        pl="2"
-        bg="blue.300"
-        area={'footer'}
-        position="fixed"
-        bottom={0}
-        width="100%">
-        Kegeland - TDT4190 Group 10
-      </GridItem>
-    </Grid>
+
+        <Flex flexDir="column" h="100%" w="100%" justifyContent="flex-start">
+          <Header toggleSidebar={toggle} />
+          <Flex
+            zIndex={999}
+            padding={5}
+            flexDir="column"
+            overflow="hidden"
+            marginX="auto"
+            w="100%"
+            maxW={{
+              base: 'container.sm',
+              lg: 'container.md',
+              xl: 'container.lg',
+            }}>
+            {children}
+          </Flex>
+        </Flex>
+      </Flex>
+    </Box>
   );
 };
 
-export default Layout;
+export default withAuthUser(Layout);

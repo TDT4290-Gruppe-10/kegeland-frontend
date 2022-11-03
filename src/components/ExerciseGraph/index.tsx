@@ -2,18 +2,22 @@ import { Chart } from 'react-chartjs-2';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { Chart as ChartJS } from 'chart.js';
 import 'chart.js/auto';
-import { Container, Spinner, useDisclosure, Divider } from '@chakra-ui/react';
+import { useDisclosure, Divider } from '@chakra-ui/react';
 import 'chartjs-adapter-moment';
 
-import useGraphProfile from '../../../../hooks/useGraphProfile';
-import { WithPatientExercise } from '../../../../hoc/withPatientExercise';
+import useGraphProfile from '../../hooks/useGraphProfile';
+import { Sensor } from '../../state/ducks/sensors/sensors.interface';
+import { Session } from '../../state/ducks/sessions/sessions.interface';
 
 import GraphOptionsModal from './GraphOptionsModal';
 import GraphHeader from './GraphHeader';
 
 ChartJS.register(zoomPlugin);
 
-type ExerciseGraphProps = WithPatientExercise;
+type ExerciseGraphProps = {
+  sensor: Sensor;
+  session: Session;
+};
 
 const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ sensor, session }) => {
   const { options, chartData, chartRef, updatePlot, resetPlot, updateXAxis } =
@@ -21,14 +25,8 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ sensor, session }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Container
-      width="full"
-      maxW="container.xl"
-      minH="2xl"
-      paddingY={4}
-      backgroundColor="white"
-      borderRadius={5}>
-      {chartData ? (
+    <>
+      {chartData && (
         <>
           <GraphHeader
             sensor={sensor}
@@ -36,20 +34,16 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ sensor, session }) => {
             toggleSettings={onOpen}
           />
           <Divider borderColor="gray.300" marginY={4} />
-          <Chart
-            ref={chartRef}
-            type="line"
-            options={options}
-            data={chartData}
-          />
+          <div style={{ width: '99%' }}>
+            <Chart
+              height={150}
+              ref={chartRef}
+              type="line"
+              options={options}
+              data={chartData}
+            />
+          </div>
         </>
-      ) : (
-        <Spinner
-          justifySelf={'center'}
-          justifyItems={'center'}
-          textAlign="center"
-          alignSelf={'center'}
-        />
       )}
       <GraphOptionsModal
         sensor={sensor}
@@ -59,7 +53,7 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ sensor, session }) => {
         resetPlot={resetPlot}
         updateXAxis={updateXAxis}
       />
-    </Container>
+    </>
   );
 };
 

@@ -19,8 +19,8 @@ import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 
 type FormData = {
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -40,7 +40,7 @@ const validationSchema = Yup.object({
   }),
 });
 
-const RegisterUser = () => {
+const RegisterPage = () => {
   const { error, loading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const { isSignedIn } = useAppSelector((state) => state.auth);
@@ -58,11 +58,12 @@ const RegisterUser = () => {
     const payload: RegisterDTO = {
       email,
       password,
+      name: {
+        firstName,
+        lastName,
+      },
       roles: [UserRole.PHYSICIAN],
     };
-    if (firstName && lastName) {
-      payload.name = { firstName, lastName };
-    }
     dispatch(signUpUser(payload));
   };
 
@@ -72,7 +73,7 @@ const RegisterUser = () => {
         <Container>
           <Container paddingTop="1em">
             <Formik
-              onSubmit={(values) => {
+              onSubmit={async (values) => {
                 register(values);
               }}
               initialValues={{
@@ -175,12 +176,9 @@ const RegisterUser = () => {
                     <Box color={'red'}>{error}</Box>
                     <Box textAlign="right">
                       <SubmitButton
-                        isLoading={formProps.isSubmitting && loading}
-                        isDisabled={!formProps.isValid}
-                        style={{
-                          backgroundColor: '#273587',
-                          color: '#FFFFFF',
-                        }}>
+                        colorScheme="primary"
+                        isLoading={formProps.isSubmitting || loading}
+                        isDisabled={!formProps.isValid}>
                         Register user
                       </SubmitButton>
                     </Box>
@@ -195,4 +193,4 @@ const RegisterUser = () => {
   );
 };
 
-export default RegisterUser;
+export default RegisterPage;

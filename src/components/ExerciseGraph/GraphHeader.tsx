@@ -8,10 +8,10 @@ import {
   MdSettings,
 } from 'react-icons/md';
 
-import LabeledValue from '../../../../components/LabeledValue';
-import { Sensor } from '../../../../state/ducks/sensors/sensors.interface';
-import { Session } from '../../../../state/ducks/sessions/sessions.interface';
-import { getSessionDuration } from '../../../../utils/graph.utils';
+import { Sensor } from '../../state/ducks/sensors/sensors.interface';
+import { Session } from '../../state/ducks/sessions/sessions.interface';
+import { getSessionDuration } from '../../utils/graph.utils';
+import LabeledValue from '../LabeledValue';
 
 type GraphHeaderProps = {
   sensor: Sensor;
@@ -29,7 +29,7 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
       <HStack spacing={12}>
         <LabeledValue
           label="Date of exercise"
-          value={moment.unix(session.createdAt).format('lll')}
+          value={moment(session.createdAt).format('lll')}
         />
 
         <LabeledValue
