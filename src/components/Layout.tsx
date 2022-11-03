@@ -35,22 +35,22 @@ const Layout: React.FC<LayoutProps> = ({ user, children }) => {
           <Sidebar user={user} isOpen={openSidebar} />
         </Box>
 
-        <Flex flexDir="column" flex={1} flexGrow={1}>
+        <Flex flexDir="column" h="100%" w="100%" justifyContent="flex-start">
           <Header toggleSidebar={toggle} />
-          <Box
+          <Flex
             zIndex={999}
-            flexDir="column"
             padding={5}
-            marginX="auto"
+            flexDir="column"
             overflow="hidden"
+            marginX="auto"
             w="100%"
             maxW={{
               base: 'container.sm',
-              md: 'container.md',
+              lg: 'container.md',
               xl: 'container.lg',
             }}>
             {children}
-          </Box>
+          </Flex>
         </Flex>
       </Flex>
     </Box>

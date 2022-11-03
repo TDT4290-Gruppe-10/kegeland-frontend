@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({
       borderRadius={5}
       marginBottom={5}
       {...props}>
-      <Skeleton isLoaded={!loading} w="inherit" h="inherit" {...containerProps}>
+      <Skeleton isLoaded={!loading} {...containerProps}>
         {children}
       </Skeleton>
     </Container>
