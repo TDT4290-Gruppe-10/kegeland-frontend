@@ -10,6 +10,7 @@ import {
 
 import { Sensor } from '../../state/ducks/sensors/sensors.interface';
 import { Session } from '../../state/ducks/sessions/sessions.interface';
+import { exportSessionAsCsv } from '../../utils/csv.utils';
 import { getSessionDuration } from '../../utils/graph.utils';
 import LabeledValue from '../LabeledValue';
 
@@ -55,15 +56,20 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
           onClick={toggleSettings}
         />
         <Tooltip label="Download data as csv">
-          <IconButton
-            aria-label="Download exercise data"
-            icon={<MdDownload />}
-            variant="unstyled"
-            fontSize={22}
-            color="gray.700"
-            _hover={{ color: 'gray.600' }}
-            onClick={toggleSettings}
-          />
+          <a
+            href={exportSessionAsCsv(sensor.labels, session.data)}
+            download={`${sensor.name.toLowerCase()}_${session.id}.csv`}
+            target="_blank"
+            rel="noreferrer">
+            <IconButton
+              aria-label="Download exercise data"
+              icon={<MdDownload />}
+              variant="unstyled"
+              fontSize={22}
+              color="gray.700"
+              _hover={{ color: 'gray.600' }}
+            />
+          </a>
         </Tooltip>
       </HStack>
     </HStack>

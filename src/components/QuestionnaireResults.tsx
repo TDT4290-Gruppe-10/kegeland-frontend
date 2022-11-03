@@ -94,13 +94,13 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
                       <Text width={20} fontWeight="medium" letterSpacing={0.5}>
                         {idx ? 'After' : 'Before'}
                       </Text>
-                      <Text fontWeight="semibold">0</Text>
-                      <Tooltip hasArrow label={answer}>
+                      <Text fontWeight="semibold">1</Text>
+                      <Tooltip hasArrow label={answer + 1}>
                         <Progress
                           colorScheme="primary"
                           width="full"
                           marginX={3}
-                          max={5}
+                          max={4}
                           height={5}
                           value={answer}
                         />

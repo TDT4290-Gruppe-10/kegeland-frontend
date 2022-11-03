@@ -168,8 +168,12 @@ const options: ChartOptions<'line'> = {
     zoom: {
       zoom: {
         mode: 'xy',
+        pinch: {
+          enabled: true,
+        },
         wheel: {
           enabled: true,
+          modifierKey: 'ctrl',
         },
       },
       pan: {
