@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
       alignItems="center"
       bgColor="white"
       boxShadow="md"
-      zIndex={1001}>
+      zIndex={1000}>
       <Flex
         flexDirection="row"
         alignItems="center"

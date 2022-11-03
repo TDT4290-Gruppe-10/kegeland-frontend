@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
       paddingX={isOpen ? 2 : 0}
       maxW="300px"
       boxShadow="md"
-      zIndex={1000}
+      zIndex={1001}
       transition="width 200ms, top 50ms">
       <ScaleFade in={isOpen}>
         <Box paddingY={2}>
