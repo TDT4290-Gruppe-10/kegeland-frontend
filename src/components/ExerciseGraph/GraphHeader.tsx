@@ -42,7 +42,9 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
         <LabeledValue
           label="Duration"
           icon={MdOutlineWatchLater}
-          value={`${getSessionDuration(session).toFixed(0)}s`}
+          value={`${moment
+            .utc(getSessionDuration(session))
+            .format('HH:mm:ss')}`}
         />
       </HStack>
       <HStack spacing={0}>

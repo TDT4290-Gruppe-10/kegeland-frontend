@@ -21,7 +21,7 @@ export const getLabelIndex = (sensor: Sensor, key: string) => {
 export const getSessionDuration = (session: Session) => {
   if (size(session.data) > 1) {
     const ts = Object.keys(session.data);
-    return (Number(ts[ts.length - 1]) - Number(ts[0])) / 1000;
+    return Number(ts[ts.length - 1]) - Number(ts[0]);
   }
   return 0;
 };
