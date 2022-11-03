@@ -20,3 +20,5 @@ export type CustomTheme = Theme & {
     };
   };
 };
+
+export type ThemeMode = 'dark' | 'light';

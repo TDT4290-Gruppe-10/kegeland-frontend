@@ -30,12 +30,13 @@ const Layout: React.FC<LayoutProps> = ({ user, children }) => {
 
   return (
     <Box h="100%" w="100%">
-      <Flex flexDir="column">
-        <Header toggleSidebar={toggle} />
-        <Flex>
-          <Box position={isGreaterThanMd ? 'relative' : 'absolute'}>
-            <Sidebar user={user} isOpen={openSidebar} />
-          </Box>
+      <Flex flexDir="row">
+        <Box position={isGreaterThanMd ? 'relative' : 'absolute'}>
+          <Sidebar user={user} isOpen={openSidebar} />
+        </Box>
+
+        <Flex flexDir="column" flex={1} flexGrow={1}>
+          <Header toggleSidebar={toggle} />
           <Box
             zIndex={999}
             flexDir="column"

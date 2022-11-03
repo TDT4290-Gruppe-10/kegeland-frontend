@@ -2,7 +2,6 @@ import { Box, Flex, Icon, useMediaQuery } from '@chakra-ui/react';
 import { MdMenu } from 'react-icons/md';
 
 import Breadcrumbs from './Breadcrumbs';
-import Logo from './Logo';
 
 type HeaderProps = {
   toggleSidebar: () => void;
@@ -30,11 +29,9 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
         justifyItems="flex-start"
         justifyContent="flex-start"
         alignContent="flex-start">
-        <Logo />
         <Icon
           as={MdMenu}
           onClick={toggleSidebar}
-          marginLeft={8}
           color="primary.600"
           transform="color 200ms"
           _hover={{ cursor: 'pointer', color: 'primary.700' }}

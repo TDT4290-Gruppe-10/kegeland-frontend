@@ -8,7 +8,6 @@ import withSilentRefresh from './hoc/withSilentRefresh';
 import routes from './routes';
 
 const Wrapper = withSilentRefresh(Box, {
-  backgroundColor: 'gray.100',
   height: 'full',
   width: 'full',
 });

@@ -1,4 +1,4 @@
-import { Box, Button, ScaleFade, VStack } from '@chakra-ui/react';
+import { Box, Button, Divider, ScaleFade, VStack } from '@chakra-ui/react';
 import {
   AiOutlineProfile,
   AiOutlineTeam,
@@ -9,17 +9,21 @@ import {
 import { User } from '../state/ducks/auth/auth.interface';
 import useAppDispatch from '../hooks/useAppDispatch';
 import { signOutUser } from '../state/ducks/auth/auth.actions';
+import { ThemeMode } from '../types';
 
 import Menu from './Menu';
 import UserAvatar from './UserAvatar';
+import Logo from './Logo';
 
 type SidebarProps = {
   user: User;
+  mode?: ThemeMode;
   isOpen: boolean;
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ user, isOpen }) => {
+const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
   const dispatch = useAppDispatch();
+  const isDark = mode === 'dark';
 
   return (
     <Box
@@ -28,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user, isOpen }) => {
       minH="100vh"
       height="full"
       alignSelf="stretch"
-      bg="white"
+      bg="gray.700"
       width={isOpen ? '300px' : '0px'}
       paddingX={isOpen ? 2 : 0}
       maxW="300px"
@@ -36,20 +40,43 @@ const Sidebar: React.FC<SidebarProps> = ({ user, isOpen }) => {
       zIndex={1000}
       transition="width 200ms, top 50ms">
       <ScaleFade in={isOpen}>
-        <Menu title="Dashboard" head={<UserAvatar user={user} />}>
-          <Menu.Item title="Patients" to={'/'} icon={AiOutlineTeam} />
+        <Box paddingY={2}>
+          <Logo />
+        </Box>
+        <Divider borderColor={isDark ? 'whiteAlpha.400' : 'blackAlpha.400'} />
+        <Menu title="Dashboard" mode={mode} head={<UserAvatar user={user} />}>
           <Menu.Item
+            mode={mode}
+            title="Patients"
+            to={'/'}
+            icon={AiOutlineTeam}
+          />
+          <Menu.Item
+            mode={mode}
             title="Edit Questionnaires"
             to={'/foo0'}
             icon={AiOutlineProfile}
           />
-          <Menu.Item title="Edit Exercises" to={'/foo1'} icon={AiOutlineRise} />
-          <Menu.Item title="Settings" to={'/foo2'} icon={AiOutlineSetting} />
+          <Menu.Item
+            mode={mode}
+            title="Edit Exercises"
+            to={'/foo1'}
+            icon={AiOutlineRise}
+          />
+          <Menu.Item
+            mode={mode}
+            title="Settings"
+            to={'/foo2'}
+            icon={AiOutlineSetting}
+          />
         </Menu>
         <VStack width="full" transition="bottom 200ms">
           <Button
             width="full"
-            variant="ghost"
+            variant="unstyled"
+            transition="all 300ms"
+            color="primary.600"
+            _hover={{ color: 'primary.300' }}
             onClick={() => dispatch(signOutUser())}>
             Sign out
           </Button>
@@ -57,6 +84,10 @@ const Sidebar: React.FC<SidebarProps> = ({ user, isOpen }) => {
       </ScaleFade>
     </Box>
   );
+};
+
+Sidebar.defaultProps = {
+  mode: 'dark',
 };
 
 export default Sidebar;
