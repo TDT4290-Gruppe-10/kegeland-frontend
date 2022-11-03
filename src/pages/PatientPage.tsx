@@ -12,6 +12,7 @@ import withLayout from '../hoc/withLayout';
 import usePatient from '../hooks/usePatient';
 import WeeklySessionsChart from '../components/WeeklySessionsChart';
 import ExerciseTable from '../components/ExerciseTable';
+import withSpinner from '../hoc/withSpinner';
 
 type PatientPageParams = {
   patientId: string;
@@ -63,4 +64,4 @@ const PatientPage: React.FC = () => {
   );
 };
 
-export default withLayout(PatientPage);
+export default withLayout(withSpinner(PatientPage, 200));
