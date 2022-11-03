@@ -14,7 +14,6 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <Flex
-      display="flex"
       flexDir="column"
       flex={1}
       flexGrow={1}

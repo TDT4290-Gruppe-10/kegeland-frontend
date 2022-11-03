@@ -41,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ user, children }) => {
             zIndex={999}
             padding={5}
             flexDir="column"
-            overflow="hidden"
+            overflowX="hidden"
             marginX="auto"
             w="90%"
             maxW="8xl">

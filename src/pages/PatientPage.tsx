@@ -26,7 +26,6 @@ const PatientPage: React.FC = () => {
     <>
       <Flex flexDirection={isGreaterThanLg ? 'row' : 'column'}>
         <Card
-          display="flex"
           marginRight={5}
           maxW={isGreaterThanLg ? 48 : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
