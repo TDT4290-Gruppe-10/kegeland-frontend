@@ -39,11 +39,12 @@ const Layout: React.FC<LayoutProps> = ({ user, children }) => {
           <Header toggleSidebar={toggle} isSidebarOpen={openSidebar} />
           <Flex
             zIndex={999}
-            padding={5}
+            marginTop={{ base: 5, md: 0 }}
+            padding={{ base: 0, md: 5 }}
             flexDir="column"
             overflowX="hidden"
             marginX="auto"
-            w="90%"
+            w={{ base: '100%', md: '90%' }}
             maxW="8xl">
             {children}
           </Flex>
