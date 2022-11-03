@@ -53,7 +53,7 @@ const ExerciseTable: React.FC<ExerciseTableProps> = ({
         ),
       },
     ],
-    [],
+    [isGreaterThanMd],
   );
 
   return <DataTable data={sessions} columns={columns} />;

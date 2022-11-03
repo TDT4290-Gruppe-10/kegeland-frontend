@@ -13,9 +13,8 @@ type PatientsTableProps = {
 };
 
 const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
-  const [isGreaterThanMd] = useMediaQuery('(min-width: 48em)');
+  const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const navigate = useNavigate();
-
   const columnHelper = createColumnHelper<Patient>();
   const columns = React.useMemo<ColumnDef<Patient, any>[]>(
     () => [
@@ -23,7 +22,7 @@ const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
         header: 'Patient',
         cell: (props) => renderName(props.getValue()),
       }),
-      ...(isGreaterThanMd
+      ...(isGreaterThanLg
         ? [
             columnHelper.accessor('email', {
               header: 'E-mail',
@@ -44,7 +43,7 @@ const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
         ),
       },
     ],
-    [],
+    [isGreaterThanLg],
   );
 
   return <DataTable data={patients} columns={columns} />;
