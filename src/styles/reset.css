@@ -7,5 +7,8 @@ div#root {
   height: 100%;
   width: 100%;
   background: #edf2f7;
+}
+
+div#root {
   overflow-y: scroll;
 }
