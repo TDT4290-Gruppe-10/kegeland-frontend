@@ -73,7 +73,7 @@ const RegisterPage = () => {
         <Container>
           <Container paddingTop="1em">
             <Formik
-              onSubmit={(values) => {
+              onSubmit={async (values) => {
                 register(values);
               }}
               initialValues={{
@@ -177,7 +177,7 @@ const RegisterPage = () => {
                     <Box textAlign="right">
                       <SubmitButton
                         colorScheme="primary"
-                        isLoading={formProps.isSubmitting && loading}
+                        isLoading={formProps.isSubmitting || loading}
                         isDisabled={!formProps.isValid}>
                         Register user
                       </SubmitButton>
