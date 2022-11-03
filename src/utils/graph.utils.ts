@@ -1,4 +1,4 @@
-import { ChartData } from 'chart.js';
+import { ChartData, ChartDataset } from 'chart.js';
 import { size } from 'lodash';
 import moment from 'moment';
 
@@ -83,7 +83,7 @@ export const initChartData = (
         borderColor: color,
         xAxisID: 'x',
         data: yData[idx],
-      };
+      } as ChartDataset;
     }),
   };
 };
