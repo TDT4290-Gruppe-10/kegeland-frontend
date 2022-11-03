@@ -92,12 +92,9 @@ const useGraphProfile = (sensor: Sensor, session: Session) => {
 
   const resetPlot = useCallback(() => {
     const newProfile = initGraphProfile(sensor);
-    dispatch(setGraphProfile({ sensor: sensor.name, profile }));
-    const newChartData = initChartData(
-      xDataRef.current,
-      yDataRef.current,
-      newProfile,
-    );
+    dispatch(setGraphProfile({ sensor: sensor.name, profile: newProfile }));
+    const xLabels = getXLabels(xDataRef.current, newProfile.useTimedelta);
+    const newChartData = initChartData(xLabels, yDataRef.current, newProfile);
     setChartData(newChartData);
   }, [profile]);
 

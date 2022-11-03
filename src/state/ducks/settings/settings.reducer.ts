@@ -8,6 +8,7 @@ const initialState: SettingsState = {
   graph: {
     femfit: undefined,
     empatica: undefined,
+    imu: undefined,
   },
 };
 
