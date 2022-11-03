@@ -1,6 +1,7 @@
 export enum SensorType {
   FEMFIT = 'femfit',
   EMPATICA = 'empatica',
+  IMU = 'imu',
 }
 
 export type Sensor = {
