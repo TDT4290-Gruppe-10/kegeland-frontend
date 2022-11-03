@@ -37,6 +37,7 @@ const GraphOptionsModal: React.FC<GraphOptionsProps> = ({
   ...props
 }) => {
   const profile = useGraphProfileSelector(sensor.name);
+
   return (
     <Modal {...props} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
@@ -79,7 +80,7 @@ const GraphOptionsModal: React.FC<GraphOptionsProps> = ({
               <HStack>
                 <Text>Display timedelta</Text>
                 <Switch
-                  checked={profile.useTimedelta}
+                  isChecked={profile.useTimedelta}
                   onChange={() => updateXAxis(!profile.useTimedelta)}
                 />
               </HStack>

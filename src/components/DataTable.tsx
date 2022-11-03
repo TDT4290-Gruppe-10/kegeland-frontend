@@ -12,6 +12,7 @@ import {
   Select,
   TableContainer,
   Tfoot,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import {
   ArrowRightIcon,
@@ -38,6 +39,7 @@ export type DataTableProps<T extends object> = {
 };
 
 const DataTable = <T extends object>({ data, columns }: DataTableProps<T>) => {
+  const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const table = useReactTable<T>({
     data,
     columns,
@@ -130,32 +132,33 @@ const DataTable = <T extends object>({ data, columns }: DataTableProps<T>) => {
             />
           </Tooltip>
         </Flex>
-
-        <Flex alignItems="center">
-          <Text flexShrink="0" mr={8}>
-            Page{' '}
-            <Text fontWeight="bold" as="span">
-              {table.getState().pagination.pageIndex + 1}
-            </Text>{' '}
-            of{' '}
-            <Text fontWeight="bold" as="span">
-              {table.getPageCount()}
+        {isGreaterThanLg && (
+          <Flex alignItems="center">
+            <Text flexShrink="0" mr={8}>
+              Page{' '}
+              <Text fontWeight="bold" as="span">
+                {table.getState().pagination.pageIndex + 1}
+              </Text>{' '}
+              of{' '}
+              <Text fontWeight="bold" as="span">
+                {table.getPageCount()}
+              </Text>
             </Text>
-          </Text>
 
-          <Select
-            w={32}
-            value={table.getState().pagination.pageSize}
-            onChange={(e) => {
-              table.setPageSize(Number(e.target.value));
-            }}>
-            {[10, 20, 30, 40, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                Show {pageSize}
-              </option>
-            ))}
-          </Select>
-        </Flex>
+            <Select
+              w={32}
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value));
+              }}>
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </Select>
+          </Flex>
+        )}
 
         <Flex>
           <Tooltip label="Next Page">

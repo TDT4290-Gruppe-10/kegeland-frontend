@@ -1,4 +1,4 @@
-import { Button, Flex } from '@chakra-ui/react';
+import { Button, Flex, useMediaQuery } from '@chakra-ui/react';
 import { createColumnHelper, ColumnDef } from '@tanstack/react-table';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,8 +13,8 @@ type PatientsTableProps = {
 };
 
 const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
+  const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const navigate = useNavigate();
-
   const columnHelper = createColumnHelper<Patient>();
   const columns = React.useMemo<ColumnDef<Patient, any>[]>(
     () => [
@@ -22,10 +22,14 @@ const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
         header: 'Patient',
         cell: (props) => renderName(props.getValue()),
       }),
-      columnHelper.accessor('email', {
-        header: 'E-mail',
-        cell: (props) => props.getValue(),
-      }),
+      ...(isGreaterThanLg
+        ? [
+            columnHelper.accessor('email', {
+              header: 'E-mail',
+              cell: (props) => props.getValue(),
+            }),
+          ]
+        : []),
       {
         id: 'action',
         header: undefined,
@@ -39,7 +43,7 @@ const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
         ),
       },
     ],
-    [],
+    [isGreaterThanLg],
   );
 
   return <DataTable data={patients} columns={columns} />;
