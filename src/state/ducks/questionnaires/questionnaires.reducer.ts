@@ -25,7 +25,11 @@ const questionnairesSlice = createSlice({
   initialState,
   reducers: {
     clearQuestionnairesState: (state) => {
-      state = initialState;
+      state.loading = false;
+      state.error = undefined;
+      state.data = [];
+      state.questionnaire = undefined;
+      state.answers = [];
     },
   },
   extraReducers: (builder) => {

@@ -22,7 +22,10 @@ const sessionsSlice = createSlice({
   initialState,
   reducers: {
     clearSessionsState: (state) => {
-      state = initialState;
+      state.loading = false;
+      state.session = undefined;
+      state.data = [];
+      state.error = undefined;
     },
   },
   extraReducers: (builder) => {

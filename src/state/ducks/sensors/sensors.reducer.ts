@@ -20,7 +20,9 @@ const sensorSlice = createSlice({
   initialState,
   reducers: {
     clearSensorsState: (state) => {
-      state = initialState;
+      state.loading = false;
+      state.data = {};
+      state.error = undefined;
     },
   },
   extraReducers: (builder) => {

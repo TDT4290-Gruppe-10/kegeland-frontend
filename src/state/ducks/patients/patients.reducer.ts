@@ -21,7 +21,10 @@ const patientsSlice = createSlice({
   initialState,
   reducers: {
     clearPatientsState: (state) => {
-      state = initialState;
+      state.loading = false;
+      state.patient = undefined;
+      state.data = [];
+      state.error = undefined;
     },
   },
   extraReducers: (builder) => {
