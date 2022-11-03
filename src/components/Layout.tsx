@@ -43,12 +43,8 @@ const Layout: React.FC<LayoutProps> = ({ user, children }) => {
             flexDir="column"
             overflow="hidden"
             marginX="auto"
-            w="100%"
-            maxW={{
-              base: 'container.sm',
-              lg: 'container.md',
-              xl: 'container.lg',
-            }}>
+            w="90%"
+            maxW="container.lg">
             {children}
           </Flex>
         </Flex>

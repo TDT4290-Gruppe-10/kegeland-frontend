@@ -1,4 +1,4 @@
-import { Button, Flex } from '@chakra-ui/react';
+import { Button, Flex, useMediaQuery } from '@chakra-ui/react';
 import { createColumnHelper, ColumnDef } from '@tanstack/react-table';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,7 @@ type PatientsTableProps = {
 };
 
 const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
+  const [isGreaterThanMd] = useMediaQuery('(min-width: 48em)');
   const navigate = useNavigate();
 
   const columnHelper = createColumnHelper<Patient>();
@@ -22,10 +23,14 @@ const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
         header: 'Patient',
         cell: (props) => renderName(props.getValue()),
       }),
-      columnHelper.accessor('email', {
-        header: 'E-mail',
-        cell: (props) => props.getValue(),
-      }),
+      ...(isGreaterThanMd
+        ? [
+            columnHelper.accessor('email', {
+              header: 'E-mail',
+              cell: (props) => props.getValue(),
+            }),
+          ]
+        : []),
       {
         id: 'action',
         header: undefined,

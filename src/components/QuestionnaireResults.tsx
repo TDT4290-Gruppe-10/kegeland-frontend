@@ -35,16 +35,12 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
 }) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const render = () => {
-    if (!questionnaire) {
+    if (!questionnaire || answers.length < 2) {
       return (
         <Text textAlign="center" fontSize={18} color="gray.500">
-          No questionnaire assigned
-        </Text>
-      );
-    } else if (answers.length < 2) {
-      return (
-        <Text textAlign="center" fontSize={18} color="gray.500">
-          No answers for the assigned questionnaire
+          {!questionnaire
+            ? 'No questionnaire assigned'
+            : 'No answers for the assigned questionnaire'}
         </Text>
       );
     } else {
