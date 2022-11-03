@@ -44,7 +44,7 @@ const Layout: React.FC<LayoutProps> = ({ user, children }) => {
             overflow="hidden"
             marginX="auto"
             w="90%"
-            maxW="container.lg">
+            maxW="8xl">
             {children}
           </Flex>
         </Flex>
