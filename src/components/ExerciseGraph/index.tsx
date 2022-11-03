@@ -36,7 +36,7 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ sensor, session }) => {
           <Divider borderColor="gray.300" marginY={4} />
           <div style={{ width: '99%' }}>
             <Chart
-              height={200}
+              height={150}
               ref={chartRef}
               type="line"
               options={options}
