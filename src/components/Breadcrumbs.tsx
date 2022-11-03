@@ -5,13 +5,13 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import useBreadcrumbs from '../hooks/useBreadcrumbs';
+import { RoutePath } from '../routes';
 
-type BreadcrumbsProps = React.ComponentProps<typeof Breadcrumb>;
+type BreadcrumbsProps = {
+  crumbs: RoutePath[];
+} & React.ComponentProps<typeof Breadcrumb>;
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = (props) => {
-  const { crumbs } = useBreadcrumbs();
-  if (crumbs.length === 0) return null;
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ crumbs, ...props }) => {
   return (
     <Breadcrumb {...props}>
       <BreadcrumbItem>
