@@ -36,7 +36,7 @@ const Layout: React.FC<LayoutProps> = ({ user, children }) => {
         </Box>
 
         <Flex flexDir="column" h="100%" w="100%" justifyContent="flex-start">
-          <Header toggleSidebar={toggle} />
+          <Header toggleSidebar={toggle} isSidebarOpen={openSidebar} />
           <Flex
             zIndex={999}
             padding={5}
