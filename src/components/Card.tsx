@@ -1,10 +1,10 @@
-import { Flex, Skeleton } from '@chakra-ui/react';
+import { Box, Skeleton } from '@chakra-ui/react';
 import { ComponentProps } from 'react';
 
 type CardProps = {
   loading?: boolean;
   containerProps?: ComponentProps<typeof Skeleton>;
-} & ComponentProps<typeof Flex>;
+} & ComponentProps<typeof Box>;
 
 const Card: React.FC<CardProps> = ({
   loading,
@@ -13,13 +13,7 @@ const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   return (
-    <Flex
-      flexDir="column"
-      flex={1}
-      flexGrow={1}
-      flexShrink={1}
-      w="100%"
-      maxW={'100%'}
+    <Box
       padding={4}
       backgroundColor="white"
       shadow="md"
@@ -31,7 +25,7 @@ const Card: React.FC<CardProps> = ({
       <Skeleton isLoaded={!loading} {...containerProps} h="100%" w="100%">
         {children}
       </Skeleton>
-    </Flex>
+    </Box>
   );
 };
 

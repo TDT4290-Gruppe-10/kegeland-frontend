@@ -5,7 +5,7 @@ import { ComponentType, useEffect, useState } from 'react';
 const withSpinner =
   <P extends object>(
     Component: ComponentType<P>,
-    duration: number = 100,
+    duration: number = 200,
   ): ComponentType<P> =>
   (props) => {
     const [spinner, setSpinner] = useState<boolean>(true);
