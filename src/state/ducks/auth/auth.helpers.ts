@@ -9,22 +9,6 @@ export enum Token {
   REFRESH_TOKEN = 'refresh_token',
 }
 
-export const allTokensExist = (tokens: Record<Token, string>): boolean => {
-  const tokenKeys = values(Token);
-  return every(
-    Object.entries(tokens),
-    ([key, val]) => tokenKeys.includes(key as Token) && val !== null,
-  );
-};
-
-export const clearSignedInState = () => {
-  return {
-    isSignedIn: false,
-    authUser: undefined,
-    userDetails: undefined,
-  };
-};
-
 export const signInReducer = (
   state: AuthState,
   action: PayloadAction<LoginResponse>,
