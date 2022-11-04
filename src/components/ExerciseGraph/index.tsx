@@ -2,7 +2,7 @@ import { Chart } from 'react-chartjs-2';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { Chart as ChartJS } from 'chart.js';
 import 'chart.js/auto';
-import { useDisclosure, Divider } from '@chakra-ui/react';
+import { useDisclosure, Divider, Box } from '@chakra-ui/react';
 import 'chartjs-adapter-moment';
 
 import useGraphProfile from '../../hooks/useGraphProfile';
@@ -25,7 +25,7 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ sensor, session }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
+    <Box h="100%" w="100%">
       {chartData && (
         <>
           <GraphHeader
@@ -53,7 +53,7 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ sensor, session }) => {
         resetPlot={resetPlot}
         updateXAxis={updateXAxis}
       />
-    </>
+    </Box>
   );
 };
 
