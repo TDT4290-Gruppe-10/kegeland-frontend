@@ -21,13 +21,13 @@ const ExercisePage: React.FC = () => {
 
   return (
     <>
-      <Card loading={loading} minH="lg" justify="start">
+      <Card loading={loading} minH="lg">
         {sensor && session && (
           <ExerciseGraph sensor={sensor!} session={session!} />
         )}
       </Card>
 
-      <Card loading={loading} minH="36" alignContent="center">
+      <Card loading={loading} h="100%">
         <QuestionnaireResults answers={answers} questionnaire={questionnaire} />
       </Card>
     </>

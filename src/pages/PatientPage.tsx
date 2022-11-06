@@ -1,4 +1,4 @@
-import { Flex, Stack, useMediaQuery } from '@chakra-ui/react';
+import { Box, Flex, Stack, useMediaQuery } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -24,11 +24,14 @@ const PatientPage: React.FC = () => {
   const { data, details, loading } = usePatient(patientId || '');
 
   return (
-    <>
-      <Flex flexDirection={isGreaterThanLg ? 'row' : 'column'}>
+    <Box w="100%" h="100%">
+      <Flex
+        flexDirection={isGreaterThanLg ? 'row' : 'column'}
+        flexBasis="100%"
+        flexWrap="nowrap">
         <Card
           marginRight={5}
-          maxW={isGreaterThanLg ? 48 : '100%'}
+          w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
           loading={loading}>
           <Stack
@@ -53,15 +56,18 @@ const PatientPage: React.FC = () => {
             />
           </Stack>
         </Card>
-        <Card minH={isGreaterThanLg ? 'md' : undefined} loading={loading}>
+        <Card
+          w={isGreaterThanLg ? '75%' : '100%'}
+          minH={isGreaterThanLg ? 'md' : undefined}
+          loading={loading}>
           <WeeklySessionsChart sessions={data} numWeeks={12} />
         </Card>
       </Flex>
       <Card loading={loading} minH="36">
         <ExerciseTable sessions={data} patientId={patientId!} />
       </Card>
-    </>
+    </Box>
   );
 };
 
-export default withLayout(withSpinner(PatientPage, 200));
+export default withLayout(withSpinner(PatientPage));
