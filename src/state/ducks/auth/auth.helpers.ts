@@ -1,5 +1,4 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { every, values } from 'lodash';
 
 import { AuthState, LoginResponse } from './auth.interface';
 
