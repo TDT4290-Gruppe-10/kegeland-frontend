@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import {
   getLabelIndex,
   getSessionDuration,
@@ -46,25 +48,17 @@ describe('Test graph utils', () => {
     expect(graphProfile).toEqual(newGraphProfile);
   });
 
-  it('getXLabels should return list with x lables of delta time', () => {
+  it('getXLabels should return list with x labels of delta time', () => {
     const xLabels = getXLabels([1, 2, 3, 4, 5, 6, 6, 6, 66], true);
     const newXLabels: number[] = [0, 1, 2, 3, 4, 5, 5, 5, 65];
-    expect(xLabels).toEqual(newXLabels);
+    expect(xLabels).toStrictEqual(newXLabels);
   });
 
-  it('getXLabels should return list with x lables non delta time', () => {
-    const xLabels = getXLabels([1, 2, 3, 4, 5, 6, 6, 6, 66], false);
-    const newXLabels: string[] = [
-      '1:00:00 AM',
-      '1:00:00 AM',
-      '1:00:00 AM',
-      '1:00:00 AM',
-      '1:00:00 AM',
-      '1:00:00 AM',
-      '1:00:00 AM',
-      '1:00:00 AM',
-      '1:00:00 AM',
-    ];
-    expect(xLabels).toEqual(newXLabels);
+  it('getXLabels should return list with x labels non delta time', () => {
+    const labels = [1, 2, 3, 4, 5, 6, 6, 6, 66];
+    const xLabels = getXLabels(labels, false);
+    const expected = labels.map((val) => moment(val).format('LTS'));
+
+    expect(xLabels).toStrictEqual(expected);
   });
 });
