@@ -5,7 +5,7 @@ import { Token } from '../state/ducks/auth/auth.helpers';
 import { isApiError } from './isApiError';
 import { retrieveToken } from './storage';
 
-const baseURL = 'http://localhost:3000/api/';
+const baseURL = 'http://localhost:8000/api/';
 
 const httpInstance = axios.create({
   timeout: 5000,

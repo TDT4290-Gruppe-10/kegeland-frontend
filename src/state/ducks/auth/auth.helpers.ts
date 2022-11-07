@@ -1,5 +1,4 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { every, values } from 'lodash';
 
 import { AuthState, LoginResponse } from './auth.interface';
 
@@ -8,22 +7,6 @@ export enum Token {
   ID_TOKEN = 'id_token',
   REFRESH_TOKEN = 'refresh_token',
 }
-
-export const allTokensExist = (tokens: Record<Token, string>): boolean => {
-  const tokenKeys = values(Token);
-  return every(
-    Object.entries(tokens),
-    ([key, val]) => tokenKeys.includes(key as Token) && val !== null,
-  );
-};
-
-export const clearSignedInState = () => {
-  return {
-    isSignedIn: false,
-    authUser: undefined,
-    userDetails: undefined,
-  };
-};
 
 export const signInReducer = (
   state: AuthState,

@@ -9,7 +9,7 @@ import {
 import { fetchPatientById, fetchPatients } from './patients.actions';
 import { PatientsState } from './patients.interface';
 
-const initialState: PatientsState = {
+export const initialState: PatientsState = {
   loading: false,
   patient: undefined,
   data: [],

@@ -14,7 +14,7 @@ export type Questionnaire = {
 export type Answer = {
   userId: string;
   sessionId: string;
-  createdAt: Date;
+  createdAt: number;
   answers: number[];
 };
 

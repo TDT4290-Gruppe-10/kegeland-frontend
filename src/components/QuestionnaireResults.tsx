@@ -93,6 +93,7 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
                       <Text fontWeight="semibold">1</Text>
                       <Tooltip hasArrow label={answer + 1}>
                         <Progress
+                          textAlign="left"
                           colorScheme="primary"
                           width="full"
                           marginX={3}
