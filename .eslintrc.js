@@ -56,6 +56,7 @@ module.exports = {
         'newlines-between': 'always',
       },
     ],
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'prettier/prettier': 'error',
     'import/default': 0,
     'import/no-unresolved': 0,

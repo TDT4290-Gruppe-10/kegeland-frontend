@@ -30,7 +30,6 @@ export const signInUser = createAsyncThunk(
 
 export const refresh = createAsyncThunk('auth/refresh', async () => {
   const token = await retrieveToken(Token.REFRESH_TOKEN);
-  console.log(token);
   if (!token) {
     throw new Error('No refresh token found');
   }
