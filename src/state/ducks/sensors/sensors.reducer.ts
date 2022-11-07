@@ -9,7 +9,7 @@ import {
 import { fetchSensor } from './sensors.actions';
 import { SensorState } from './sensors.interface';
 
-const initialState: SensorState = {
+export const initialState: SensorState = {
   loading: false,
   data: {},
   error: undefined,

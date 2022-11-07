@@ -10,7 +10,7 @@ import {
 import { fetchSessionById, fetchSessions } from './sessions.actions';
 import { SessionsState } from './sessions.interface';
 
-const initialState: SessionsState = {
+export const initialState: SessionsState = {
   loading: false,
   session: undefined,
   data: [],

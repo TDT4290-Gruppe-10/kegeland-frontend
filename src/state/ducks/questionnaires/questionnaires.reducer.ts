@@ -12,7 +12,7 @@ import {
 } from './questionnaires.actions';
 import { QuestionnaireState } from './questionnaires.interface';
 
-const initialState: QuestionnaireState = {
+export const initialState: QuestionnaireState = {
   loading: false,
   error: undefined,
   data: [],
@@ -27,7 +27,6 @@ const questionnairesSlice = createSlice({
     clearQuestionnairesState: (state) => {
       state.loading = false;
       state.error = undefined;
-      state.data = [];
       state.questionnaire = undefined;
       state.answers = [];
     },

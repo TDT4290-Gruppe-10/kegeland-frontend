@@ -18,7 +18,7 @@ export const retrieveToken = async (token: Token) => {
 
 export const retrieveTokens = async () => {
   const accessToken = localStorage.getItem('access_token');
-  const idToken = localStorage.getItem('is_token');
+  const idToken = localStorage.getItem('id_token');
   const refreshToken = localStorage.getItem('refresh_token');
   if (!accessToken || !idToken || !refreshToken) {
     throw new Error('Failed to retrieve tokens');

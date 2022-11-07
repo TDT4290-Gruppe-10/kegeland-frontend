@@ -4,7 +4,7 @@ import { SensorType } from '../sensors/sensors.interface';
 
 import { GraphProfile, SettingsState } from './settings.interface';
 
-const initialState: SettingsState = {
+export const initialState: SettingsState = {
   graph: {
     femfit: undefined,
     empatica: undefined,
