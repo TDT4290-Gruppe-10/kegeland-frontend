@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import renderer from 'react-test-renderer';
+
 import { sessions } from '../mocks/sessions.mock';
 import WeeklySessionsChart from '../WeeklySessionsChart';
 import theme from '../../constants/theme.constants';

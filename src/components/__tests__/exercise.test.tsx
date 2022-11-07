@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
+
 import { SensorType } from '../../state/ducks/sensors/sensors.interface';
-import Card from '../Card';
 import Exercise from '../Exercise';
 
 describe('Test excercise', () => {

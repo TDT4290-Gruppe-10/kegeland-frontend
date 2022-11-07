@@ -1,9 +1,9 @@
 import { ChartType } from 'chart.js';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
+
 import { SensorType } from '../../../state/ducks/sensors/sensors.interface';
 import { store } from '../../../state/store';
-import { session } from '../../mocks/sessions.mock';
 import GraphOptionsModal from '../GraphOptionsModal';
 
 describe('Test graph options modal', () => {

@@ -1,4 +1,5 @@
 import renderer from 'react-test-renderer';
+
 import { SensorType } from '../../../state/ducks/sensors/sensors.interface';
 import GraphHeader from '../GraphHeader';
 import { session } from '../../mocks/sessions.mock';

@@ -34,7 +34,7 @@ describe('Test sesison utils', () => {
     expect(token).toEqual('access token');
   });
 
-  test('removeTokens should remove tokens ', async () => {
+  test('removeTokens should remove tokens', async () => {
     removeTokens();
     await expect(retrieveTokens()).rejects.toThrow('Failed to retrieve tokens');
   });

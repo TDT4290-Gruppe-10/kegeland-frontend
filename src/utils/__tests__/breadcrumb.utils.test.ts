@@ -1,6 +1,7 @@
+import { matchPath } from 'react-router-dom';
+
 import { matchRouteDefinitions } from '../breadcrumb.utils';
 import routes, { RoutePath } from '../../routes';
-import { matchPath } from 'react-router-dom';
 import { routePath } from '../mocks/breadcrumb.mock';
 
 describe('Test breadcrum utils', () => {

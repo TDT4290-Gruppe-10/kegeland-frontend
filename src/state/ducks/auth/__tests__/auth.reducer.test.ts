@@ -6,7 +6,6 @@ import loginResponse from '../mocks/loginResponse.mock';
 import { UserRole } from '../auth.interface';
 import refreshResponse from '../mocks/refreshResponse.mock';
 import { retrieveTokens } from '../../../../utils/storage';
-import { Token } from '../auth.helpers';
 
 jest.mock('../../../../utils/apiCaller');
 
@@ -29,7 +28,7 @@ describe('Test auth slice', () => {
   });
 
   it('signInUser/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject());
+    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
     await store.dispatch(
       signInUser({ email: 'ola.nordmann@gmail.com', password: '12324' }),
     );
@@ -70,7 +69,7 @@ describe('Test auth slice', () => {
   });
 
   it('signOutUser/rejected should set unauthorized state', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject());
+    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
     await store.dispatch(signOutUser());
     const state = store.getState().auth;
     const newState = {
@@ -85,7 +84,7 @@ describe('Test auth slice', () => {
   });
 
   it('signUpUser/rejected should set error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject());
+    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
     await store.dispatch(
       signUpUser({
         name: { firstName: 'ola', lastName: 'Nordmann' },
@@ -121,7 +120,7 @@ describe('Test auth slice', () => {
   });
 
   it('refresh/rejected should set unauthorized state', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject());
+    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
     await store.dispatch(refresh());
     const state = store.getState().auth;
     expect(state.loading).toBeFalsy();
@@ -136,6 +135,7 @@ describe('Test auth slice', () => {
       Promise.resolve(refreshResponse),
     );
     await store.dispatch(refresh());
+    // eslint-disable-next-line camelcase
     const { refresh_token, id_token, access_token } = await retrieveTokens();
     expect(refresh_token).toBe(refreshResponse.refreshToken);
     expect(id_token).toBe(refreshResponse.idToken);

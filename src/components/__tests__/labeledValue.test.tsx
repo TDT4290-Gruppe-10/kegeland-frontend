@@ -1,4 +1,5 @@
 import renderer from 'react-test-renderer';
+
 import LabeledValue from '../LabeledValue';
 
 describe('Test labeled value', () => {

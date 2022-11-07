@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
+
 import ExerciseGraph from '..';
 import { SensorType } from '../../../state/ducks/sensors/sensors.interface';
 import { store } from '../../../state/store';

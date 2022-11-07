@@ -1,4 +1,5 @@
 import renderer from 'react-test-renderer';
+
 import Menu from '../Menu';
 
 describe('Test manu', () => {

@@ -14,14 +14,14 @@ describe('Test sensor slice', () => {
   });
 
   it('clearSessionsState should set initial error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject());
+    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
     store.dispatch(clearSessionsState());
     const state = store.getState().sessions;
     expect(state).toEqual(initialState);
   });
 
   it('fetchSessionById/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject());
+    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
     await store.dispatch(fetchSessionById('hei'));
     const state = store.getState().sessions;
     expect(state.error).toBeTruthy();
@@ -39,7 +39,7 @@ describe('Test sensor slice', () => {
   });
 
   it('fetchSessions/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject());
+    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
     await store.dispatch(
       fetchSessions({
         userId: '16L4x6AmAohaKniCnBToa3jUZPk2',

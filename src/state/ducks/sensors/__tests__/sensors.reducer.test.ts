@@ -1,9 +1,6 @@
 import { apiCaller } from '../../../../utils/apiCaller';
 import { store } from '../../../store';
-import {
-  sensorFemfitRespose,
-  sensorsFemfitEmpaticaResponce,
-} from '../mocks/sensorsResponse.mock';
+import { sensorFemfitRespose } from '../mocks/sensorsResponse.mock';
 import { fetchSensor } from '../sensors.actions';
 import { SensorType } from '../sensors.interface';
 import { clearSensorsState, initialState } from '../sensors.reducer';
@@ -17,14 +14,14 @@ describe('Test sensor slice', () => {
   });
 
   it('clearSensorsState should set initial error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject());
+    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
     store.dispatch(clearSensorsState());
     const state = store.getState().sensors;
     expect(state).toEqual(initialState);
   });
 
   it('fetchSensor/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject());
+    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
     await store.dispatch(fetchSensor(SensorType.FEMFIT));
     const state = store.getState().sensors;
     expect(state.error).toBeTruthy();

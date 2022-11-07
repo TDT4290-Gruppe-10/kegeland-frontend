@@ -27,7 +27,7 @@ describe('Test graph utils', () => {
     expect(index).toEqual(undefined);
   });
 
-  it('getSessionDuration should return ', () => {
+  it('getSessionDuration should return', () => {
     const size = getSessionDuration(session);
     const newSize = 1101;
     expect(size).toEqual(newSize);

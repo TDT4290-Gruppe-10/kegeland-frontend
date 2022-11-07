@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import Layout from '../Layout';
+
 import Patient from '../Patient';
 
 describe('Test patient', () => {

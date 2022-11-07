@@ -1,10 +1,11 @@
+import moment from 'moment';
+
 import { session } from '../../components/mocks/sessions.mock';
 import {
   getLastSessionTimeDelta,
   getNumSessionsThisWeek,
   groupByWeek,
 } from '../session.utils';
-import moment from 'moment';
 
 describe('Test sesison utils', () => {
   it('groupByWeek should return currenct week and 0', () => {
@@ -18,7 +19,7 @@ describe('Test sesison utils', () => {
     expect(index).toEqual(0);
   });
 
-  it('getLastSessionTimeDelta should return ', () => {
+  it('getLastSessionTimeDelta should return', () => {
     const size = getLastSessionTimeDelta([]);
     expect(size).toEqual(0);
   });

@@ -1,4 +1,3 @@
-import { SensorType } from '../../sensors/sensors.interface';
 import { GraphProfile } from '../settings.interface';
 
 const graphProfileMocks: GraphProfile = {

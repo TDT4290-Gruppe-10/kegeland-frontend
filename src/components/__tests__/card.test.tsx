@@ -1,4 +1,5 @@
 import renderer from 'react-test-renderer';
+
 import Card from '../Card';
 
 describe('Test card', () => {

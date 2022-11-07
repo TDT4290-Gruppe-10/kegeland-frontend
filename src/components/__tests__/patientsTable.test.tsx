@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import { UserRole } from '../../state/ducks/auth/auth.interface';
+
 import { user } from '../mocks/user.mock';
 import PatientsTable from '../PatientsTable';
 

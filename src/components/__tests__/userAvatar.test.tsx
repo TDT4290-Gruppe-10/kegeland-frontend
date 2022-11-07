@@ -1,4 +1,5 @@
 import renderer from 'react-test-renderer';
+
 import { user } from '../mocks/user.mock';
 import UserAvatar from '../UserAvatar';
 

@@ -1,5 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
+
 import Header from '../Header';
 
 describe('Test header', () => {
