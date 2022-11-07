@@ -2,7 +2,7 @@ import { LoginResponse, UserRole } from '../auth.interface';
 
 const loginResponse: LoginResponse = {
   id: 'oaijdoqwdjfwou',
-  email: 'ola.nordmann@gmail.com',
+  email: 'ola.nordmann@gmail.org',
   details: {
     roles: [UserRole.PATIENT],
     name: {
