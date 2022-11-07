@@ -51,7 +51,7 @@ jobs:
         run: yarn build
 
       - name: Run tests
-        run: yarn test -- --watchAll=false --coverage
+        run: yarn test --watchAll=false --coverage -u
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3.1.1
