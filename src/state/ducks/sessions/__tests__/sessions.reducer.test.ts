@@ -6,7 +6,7 @@ import { fetchSessionById, fetchSessions } from '../sessions.actions';
 import { clearSessionsState, initialState } from '../sessions.reducer';
 
 jest.mock('../../../../utils/apiCaller');
-
+const error = new Error('error');
 describe('Test sensor slice', () => {
   it('Should return initial state', () => {
     const state = store.getState().sessions;
@@ -14,17 +14,17 @@ describe('Test sensor slice', () => {
   });
 
   it('clearSessionsState should set initial error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     store.dispatch(clearSessionsState());
     const state = store.getState().sessions;
     expect(state).toEqual(initialState);
   });
 
   it('fetchSessionById/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(fetchSessionById('hei'));
     const state = store.getState().sessions;
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 
   it('fetchSessionById/fulfilled should set session state', async () => {
@@ -39,7 +39,7 @@ describe('Test sensor slice', () => {
   });
 
   it('fetchSessions/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(
       fetchSessions({
         userId: '16L4x6AmAohaKniCnBToa3jUZPk2',
@@ -47,7 +47,7 @@ describe('Test sensor slice', () => {
       }),
     );
     const state = store.getState().sessions;
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 
   it('fetchSessions/fulfilled should set session state', async () => {

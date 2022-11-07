@@ -28,12 +28,13 @@ describe('Test auth slice', () => {
   });
 
   it('signInUser/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('Error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(
       signInUser({ email: 'ola.nordmann@gmail.com', password: '12324' }),
     );
     const state = store.getState().auth;
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 
   it('signInUser/fulfilled should set authorized state', async () => {
@@ -69,7 +70,8 @@ describe('Test auth slice', () => {
   });
 
   it('signOutUser/rejected should set unauthorized state', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('Error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(signOutUser());
     const state = store.getState().auth;
     const newState = {
@@ -78,13 +80,14 @@ describe('Test auth slice', () => {
       isSignedIn: false,
       authUser: undefined,
       userDetails: undefined,
-      error: 'Rejected',
+      error: error.message,
     };
     expect(state).toEqual(newState);
   });
 
   it('signUpUser/rejected should set error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('Error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(
       signUpUser({
         name: { firstName: 'ola', lastName: 'Nordmann' },
@@ -94,7 +97,7 @@ describe('Test auth slice', () => {
       }),
     );
     const state = store.getState().auth;
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 
   it('signUpUser/fulfilled should set authorized state', async () => {
@@ -120,14 +123,15 @@ describe('Test auth slice', () => {
   });
 
   it('refresh/rejected should set unauthorized state', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('Error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(refresh());
     const state = store.getState().auth;
     expect(state.loading).toBeFalsy();
     expect(state.isSignedIn).toBeFalsy();
     expect(state.authUser).toBeFalsy();
     expect(state.userDetails).toBeFalsy();
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 
   it('refresh/resolved should set refreshtoken state', async () => {

@@ -14,17 +14,19 @@ describe('Test patients slice', () => {
   });
 
   it('clearPatientsState should set initial error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('Error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error.message));
     store.dispatch(clearPatientsState());
     const state = store.getState().patients;
     expect(state).toEqual(initialState);
   });
 
   it('fetchPatientByid/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('Error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(fetchPatientById('123456'));
     const state = store.getState().patients;
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 
   it('fetchPatientById/fulfilled should set patient state', async () => {
@@ -51,20 +53,22 @@ describe('Test patients slice', () => {
   });
 
   it('fetchPatientById/rejected should set error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('Error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(fetchPatientById('123'));
     const state = store.getState().patients;
 
     expect(state.loading).toBeFalsy();
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 
   it('fetchPatients/rejected should set error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('Error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(fetchPatients());
     const state = store.getState().patients;
 
     expect(state.loading).toBeFalsy();
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 });

@@ -6,7 +6,7 @@ import { SensorType } from '../sensors.interface';
 import { clearSensorsState, initialState } from '../sensors.reducer';
 
 jest.mock('../../../../utils/apiCaller');
-
+const error = new Error('error');
 describe('Test sensor slice', () => {
   it('Should return initial state', () => {
     const state = store.getState().sensors;
@@ -14,17 +14,17 @@ describe('Test sensor slice', () => {
   });
 
   it('clearSensorsState should set initial error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     store.dispatch(clearSensorsState());
     const state = store.getState().sensors;
     expect(state).toEqual(initialState);
   });
 
   it('fetchSensor/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(fetchSensor(SensorType.FEMFIT));
     const state = store.getState().sensors;
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 
   it('fetchSensor/fulfilled should set sensor state', async () => {

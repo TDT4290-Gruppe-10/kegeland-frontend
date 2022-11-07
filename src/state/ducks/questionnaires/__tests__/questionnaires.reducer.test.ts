@@ -28,7 +28,8 @@ describe('Test questionnaires slice', () => {
   });
 
   it('fetchAssignedQuestionnaire/rejected should set state error', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(
       fetchAssignedQuestionnaire({
         userId: '1234567',
@@ -36,7 +37,7 @@ describe('Test questionnaires slice', () => {
       }),
     );
     const state = store.getState().questionnaires;
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 
   it('fetchAssignedQuestionnaire/fulfilled should set questionnaire state', async () => {
@@ -72,7 +73,8 @@ describe('Test questionnaires slice', () => {
   });
 
   it('fetchQuestionnaireAnswers/rejected should set error state', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.reject(new Error()));
+    const error = new Error('error');
+    (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(
       fetchQuestionnaireAnswers({
         questionnaireId: '9x7rPmACKqoE48EUh3Ds',
@@ -80,6 +82,6 @@ describe('Test questionnaires slice', () => {
       }),
     );
     const state = store.getState().questionnaires;
-    expect(state.error).toBeTruthy();
+    expect(state.error).toStrictEqual(error.message);
   });
 });
