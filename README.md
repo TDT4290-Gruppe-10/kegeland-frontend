@@ -1,3 +1,5 @@
+![CI/CD](https://github.com/TDT4290-Gruppe-10/kegeland-frontend/actions/workflows/on-pull-request.yml/badge.svg)
+[![codecov](https://codecov.io/gh/TDT4290-Gruppe-10/kegeland-frontend/branch/master/graph/badge.svg?token=PA8OQV3AWD)](https://codecov.io/gh/TDT4290-Gruppe-10/kegeland-frontend)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
