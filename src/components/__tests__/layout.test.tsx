@@ -3,15 +3,19 @@ import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
 import Layout from '../Layout';
-import { store } from '../../state/store';
+import { mockStore, MockStore } from '../../state/mocks/store.mock';
+import PatientPage from '../../pages/PatientPage';
 
 describe('Test layout', () => {
   it('renders correctlyu', () => {
+    const store = mockStore();
     const tree = renderer
       .create(
         <Provider store={store}>
           <MemoryRouter>
-            <Layout />
+            <Layout>
+              <PatientPage />
+            </Layout>
           </MemoryRouter>
         </Provider>,
       )

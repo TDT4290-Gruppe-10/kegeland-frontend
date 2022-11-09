@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { SensorType } from '../../sensors/sensors.interface';
 import { Session } from '../sessions.interface';
 

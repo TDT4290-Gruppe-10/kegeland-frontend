@@ -85,5 +85,18 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "react-axe": "^3.5.4"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/$1"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/?!(static-container)"
+    ],
+    "clearMocks": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!**/node_modules/**"
+    ]
   }
 }

@@ -9,6 +9,14 @@ const graphProfileMocks: GraphProfile = {
     },
     s2: {
       plotType: 'bar',
+      hidden: true,
+    },
+    s3: {
+      plotType: 'bar',
+      hidden: false,
+    },
+    s4: {
+      plotType: 'bar',
       hidden: false,
     },
   },
