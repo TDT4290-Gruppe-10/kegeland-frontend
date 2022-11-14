@@ -2,12 +2,12 @@ import { UserRole } from '../../auth/auth.interface';
 import { Patient } from '../patients.interface';
 
 const fetchPatentByIdResponse: Patient = {
-  id: 'oaijdoqwdjfwou',
-  email: 'ola.nordmann@gmail.com',
+  id: 'uid',
+  email: 'olaf.eriksen@mail.com',
   roles: [UserRole.PATIENT],
   name: {
-    lastName: 'Nordmann',
-    firstName: 'Ola',
+    lastName: 'Eriksen',
+    firstName: 'Olaf',
   },
 };
 

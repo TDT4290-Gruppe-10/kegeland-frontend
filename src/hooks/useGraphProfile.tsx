@@ -60,6 +60,7 @@ const useGraphProfile = (sensor: Sensor, session: Session) => {
     (label: string, plot: ChartType) => {
       const idx = getLabelIndex(sensor, label);
       if (profile && idx !== undefined) {
+        console.log('heleeneee');
         const newProfile = set(
           cloneDeep(profile),
           ['labels', label, 'plotType'],

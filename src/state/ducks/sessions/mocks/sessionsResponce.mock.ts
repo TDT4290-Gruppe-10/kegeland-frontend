@@ -4,8 +4,8 @@ import { Session } from '../sessions.interface';
 
 const sessionsresponce: Session[] = [
   {
-    id: 'xLsSlzvWMTBiZXDBm2wW',
-    userId: 'userId',
+    id: 'eid',
+    userId: 'uid',
     sensor: SensorType.FEMFIT,
     createdAt: 12345678910,
     data: {
@@ -13,8 +13,8 @@ const sessionsresponce: Session[] = [
     },
   },
   {
-    id: '1PsHCDJEbWJ9b6SseSOH',
-    userId: 'userId',
+    id: 'eid',
+    userId: 'uid',
     sensor: SensorType.FEMFIT,
     createdAt: 12345678910,
     data: {

@@ -1,7 +1,7 @@
 import { LoginResponse, UserRole } from '../auth.interface';
 
-const loginResponse: LoginResponse = {
-  id: 'oaijdoqwdjfwou',
+const loginResponseMock: LoginResponse = {
+  id: 'uid3',
   email: 'ola.nordmann@gmail.org',
   details: {
     roles: [UserRole.PATIENT],
@@ -18,4 +18,4 @@ const loginResponse: LoginResponse = {
   },
 };
 
-export default loginResponse;
+export default loginResponseMock;

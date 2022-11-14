@@ -27,17 +27,17 @@ const xLabelsF = getXLabels(
 );
 
 describe('Test useGraphProfile-hook', () => {
-  it('should return x labels, and list of datapoints one of the sensor label for all the timestamps ', async () => {
-    const settingsState: SettingsState = {
-      ...initialState,
-      graph: {
-        [SensorType.FEMFIT]: graphProfileMocks,
-        [SensorType.EMPATICA]: undefined,
-        [SensorType.IMU]: undefined,
-      },
-    };
-    const store = mockStore(merge({ settings: settingsState }, initialStore));
+  const settingsState: SettingsState = {
+    ...initialState,
+    graph: {
+      [SensorType.FEMFIT]: graphProfileMocks,
+      [SensorType.EMPATICA]: undefined,
+      [SensorType.IMU]: undefined,
+    },
+  };
+  const store = mockStore(merge({ settings: settingsState }, initialStore));
 
+  it('should return x labels, and list of datapoints one of the sensor label for all the timestamps ', async () => {
     const { result } = renderHook(
       () => useGraphProfile(sensorFemfitRespose, sessionByIdResponce),
       {
@@ -70,7 +70,7 @@ describe('Test useGraphProfile-hook', () => {
     );
   });
 
-  it('Should update sensor plotType ', async () => {
+  it('Should update sensor plotType in state', async () => {
     const settingsState: SettingsState = {
       ...initialState,
       graph: {
@@ -82,48 +82,43 @@ describe('Test useGraphProfile-hook', () => {
     const store = mockStore(merge({ settings: settingsState }, initialStore));
 
     const { result } = renderHook(
-      () =>
-        useGraphProfile(sensorFemfitRespose, sessionByIdResponce).updatePlot(
-          's1',
-          'line',
-        ),
+      () => useGraphProfile(sensorFemfitRespose, sessionByIdResponce),
       {
         wrapper: ({ children }: { children: React.ReactNode }) => (
           <Provider store={store}>{children}</Provider>
         ),
       },
     );
+    result.current.updatePlot('p1', 'line');
 
     const newResult = store.getState();
 
-    expect(newResult.settings.graph.femfit?.labels.s1.plotType).toEqual('line');
+    expect(newResult.settings.graph.femfit?.labels.p1.plotType).toEqual('line');
   });
 
-  // it('Should update x labels', async () => {
-  //   const settingsState: SettingsState = {
-  //     ...initialState,
-  //     graph: {
-  //       [SensorType.FEMFIT]: graphProfileMocks,
-  //       [SensorType.EMPATICA]: undefined,
-  //       [SensorType.IMU]: undefined,
-  //     },
-  //   };
-  //   const store = mockStore(merge({ settings: settingsState }, initialStore));
+  it('Should update x labels', async () => {
+    const settingsState: SettingsState = {
+      ...initialState,
+      graph: {
+        [SensorType.FEMFIT]: graphProfileMocks,
+        [SensorType.EMPATICA]: undefined,
+        [SensorType.IMU]: undefined,
+      },
+    };
+    const store = mockStore(merge({ settings: settingsState }, initialStore));
 
-  //   const { result } = renderHook(
-  //     () => useGraphProfile(sensorFemfitRespose, sessionByIdResponce),
-  //     {
-  //       wrapper: ({ children }: { children: React.ReactNode }) => (
-  //         <Provider store={store}>{children}</Provider>
-  //       ),
-  //     },
-  //   );
-  //   const useRefSpy = jest.spyOn(React, 'useRef').mockReturnValueOnce(result);
-  //   act(() => {
-  //     result.current.updateXAxis(false);
-  //   });
-  //   const newResult = store.getState();
-  //   expect(result.current.chartData?.labels).toEqual(xLabelsF);
-  //   expect(newResult.settings.graph.femfit?.useTimedelta).toEqual(false);
-  // });
+    const { result } = renderHook(
+      () => useGraphProfile(sensorFemfitRespose, sessionByIdResponce),
+      {
+        wrapper: ({ children }: { children: React.ReactNode }) => (
+          <Provider store={store}>{children}</Provider>
+        ),
+      },
+    );
+    act(() => {
+      result.current.updateXAxis(false);
+    });
+    const newResult = store.getState();
+    expect(newResult.settings.graph.femfit?.useTimedelta).toEqual(false);
+  });
 });

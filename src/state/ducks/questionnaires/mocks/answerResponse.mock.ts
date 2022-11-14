@@ -3,14 +3,14 @@ import { Answer } from '../questionnaires.interface';
 const answerResponce: Answer[] = [
   {
     createdAt: 1667501744,
-    userId: 'qKWyK7uICdNUP5qxZ8ooKCYrKux2',
+    userId: 'uid',
     answers: [3, 1],
-    sessionId: 'jnjMiSRxfnbqH1nKj4S3',
+    sessionId: 'eid',
   },
   {
     createdAt: 1667501745,
-    sessionId: 'jnjMiSRxfnbqH1nKj4S3',
-    userId: 'qKWyK7uICdNUP5qxZ8ooKCYrKux2',
+    sessionId: 'eid',
+    userId: 'uid',
     answers: [3, 1],
   },
 ];

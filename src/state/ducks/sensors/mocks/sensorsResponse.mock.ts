@@ -2,7 +2,20 @@ import { Sensor, SensorState, SensorType } from '../sensors.interface';
 
 export const sensorFemfitRespose: Sensor = {
   id: 'femfit',
-  labels: ['s1', 's2', 's3', 's4'],
+  labels: [
+    'p1',
+    'p2',
+    'p3',
+    'p4',
+    'p5',
+    'p6',
+    't1',
+    't2',
+    't3',
+    't4',
+    't5',
+    't6',
+  ],
   name: SensorType.FEMFIT,
 };
 

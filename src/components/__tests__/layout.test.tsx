@@ -6,6 +6,10 @@ import Layout from '../Layout';
 import { mockStore, MockStore } from '../../state/mocks/store.mock';
 import PatientPage from '../../pages/PatientPage';
 
+jest.mock('../../hooks/useSilentRefresh');
+jest.mock('../../hooks/useBreadcrumbs', () => {
+  return [];
+});
 describe('Test layout', () => {
   it('renders correctlyu', () => {
     const store = mockStore();
@@ -13,9 +17,7 @@ describe('Test layout', () => {
       .create(
         <Provider store={store}>
           <MemoryRouter>
-            <Layout>
-              <PatientPage />
-            </Layout>
+            <PatientPage />
           </MemoryRouter>
         </Provider>,
       )

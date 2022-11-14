@@ -2,8 +2,8 @@ import { SensorType } from '../../sensors/sensors.interface';
 import { Session } from '../sessions.interface';
 
 const sessionByIdResponce: Session = {
-  id: 'exersiseId',
-  userId: 'userId',
+  id: 'eis',
+  userId: 'uid',
   sensor: SensorType.FEMFIT,
   createdAt: 12345678910,
   data: {

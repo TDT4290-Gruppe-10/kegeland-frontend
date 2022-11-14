@@ -1,12 +1,27 @@
 import { ChartType } from 'chart.js';
+import { merge } from 'lodash';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 
 import { SensorType } from '../../../state/ducks/sensors/sensors.interface';
+import graphProfileMocks from '../../../state/ducks/settings/mocks/graphProfile.mocks';
+import { SettingsState } from '../../../state/ducks/settings/settings.interface';
+import { initialState } from '../../../state/ducks/settings/settings.reducer';
+import { initialStore, mockStore } from '../../../state/mocks/store.mock';
 import { store } from '../../../state/store';
 import GraphOptionsModal from '../GraphOptionsModal';
 
 describe('Test graph options modal', () => {
+  const settingsState: SettingsState = {
+    ...initialState,
+    graph: {
+      [SensorType.FEMFIT]: graphProfileMocks,
+      [SensorType.EMPATICA]: undefined,
+      [SensorType.IMU]: undefined,
+    },
+  };
+
+  const store = mockStore(merge({ settings: settingsState }, initialStore));
   it('renders correctly', () => {
     const tree = renderer
       .create(
@@ -17,11 +32,11 @@ describe('Test graph options modal', () => {
               name: SensorType.FEMFIT,
               labels: ['s1', 's2', 's3'],
             }}
-            updatePlot={(label: string, plot: ChartType) => {}}
-            resetPlot={() => {}}
-            updateXAxis={(value: boolean) => {}}
+            updatePlot={jest.fn()}
+            resetPlot={jest.fn()}
+            updateXAxis={jest.fn()}
             isOpen={false}
-            onClose={() => {}}
+            onClose={jest.fn()}
           />
         </Provider>,
       )

@@ -7,7 +7,7 @@ import {
   initGraphProfile,
 } from '../graph.utils';
 import { SensorType } from '../../state/ducks/sensors/sensors.interface';
-import { session } from '../../components/mocks/sessions.mock';
+import { sessionMock } from '../../components/mocks/sessions.mock';
 import { sensor } from '../mocks/sensor.mock';
 import { GraphProfile } from '../../state/ducks/settings/settings.interface';
 
@@ -30,7 +30,7 @@ describe('Test graph utils', () => {
   });
 
   it('getSessionDuration should return', () => {
-    const size = getSessionDuration(session);
+    const size = getSessionDuration(sessionMock);
     const newSize = 1101;
     expect(size).toEqual(newSize);
   });
