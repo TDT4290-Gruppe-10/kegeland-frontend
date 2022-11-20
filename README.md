@@ -1,48 +1,117 @@
 ![CI/CD](https://github.com/TDT4290-Gruppe-10/kegeland-frontend/actions/workflows/on-pull-request.yml/badge.svg)
 [![codecov](https://codecov.io/gh/TDT4290-Gruppe-10/kegeland-frontend/branch/master/graph/badge.svg?token=PA8OQV3AWD)](https://codecov.io/gh/TDT4290-Gruppe-10/kegeland-frontend)
-# Getting Started with Create React App
+# Description
+This repository is a part of a delivery in the course [TDT4290 costumer driven project](https://www.ntnu.no/studier/emner/TDT4290/2017/1#tab=omEmnet) at NTNU. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Here, you will find the code for the Web application part of the project, which in general is a SPA dashboard application intended for physicians to be able to monitor their patients exercises. 
 
-## Available Scripts
+The intention behind this service is to prove the concept of vieview exercise data when trained by patients. This repository depends on the [API](https://github.com/TDT4290-Gruppe-10/kegeland-api) to run properly. Also related to this project is [a mobile game](https://github.com/TDT4290-Gruppe-10/kegeland-app) where patients can exercise, using a sensor.
 
-In the project directory, you can run:
+The project is build on the [React](https://reactjs.org/) framework - a Javascript library to build user interfaces. It is, however, written with [Typescript](https://www.typescriptlang.org/)
 
-### `npm start`
+# Overall structure
+This application was initialized using the [`create-react-app`](https://create-react-app.dev/docs/getting-started/) script. 
+As such the structure of this code is as follows:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```{r}
+.
+├── README.md
+├── package-lock.json
+├── package.json
+├── public
+│   ├── index.html
+│   ├── ...
+│   └── robots.txt
+├── src
+│   ├── App.tsx
+│   ├── pages
+│   │   ├── ExercisePage.tsx
+│   │   ├── NotFound.tsx
+│   │   ├── PatientListPage.tsx
+│   │   ├── PatientPage.tsx
+│   │   └── auth
+│   │       ├── LoginPage.tsx
+│   │       └── RegisterPage.tsx
+│   ├── components
+│   │   ├── DataTable.tsx
+│   │   ├── ...
+│   │   └── WeeklySessionsChart.tsx
+│   ├── state
+│   │   ├── ducks
+│   │   │   ├── auth
+│   │   │   │   ├── auth.actions.ts
+│   │   │   │   ├── auth.helpers.ts
+│   │   │   │   ├── auth.interface.ts
+│   │   │   │   └── auth.reducer.ts
+│   │   │   ├── patients
+│   │   │   │   └── ...
+│   │   │   ├── questionnaires
+│   │   │   │   └── ...
+│   │   │   ├── sensors
+│   │   │   │   └── ...
+│   │   │   ├── sessions
+│   │   │   │   └── ...
+│   │   │   └── settings
+│   │   │       ├── settings.interface.ts
+│   │   │       └── settings.reducer.ts
+│   │   └── store.ts
+│   └── utils
+│   │   ├── apiCaller.ts
+│   │   ├── ...
+│   │   └── tunk.utiles.ts
+│   ├── constants
+│   │   └── ...
+│   ├── hoc
+│   │   └── ...
+│   ├── hooks
+│   │   └── ...
+│   ├── index.module.scss
+│   ├── index.tsx
+│   ├── react-app-env.d.ts
+│   ├── routes
+│   │   └── index.tsx
+│   ├── styles
+│   │   └── reset.css
+│   ├── types.ts
+├── tsconfig.json
+└── yarn.lock
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+The important elements of this structure is that `App.tsx` reders the routes defined in the `routes/index.tsx` file, where the program defines paths for the pages of the web application and decides which `pages`-component to render. Wihin a page, user interface is defined and utilzes often used components like buttons or similar from the `components` directory. 
 
-### `npm test`
+Many pages will also use the custom hooks developed to retrieve data relevant for its usage. This implementation can be found in the `state` directory, which in turn uses the prgrams implementation of [Redux](https://react-redux.js.org/). These will also use some functions from the `utils` directory, where standard and reusable functions are defined.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Example usage of hooks:
+```
+import usePatientList from '../hooks/usePatientList';
 
-### `npm run build`
+const PatientListPage: React.FC = () => {
+  const { patients, loading, filterData } = usePatientList();
+  // patients is now a variable with list of all the patients in the system
+  return (
+    <>
+      {/*React Code*/}
+    </>
+   )
+  }
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Getting started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+In order to test, run or develop on the project, one must perform the following steps:
 
-### `npm run eject`
+## 1. Prerequisites
+1. Download and install [`node`](https://nodejs.org/en/download/)
+2. Install [`yarn`](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) using `npm install --global yarn`
+3. Clone, install and run the [API](https://github.com/TDT4290-Gruppe-10/kegeland-api) for this project
+4. Clone this project. `git clone https://github.com/TDT4290-Gruppe-10/kegeland-api.git`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 2. Runing the code
+1. cd into the folder of this project from a terminal
+2. run `yarn install`
+3. once everyting is installed, you can run `yarn start` to spin up a development server on your local machine
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 4. Testing
+run `yarn test` to run the tests developed for this repository.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
