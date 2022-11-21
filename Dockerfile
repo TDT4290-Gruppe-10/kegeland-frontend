@@ -2,15 +2,14 @@ FROM node:16-alpine
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-RUN yarn install --pure-lockfile
-
 COPY . .
 
-RUN yarn build
+RUN npm ci 
 
-RUN yarn global add serve
+RUN npm run build
+
+RUN npm install -g serve
 
 EXPOSE 3000
 
-CMD serve -s build
+CMD [ "npx", "serve", "build" ]
