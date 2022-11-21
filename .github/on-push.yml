@@ -38,4 +38,3 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "tdt4290-frontend"
           heroku_email: "simekri@stud.ntnu.no"
-          usedocker: true
