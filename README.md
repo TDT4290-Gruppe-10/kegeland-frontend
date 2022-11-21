@@ -1,4 +1,5 @@
-![CI/CD](https://github.com/TDT4290-Gruppe-10/kegeland-frontend/actions/workflows/on-pull-request.yml/badge.svg)
+[![CI](https://github.com/TDT4290-Gruppe-10/kegeland-frontend/actions/workflows/on-pull-request.yml/badge.svg)](https://github.com/TDT4290-Gruppe-10/kegeland-frontend/actions/workflows/on-pull-request.yml)
+[![CD](https://github.com/TDT4290-Gruppe-10/kegeland-frontend/actions/workflows/on-push.yml/badge.svg)](https://github.com/TDT4290-Gruppe-10/kegeland-frontend/actions/workflows/on-push.yml)
 [![codecov](https://codecov.io/gh/TDT4290-Gruppe-10/kegeland-frontend/branch/master/graph/badge.svg?token=PA8OQV3AWD)](https://codecov.io/gh/TDT4290-Gruppe-10/kegeland-frontend)
 # Description
 This repository is a part of a delivery in the course [TDT4290 costumer driven project](https://www.ntnu.no/studier/emner/TDT4290/2017/1#tab=omEmnet) at NTNU. 

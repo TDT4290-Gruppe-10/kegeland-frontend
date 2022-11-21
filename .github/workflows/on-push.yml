@@ -1,0 +1,36 @@
+# Workflow configuration for continuous deployment
+
+name: CD
+
+on:
+  push:
+    branches: ['master']
+
+  workflow_dispatch:
+
+jobs:
+  # Deploy the frontend as a Heroku app
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "tdt4290-frontend"
+          heroku_email: "simekri@stud.ntnu.no"
+          usedocker: true
