@@ -8,6 +8,11 @@ export enum Token {
   REFRESH_TOKEN = 'refresh_token',
 }
 
+/**
+ * Updates the state after a user is signed in
+ * @param state the current state
+ * @param action the action returned
+ */
 export const signInReducer = (
   state: AuthState,
   action: PayloadAction<LoginResponse>,
@@ -18,6 +23,11 @@ export const signInReducer = (
   state.userDetails = action.payload.details;
 };
 
+/**
+ * Updates the state after a user is signed out
+ * @param state the current state
+ * @param action the action returned
+ */
 export const signOutReducer = (state: AuthState) => {
   state.isSignedIn = false;
   state.authUser = undefined;

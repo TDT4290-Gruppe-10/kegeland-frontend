@@ -9,6 +9,10 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { MdConstruction } from 'react-icons/md';
+
+/**
+ * Page for future implements
+ */
 const NotImplemented: React.FC = () => {
   const navigate = useNavigate();
   return (

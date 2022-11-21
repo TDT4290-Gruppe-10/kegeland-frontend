@@ -31,6 +31,12 @@ type ApiCallerProps = Pick<
   'url' | 'method' | 'data' | 'params'
 >;
 
+/**
+ * Util function for handling calls to the api
+ * @param config configuration for the api call
+ * @returns http response
+ * @see {@link ApiCallerProps}
+ */
 export const apiCaller = <T = unknown>(config: ApiCallerProps) =>
   httpInstance
     .request<T>({ baseURL: `${API_URL}/api/`, ...config })

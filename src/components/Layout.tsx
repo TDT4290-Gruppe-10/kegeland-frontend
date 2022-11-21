@@ -11,6 +11,13 @@ type LayoutProps = {
   children?: React.ReactNode;
 } & WithAuthUserProps;
 
+/**
+ * Component that render the layout of the web application
+ * With sidebar and header
+ *
+ * @param props the props
+ * @see {@link LayoutProps}
+ */
 const Layout: React.FC<LayoutProps> = ({ user, children }) => {
   useSilentRefresh();
   const [isGreaterThanMd] = useMediaQuery('(min-width: 48em)');

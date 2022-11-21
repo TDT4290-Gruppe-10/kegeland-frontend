@@ -2,6 +2,12 @@
 import { Flex, Spinner } from '@chakra-ui/react';
 import { ComponentType, useEffect, useState } from 'react';
 
+/**
+ * Higher-order component for spinner
+ * wrappes the component with a spinner
+ * @param Component the component that is wrappes
+ * @param duration the duration of the spinner
+ */
 const withSpinner =
   <P extends object>(
     Component: ComponentType<P>,

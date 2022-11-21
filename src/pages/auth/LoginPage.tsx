@@ -19,11 +19,17 @@ import { signInUser } from '../../state/ducks/auth/auth.actions';
 import { LoginDTO } from '../../state/ducks/auth/auth.interface';
 import { clearError } from '../../state/ducks/auth/auth.reducer';
 
+/**
+ * Validate schema
+ */
 const validateSchema = Yup.object({
   email: Yup.string().required().email('Email is not valid').label('Email'),
   password: Yup.string().required().label('Password'),
 });
 
+/**
+ * Login page
+ */
 const LoginPage = () => {
   const navigate = useNavigate();
   const { error, loading } = useAppSelector((state) => state.auth);

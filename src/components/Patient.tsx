@@ -13,6 +13,12 @@ interface PatientProps {
   id: string;
 }
 
+/**
+ * Components that render a patient
+ *
+ * @param param0
+ * @see {@link PatientProps}
+ */
 const Patient: React.FC<PatientProps> = ({ name, id }) => {
   return (
     <WrapItem

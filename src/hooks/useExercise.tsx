@@ -16,6 +16,12 @@ import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
 import useSessionSensorSelector from './useSensorSelector';
 
+/**
+ * Sort answers by created at field
+ *
+ * @param answers the answers
+ * @returns sorted list of answers
+ */
 const sortAnswers = (answers: Answer[]) =>
   answers.length >= 2
     ? answers.sort((a, b) => {
@@ -26,6 +32,13 @@ const sortAnswers = (answers: Answer[]) =>
       })
     : [];
 
+/**
+ * Custom hook for fetching a exerecise with questionnaires and answers
+ *
+ * @param patientId id for a patient
+ * @param exerciseId id for an exercise
+ * @returns a sensor type used in the exercise, the session, questionnaire and answers
+ */
 const useExercise = (patientId: string, exerciseId: string) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);

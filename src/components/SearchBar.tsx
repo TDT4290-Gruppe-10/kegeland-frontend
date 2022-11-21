@@ -4,6 +4,11 @@ import { AiOutlineSearch } from 'react-icons/ai';
 
 type SearchBarProps = ComponentProps<typeof Input>;
 
+/**
+ * Component that renders the searchbar
+ * @param props the props
+ * @see {@link SearchBarProps}
+ */
 const SearchBar: React.FC<SearchBarProps> = (props) => {
   return (
     <InputGroup>

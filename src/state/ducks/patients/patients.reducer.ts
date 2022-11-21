@@ -9,6 +9,9 @@ import {
 import { fetchPatientById, fetchPatients } from './patients.actions';
 import { PatientsState } from './patients.interface';
 
+/**
+ * Initial state for patient state
+ */
 export const initialState: PatientsState = {
   loading: false,
   patient: undefined,
@@ -16,6 +19,9 @@ export const initialState: PatientsState = {
   error: undefined,
 };
 
+/**
+ * The reducer for patients state
+ */
 const patientsSlice = createSlice({
   name: 'patients',
   initialState,

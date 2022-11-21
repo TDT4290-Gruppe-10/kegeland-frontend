@@ -26,6 +26,11 @@ import {
 import useAppDispatch from './useAppDispatch';
 import useGraphProfileSelector from './useGraphProfileSelector';
 
+/**
+ * Custom hook for the graph profile, updating and setting
+ * @param sensor the sensor type
+ * @param session the session
+ */
 const useGraphProfile = (sensor: Sensor, session: Session) => {
   const dispatch = useAppDispatch();
   const profile = useGraphProfileSelector(sensor.name);
@@ -38,6 +43,11 @@ const useGraphProfile = (sensor: Sensor, session: Session) => {
   );
   const [chartData, setChartData] = useState<ChartData>();
 
+  /**
+   * hide a label
+   * @param _event the chart event
+   * @param item the legend item
+   */
   const handleHideLabel = (_event: ChartEvent, item: LegendItem) => {
     const key = item.text;
     const idx = getLabelIndex(sensor, key);
@@ -56,6 +66,9 @@ const useGraphProfile = (sensor: Sensor, session: Session) => {
     }
   };
 
+  /**
+   * Update the plot to diffetent plot type
+   */
   const updatePlot = useCallback(
     (label: string, plot: ChartType) => {
       const idx = getLabelIndex(sensor, label);
@@ -75,6 +88,9 @@ const useGraphProfile = (sensor: Sensor, session: Session) => {
     [profile],
   );
 
+  /**
+   * Update the x axis to delta time
+   */
   const updateXAxis = useCallback(
     (value: boolean) => {
       if (profile) {
@@ -90,6 +106,9 @@ const useGraphProfile = (sensor: Sensor, session: Session) => {
     [profile],
   );
 
+  /**
+   * Reset plot
+   */
   const resetPlot = useCallback(() => {
     const newProfile = initGraphProfile(sensor);
     dispatch(setGraphProfile({ sensor: sensor.name, profile: newProfile }));
@@ -126,6 +145,9 @@ const useGraphProfile = (sensor: Sensor, session: Session) => {
   };
 };
 
+/**
+ * chart options
+ */
 const options: ChartOptions<'line'> = {
   responsive: true,
   animation: false,

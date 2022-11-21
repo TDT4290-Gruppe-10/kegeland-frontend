@@ -1,5 +1,10 @@
 import { SessionDataPoint } from '../state/ducks/sessions/sessions.interface';
 
+/**
+ * Export the session data to a csv
+ * @param labels the sensor labels
+ * @param data the session data
+ */
 export const exportSessionAsCsv = (
   labels: string[],
   data: Record<string, SessionDataPoint[]>,

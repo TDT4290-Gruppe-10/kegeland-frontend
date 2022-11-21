@@ -6,6 +6,11 @@ import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
 
 export const REFRESH_INTERVAL_MS = 50 * 60 * 1000;
+
+/**
+ * Custom hook for silent refresh to the api
+ * @returns true
+ */
 const useSilentRefresh = () => {
   const dispatch = useAppDispatch();
   const { isSignedIn } = useAppSelector((state) => state.auth);

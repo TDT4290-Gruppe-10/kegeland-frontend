@@ -13,6 +13,13 @@ type WeeklySessionsChartProps = {
   numWeeks: number;
 };
 
+/**
+ * initializer chart data
+ * @param sessions sessions for a user
+ * @param numWeeks number of weeks for chart
+ * @param color color for chart
+ * @returns chart data
+ */
 const initChartData = (
   sessions: LeanSession[],
   numWeeks: number,
@@ -31,6 +38,13 @@ const initChartData = (
   };
 };
 
+/**
+ * Component that renders the weekly sessions chart for a user
+ *
+ * @param props the props
+ * @see {@link WeeklySessionsChartProps}
+ * @see {@link initChartData}
+ */
 const WeeklySessionsChart: React.FC<WeeklySessionsChartProps> = ({
   sessions,
   numWeeks,
@@ -59,6 +73,9 @@ const WeeklySessionsChart: React.FC<WeeklySessionsChartProps> = ({
   );
 };
 
+/**
+ * Options for bar chart
+ */
 const chartOptions: ChartOptions<'bar'> = {
   responsive: true,
   plugins: {

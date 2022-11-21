@@ -9,12 +9,18 @@ import {
 import { fetchSensor } from './sensors.actions';
 import { SensorState } from './sensors.interface';
 
+/**
+ * Initial state for sensor state
+ */
 export const initialState: SensorState = {
   loading: false,
   data: {},
   error: undefined,
 };
 
+/**
+ * Reducer for sensor state
+ */
 const sensorSlice = createSlice({
   name: 'sensors',
   initialState,

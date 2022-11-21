@@ -14,6 +14,12 @@ interface ExerciseProps {
   sensor: string;
 }
 
+/**
+ * Component that renders an exercise
+ *
+ * @param props the props
+ * @see {@link ExerciseProps}
+ */
 const Exercise: React.FC<ExerciseProps> = ({ date, id, sensor }) => {
   const { patientId } = useParams();
 

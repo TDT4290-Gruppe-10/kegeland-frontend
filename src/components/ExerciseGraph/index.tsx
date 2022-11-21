@@ -19,6 +19,14 @@ type ExerciseGraphProps = {
   session: Session;
 };
 
+/**
+ * Component that renders the exercise graph
+ *
+ * @param props the props
+ * @see {@link ExerciseGraphProps}
+ * @see {@link GraphOptionsModal}
+ * @see {@link GraphHeader}
+ */
 const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ sensor, session }) => {
   const { options, chartData, chartRef, updatePlot, resetPlot, updateXAxis } =
     useGraphProfile(sensor, session);

@@ -27,6 +27,13 @@ export type GraphOptionsProps = {
   updateXAxis: (value: boolean) => void;
 } & Omit<ModalProps, 'children'>;
 
+/**
+ * Component that renders the graph option modal
+ * Has dunctionality to open/close the modal
+ *
+ * @param props the props
+ * @see {@link GraphOptionsProps}
+ */
 const GraphOptionsModal: React.FC<GraphOptionsProps> = ({
   sensor,
   updatePlot,

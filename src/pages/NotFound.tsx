@@ -1,6 +1,9 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * 404 not found page
+ */
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
   return (

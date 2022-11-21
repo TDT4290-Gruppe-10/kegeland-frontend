@@ -21,14 +21,31 @@ type QuestionnaireResultsProps = {
   answers: Answer[];
 };
 
+/**
+ * Gets offset for min value for a question in questionnaire
+ *
+ * @param minVal (String) min value for questionnaire
+ * @returns (number) offset
+ */
 const getMinValOffset = (minVal: string) => {
   return `${Math.max(16 - Math.round(minVal.length / 2), 0) * 4}px`;
 };
 
+/**
+ * Gets offset for max value for a question in questionnaire
+ *
+ * @param minVal (String) max value for questionnaire
+ * @returns (number) offset
+ */
 const getMaxValOffset = (maxVal: string) => {
   return `${Math.max(8 - Math.round(maxVal.length / 2), 0) * 4}px`;
 };
 
+/**
+ * Component that renders the questionnaire results for a session
+ * @param props the props
+ * @see {@link QuestionnaireResultsProps}
+ */
 const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
   questionnaire,
   answers,

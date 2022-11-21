@@ -13,11 +13,21 @@ import {
   GraphProfile,
 } from '../state/ducks/settings/settings.interface';
 
+/**
+ * Get the label index
+ * @param sensor the sesnor
+ * @param key the key to find the index
+ * @returns number
+ */
 export const getLabelIndex = (sensor: Sensor, key: string) => {
   const idx = sensor.labels.indexOf(key);
   return idx !== -1 ? idx : undefined;
 };
 
+/**
+ * get the lenth of the session
+ * @param session the session to find the durarion of
+ */
 export const getSessionDuration = (session: Session) => {
   if (size(session.data) > 1) {
     const ts = Object.keys(session.data);
@@ -26,6 +36,11 @@ export const getSessionDuration = (session: Session) => {
   return 0;
 };
 
+/**
+ * Split the session data to the sensor labels
+ * @param sensor the sensor
+ * @param session the session
+ */
 export const splitSensorData = (sensor: Sensor, session: Session) => {
   const data: Array<SessionDataPoint[]> = Array.from(
     Array(sensor.labels.length),
@@ -37,6 +52,10 @@ export const splitSensorData = (sensor: Sensor, session: Session) => {
   return data;
 };
 
+/**
+ * The init graph profile
+ * @param sensor the sensor
+ */
 export const initGraphProfile = (sensor: Sensor) => {
   return {
     useTimedelta: false,
@@ -50,6 +69,11 @@ export const initGraphProfile = (sensor: Sensor) => {
   } as GraphProfile;
 };
 
+/**
+ * get the x labels
+ * @param xData the timestamps
+ * @param useDelta if the x labels should show in delta time
+ */
 export const getXLabels = (xData: number[], useDelta: boolean) => {
   if (useDelta) {
     return getTimedeltaLabels(xData);
@@ -57,15 +81,29 @@ export const getXLabels = (xData: number[], useDelta: boolean) => {
   return getDateLabels(xData);
 };
 
+/**
+ * Get date x labels
+ * @param xData the timestamps
+ */
 export const getDateLabels = (xData: number[]) => {
   return xData.map((val) => moment(val).format('LTS')); // new Date(Number(val)));
 };
 
+/**
+ * Get the x labels for delta
+ * @param xData the timestampls
+ */
 export const getTimedeltaLabels = (xData: number[]) => {
   const start = xData[0];
   return [0, ...xData.slice(1).map((val) => val - start)];
 };
 
+/**
+ * init graph data
+ * @param xData timestamps
+ * @param yData the sensor data
+ * @param profile the profile
+ */
 export const initChartData = (
   xData: (number | string)[],
   yData: SessionDataPoint[][],
@@ -88,6 +126,11 @@ export const initChartData = (
   };
 };
 
+/**
+ * Get the colors
+ * @param idx numbers of labels
+ * @returns list of colors
+ */
 export const getColor = (idx: number) => {
   return GRAPH_COLORS[idx % GRAPH_COLORS.length];
 };

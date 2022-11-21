@@ -12,6 +12,12 @@ type PatientsTableProps = {
   patients: Patient[];
 };
 
+/**
+ * Component that renders patient table
+ *
+ * @param props the props
+ * @see {@link PatientsTableProps}
+ */
 const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const navigate = useNavigate();
