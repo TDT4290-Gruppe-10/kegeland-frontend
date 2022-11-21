@@ -5,8 +5,7 @@ import { Token } from '../state/ducks/auth/auth.helpers';
 import { isApiError } from './isApiError';
 import { retrieveToken } from './storage';
 
-const baseURL = 'http://localhost:8000/api/';
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 const httpInstance = axios.create({
   timeout: 5000,
 });
@@ -29,7 +28,7 @@ type ApiCallerProps = Pick<
 
 export const apiCaller = <T = unknown>(config: ApiCallerProps) =>
   httpInstance
-    .request<T>({ baseURL, ...config })
+    .request<T>({ baseURL: `${API_URL}/api/`, ...config })
     .then((res) => res.data)
     .catch((err) => {
       if (err instanceof Error) {
