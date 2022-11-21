@@ -8,6 +8,10 @@ import { retrieveToken } from './storage';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 const httpInstance = axios.create({
   timeout: 5000,
+  withCredentials: false,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 });
 
 httpInstance.interceptors.request.use(
