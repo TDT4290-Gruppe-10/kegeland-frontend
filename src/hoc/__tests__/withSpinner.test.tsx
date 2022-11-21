@@ -1,10 +1,11 @@
 import { Text } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../state/mocks/store.mock';
 import renderer from 'react-test-renderer';
-import withSpinner from '../withSpinner';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
+
+import withSpinner from '../withSpinner';
+import { mockStore } from '../../state/mocks/store.mock';
 
 jest.useFakeTimers();
 jest.spyOn(global, 'setTimeout');

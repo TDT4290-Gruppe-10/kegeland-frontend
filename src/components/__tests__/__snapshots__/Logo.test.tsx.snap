@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test logo renders correctlyu 1`] = `
+exports[`Test logo renders correctly 1`] = `
 <h1
   className="chakra-heading css-1hss139"
 >

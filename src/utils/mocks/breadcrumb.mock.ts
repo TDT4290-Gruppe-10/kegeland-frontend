@@ -1,5 +1,3 @@
-import { matchPath } from 'react-router-dom';
-
 export const routePathLoginMock = {
   title: 'Login',
   active: true,

@@ -7,7 +7,6 @@ import {
   interceptRejected,
   baseURL as API_URL,
 } from '../apiCaller';
-
 import * as storage from '../storage';
 
 describe('Test apiCaller', () => {

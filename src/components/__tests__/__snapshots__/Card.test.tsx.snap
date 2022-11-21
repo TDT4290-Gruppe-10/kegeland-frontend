@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test card renders correctlyu 1`] = `
+exports[`Test card renders correctly 1`] = `
 <div
   align="center"
   className="css-190jc56"

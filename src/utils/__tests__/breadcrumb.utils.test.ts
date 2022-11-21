@@ -1,7 +1,5 @@
-import { matchPath } from 'react-router-dom';
-
 import { matchRouteDefinitions } from '../breadcrumb.utils';
-import routes, { RoutePath } from '../../routes';
+import routes from '../../routes';
 import {
   routePathLoginMock,
   routePathPatientPatientIdMock,

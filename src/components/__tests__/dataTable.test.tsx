@@ -4,7 +4,7 @@ import { SensorType } from '../../state/ducks/sensors/sensors.interface';
 import DataTable from '../DataTable';
 
 describe('Test DataTable', () => {
-  it('renders correctlyu', () => {
+  it('renders correctly', () => {
     const tree = renderer
       .create(
         <DataTable

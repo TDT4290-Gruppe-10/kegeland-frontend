@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => {
 });
 
 describe('Test excercise', () => {
-  it('renders correctlyu', () => {
+  it('renders correctly', () => {
     const tree = renderer
       .create(
         <Provider store={mockStore()}>

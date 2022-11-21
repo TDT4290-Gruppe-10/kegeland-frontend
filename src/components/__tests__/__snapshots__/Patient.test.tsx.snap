@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test patient renders correctlyu 1`] = `
+exports[`Test patient renders correctly 1`] = `
 <li
   className="chakra-wrap__listitem css-2guh51"
 >

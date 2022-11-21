@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text } from '@chakra-ui/react';
-import withSilentRefresh from '../withSilentRefresh';
-import * as silentRefreshHook from '../../hooks/useSilentRefresh';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import { mockStore } from '../../state/mocks/store.mock';
 import { MemoryRouter } from 'react-router-dom';
+
+import withSilentRefresh from '../withSilentRefresh';
+import * as silentRefreshHook from '../../hooks/useSilentRefresh';
+import { mockStore } from '../../state/mocks/store.mock';
 
 describe('Test withAppWrapper-hoc', () => {
   const MockComponent: React.FC = () => {

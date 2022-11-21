@@ -1,6 +1,8 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { map } from 'lodash';
+
 import answerResponce from '../../state/ducks/questionnaires/mocks/answerResponse.mock';
 import questionnairesResponce from '../../state/ducks/questionnaires/mocks/questionnairesResponse.mock';
 import { sensorFemfitRespose } from '../../state/ducks/sensors/mocks/sensorsResponse.mock';
@@ -9,7 +11,6 @@ import { mockStore } from '../../state/mocks/store.mock';
 import * as apiCaller from '../../utils/apiCaller';
 import useExercise from '../useExercise';
 import sessionByIdResponce from '../../state/ducks/sessions/mocks/sessionByIdResponce.mock';
-import { map } from 'lodash';
 import { fetchSensor } from '../../state/ducks/sensors/sensors.actions';
 
 describe('Test useExercise-hook', () => {
