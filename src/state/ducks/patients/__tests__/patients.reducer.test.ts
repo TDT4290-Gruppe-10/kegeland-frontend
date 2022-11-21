@@ -3,7 +3,7 @@ import { apiCaller } from '../../../../utils/apiCaller';
 import { fetchPatientById, fetchPatients } from '../patients.actions';
 import { clearPatientsState, initialState } from '../patients.reducer';
 import fetchPatentByIdResponse from '../mocks/fetchPatientByIdResponse.mock';
-import fetchPatentsResponse from '../mocks/fetchPatientsRespnse.mock';
+import fetchPatentsResponseMock from '../mocks/fetchPatientsRespnse.mock';
 
 jest.mock('../../../../utils/apiCaller');
 
@@ -42,12 +42,12 @@ describe('Test patients slice', () => {
 
   it('fetchPatients/fulfilled should set patients state', async () => {
     (apiCaller as any).mockImplementation(() =>
-      Promise.resolve(fetchPatentsResponse),
+      Promise.resolve(fetchPatentsResponseMock),
     );
     await store.dispatch(fetchPatients());
     const state = store.getState().patients;
 
-    expect(state.data).toEqual(fetchPatentsResponse);
+    expect(state.data).toEqual(fetchPatentsResponseMock);
     expect(state.loading).toBeFalsy();
     expect(state.error).toBeFalsy();
   });

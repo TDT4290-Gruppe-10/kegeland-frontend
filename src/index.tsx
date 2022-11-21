@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import ReactDOM from 'react-dom/client';
 import { ChakraProvider } from '@chakra-ui/react';
 import moment from 'moment';

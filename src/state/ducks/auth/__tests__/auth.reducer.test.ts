@@ -2,9 +2,9 @@ import { store } from '../../../store';
 import { refresh, signInUser, signOutUser, signUpUser } from '../auth.actions';
 import { initialState } from '../auth.reducer';
 import { apiCaller } from '../../../../utils/apiCaller';
-import loginResponse from '../mocks/loginResponse.mock';
+import loginResponseMock from '../mocks/loginResponse.mock';
 import { UserRole } from '../auth.interface';
-import refreshResponse from '../mocks/refreshResponse.mock';
+import refreshResponseMock from '../mocks/refreshResponse.mock';
 import { retrieveTokens } from '../../../../utils/storage';
 
 jest.mock('../../../../utils/apiCaller');
@@ -38,7 +38,9 @@ describe('Test auth slice', () => {
   });
 
   it('signInUser/fulfilled should set authorized state', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.resolve(loginResponse));
+    (apiCaller as any).mockImplementation(() =>
+      Promise.resolve(loginResponseMock),
+    );
     await store.dispatch(
       signInUser({ email: 'ola.nordmann@gmail.com', password: '12324' }),
     );
@@ -47,8 +49,8 @@ describe('Test auth slice', () => {
       ...initialState,
       loading: false,
       isSignedIn: true,
-      authUser: { id: loginResponse.id, email: loginResponse.email },
-      userDetails: loginResponse.details,
+      authUser: { id: loginResponseMock.id, email: loginResponseMock.email },
+      userDetails: loginResponseMock.details,
       error: undefined,
     };
     expect(state).toEqual(newState);
@@ -101,7 +103,9 @@ describe('Test auth slice', () => {
   });
 
   it('signUpUser/fulfilled should set authorized state', async () => {
-    (apiCaller as any).mockImplementation(() => Promise.resolve(loginResponse));
+    (apiCaller as any).mockImplementation(() =>
+      Promise.resolve(loginResponseMock),
+    );
     await store.dispatch(
       signUpUser({
         name: { firstName: 'ola', lastName: 'Nordmann' },
@@ -115,8 +119,8 @@ describe('Test auth slice', () => {
       ...initialState,
       loading: false,
       isSignedIn: true,
-      authUser: { id: loginResponse.id, email: loginResponse.email },
-      userDetails: loginResponse.details,
+      authUser: { id: loginResponseMock.id, email: loginResponseMock.email },
+      userDetails: loginResponseMock.details,
       error: undefined,
     };
     expect(state).toEqual(newState);
@@ -136,13 +140,13 @@ describe('Test auth slice', () => {
 
   it('refresh/resolved should set refreshtoken state', async () => {
     (apiCaller as any).mockImplementation(() =>
-      Promise.resolve(refreshResponse),
+      Promise.resolve(refreshResponseMock),
     );
     await store.dispatch(refresh());
     // eslint-disable-next-line camelcase
     const { refresh_token, id_token, access_token } = await retrieveTokens();
-    expect(refresh_token).toBe(refreshResponse.refreshToken);
-    expect(id_token).toBe(refreshResponse.idToken);
-    expect(access_token).toBe(refreshResponse.accessToken);
+    expect(refresh_token).toBe(refreshResponseMock.refreshToken);
+    expect(id_token).toBe(refreshResponseMock.idToken);
+    expect(access_token).toBe(refreshResponseMock.accessToken);
   });
 });

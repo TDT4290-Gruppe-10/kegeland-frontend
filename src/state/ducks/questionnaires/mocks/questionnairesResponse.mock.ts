@@ -2,7 +2,7 @@ import { SensorType } from '../../sensors/sensors.interface';
 import { Questionnaire } from '../questionnaires.interface';
 
 const questionnairesResponce: Questionnaire = {
-  id: '9x7rPmACKqoE48EUh3Ds',
+  id: 'qid',
   name: 'Test questionnaire',
   sensor: SensorType.FEMFIT,
   questions: [

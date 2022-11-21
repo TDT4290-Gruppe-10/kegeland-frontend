@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
-import { user } from '../mocks/user.mock';
+import { userMock } from '../mocks/user.mock';
 import PatientsTable from '../PatientsTable';
 
 describe('Test patients table', () => {
@@ -9,7 +9,7 @@ describe('Test patients table', () => {
     const tree = renderer
       .create(
         <MemoryRouter>
-          <PatientsTable patients={[user, user]} />
+          <PatientsTable patients={[userMock, userMock]} />
         </MemoryRouter>,
       )
       .toJSON();

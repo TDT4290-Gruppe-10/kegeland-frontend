@@ -5,7 +5,7 @@ import { SensorType } from '../../state/ducks/sensors/sensors.interface';
 import Exercise from '../Exercise';
 
 describe('Test excercise', () => {
-  it('renders correctlyu', () => {
+  it('renders correctly', () => {
     const tree = renderer
       .create(
         <MemoryRouter>

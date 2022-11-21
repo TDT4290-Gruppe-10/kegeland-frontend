@@ -1,25 +1,25 @@
 import { UserRole } from '../../auth/auth.interface';
 import { Patient } from '../patients.interface';
 
-const fetchPatentsResponse: Patient[] = [
+const fetchPatentsResponseMock: Patient[] = [
   {
-    id: 'oaijdoqwdjfwou',
-    email: 'ola.nordmann@gmail.com',
+    id: 'uid',
+    email: 'olaf.eriksen@mail.com',
     roles: [UserRole.PATIENT],
     name: {
-      lastName: 'Nordmann',
-      firstName: 'Ola',
+      lastName: 'Eriksen',
+      firstName: 'Olaf',
     },
   },
   {
-    id: 'oaijdoqwdjfwou',
-    email: 'ola.nordmann@gmail.com',
+    id: 'uid2',
+    email: 'kari.thomasen@mail.com',
     roles: [UserRole.PATIENT],
     name: {
-      lastName: 'Nordmann',
-      firstName: 'Ola',
+      lastName: 'Thomasen',
+      firstName: 'Kari',
     },
   },
 ];
 
-export default fetchPatentsResponse;
+export default fetchPatentsResponseMock;

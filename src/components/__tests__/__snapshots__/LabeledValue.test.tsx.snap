@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test labeled value renders correctlyu 1`] = `
+exports[`Test labeled value renders correctly 1`] = `
 <div
   className="chakra-stack css-84zodg"
 >

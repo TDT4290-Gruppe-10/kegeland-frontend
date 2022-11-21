@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { session } from '../../components/mocks/sessions.mock';
+import { sessionMock } from '../../components/mocks/sessions.mock';
 import {
   getLastSessionTimeDelta,
   getNumSessionsThisWeek,
@@ -10,12 +10,12 @@ import {
 describe('Test sesison utils', () => {
   it('groupByWeek should return currenct week and 0', () => {
     const currWeek = moment().week();
-    const state = groupByWeek([session], 1);
+    const state = groupByWeek([sessionMock], 1);
     expect(state).toEqual({ [currWeek]: 0 });
   });
 
   it('getNumSessionsThisWeek should return undefined', () => {
-    const index = getNumSessionsThisWeek([session]);
+    const index = getNumSessionsThisWeek([sessionMock]);
     expect(index).toEqual(0);
   });
 

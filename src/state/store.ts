@@ -26,7 +26,7 @@ const persistConfig = {
   whitelist: ['settings', 'auth'],
 };
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   settings: settingsReducer,
   auth: authReducer,
   patients: patientsReducer,

@@ -136,3 +136,19 @@ exports[`Test questionnaire results renders correctly 1`] = `
   </div>
 </div>
 `;
+
+exports[`Test questionnaire results renders correctly no answers 1`] = `
+<p
+  className="chakra-text css-12b8tya"
+>
+  No answers for the assigned questionnaire
+</p>
+`;
+
+exports[`Test questionnaire results renders correctly no questionnaire 1`] = `
+<p
+  className="chakra-text css-12b8tya"
+>
+  No questionnaire assigned
+</p>
+`;

@@ -27,6 +27,7 @@
     "chart.js": "^3.9.1",
     "chartjs-adapter-moment": "^1.0.0",
     "chartjs-plugin-zoom": "^1.2.1",
+    "cypress": "^11.0.1",
     "dayjs": "^1.11.6",
     "formik": "^2.2.9",
     "formik-chakra-ui": "^1.6.0",
@@ -72,6 +73,7 @@
     "@types/redux-logger": "^3.0.9",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.41.0",
+    "cypress-plugin-tab": "^1.0.5",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
@@ -85,5 +87,18 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "react-axe": "^3.5.4"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/$1"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/?!(static-container)"
+    ],
+    "clearMocks": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!**/node_modules/**"
+    ]
   }
 }

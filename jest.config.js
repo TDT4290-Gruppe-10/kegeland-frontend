@@ -1,5 +1,4 @@
 module.exports = {
-  preset: 'react',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
   },
