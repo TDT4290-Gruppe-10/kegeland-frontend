@@ -6,6 +6,8 @@ COPY . .
 
 RUN npm install --force
 
+RUN npm run lint
+
 RUN npm run build
 
 RUN npm install -g serve
