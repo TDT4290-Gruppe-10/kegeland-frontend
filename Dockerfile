@@ -10,6 +10,8 @@ RUN npm run lint
 
 RUN npm run build
 
+ENV REACT_APP_API_URL "https://tdt4290-api.herokuapp.com/"
+
 RUN npm install -g serve
 
 EXPOSE 3000
