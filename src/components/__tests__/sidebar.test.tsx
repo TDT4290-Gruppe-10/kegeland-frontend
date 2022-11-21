@@ -1,7 +1,7 @@
-import { DarkMode } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
+
 import { mockStore } from '../../state/mocks/store.mock';
 import { userMock } from '../mocks/user.mock';
 import Sidebar from '../Sidebar';

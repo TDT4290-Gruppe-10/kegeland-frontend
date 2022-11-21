@@ -14,6 +14,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { isFunction } from 'lodash';
+import { isFSA } from '@reduxjs/toolkit/src/createAction';
+
 import { rootReducer, RootState } from '../store';
 import { initialState as authState } from '../ducks/auth/auth.reducer';
 import { initialState as patientsState } from '../ducks/patients/patients.reducer';
@@ -21,7 +23,6 @@ import { initialState as questionnairesState } from '../ducks/questionnaires/que
 import { initialState as sensorsState } from '../ducks/sensors/sensors.reducer';
 import { initialState as sessionState } from '../ducks/sessions/sessions.reducer';
 import { initialState as settingsState } from '../ducks/settings/settings.reducer';
-import { isFSA } from '@reduxjs/toolkit/src/createAction';
 
 type MockState = Omit<RootState, '_persist'>;
 type ActionHistory = { type: string; meta: any; payload: any }[];

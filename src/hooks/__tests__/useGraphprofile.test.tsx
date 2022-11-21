@@ -1,11 +1,11 @@
 import { act, renderHook } from '@testing-library/react';
-import React, { useRef } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
-import answerResponce from '../../state/ducks/questionnaires/mocks/answerResponse.mock';
+import { merge } from 'lodash';
+
 import { sensorFemfitRespose } from '../../state/ducks/sensors/mocks/sensorsResponse.mock';
 import { initialStore, mockStore } from '../../state/mocks/store.mock';
 import sessionByIdResponce from '../../state/ducks/sessions/mocks/sessionByIdResponce.mock';
-import { merge } from 'lodash';
 import useGraphProfile from '../useGraphProfile';
 import { initialState } from '../../state/ducks/settings/settings.reducer';
 import { SensorType } from '../../state/ducks/sensors/sensors.interface';
@@ -19,12 +19,6 @@ const xLabelsT = getXLabels(
   }),
   true,
 );
-const xLabelsF = getXLabels(
-  Object.keys(sessionByIdResponce.data).map((key) => {
-    return Number(key);
-  }),
-  false,
-);
 
 describe('Test useGraphProfile-hook', () => {
   const settingsState: SettingsState = {
@@ -37,7 +31,7 @@ describe('Test useGraphProfile-hook', () => {
   };
   const store = mockStore(merge({ settings: settingsState }, initialStore));
 
-  it('should return x labels, and list of datapoints one of the sensor label for all the timestamps ', async () => {
+  it('should return x labels, and list of datapoints one of the sensor label for all the timestamps', async () => {
     const { result } = renderHook(
       () => useGraphProfile(sensorFemfitRespose, sessionByIdResponce),
       {

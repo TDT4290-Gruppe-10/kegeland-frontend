@@ -1,12 +1,11 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { map, merge } from 'lodash';
+import { map } from 'lodash';
 import moment from 'moment';
 import { Provider } from 'react-redux';
+
 import { sessionsMock } from '../../components/mocks/sessions.mock';
 import { fetchSessions } from '../../state/ducks/sessions/sessions.actions';
-import { SessionsState } from '../../state/ducks/sessions/sessions.interface';
-import { initialState } from '../../state/ducks/sessions/sessions.reducer';
-import { initialStore, mockStore } from '../../state/mocks/store.mock';
+import { mockStore } from '../../state/mocks/store.mock';
 import * as apiCaller from '../../utils/apiCaller';
 import usePatient from '../usePatient';
 

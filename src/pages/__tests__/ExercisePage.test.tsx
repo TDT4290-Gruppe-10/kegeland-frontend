@@ -4,7 +4,6 @@ import renderer from 'react-test-renderer';
 
 import { mockStore } from '../../state/mocks/store.mock';
 import ExercisePage from '../ExercisePage';
-import * as useBreadcrums from '../../hooks/useBreadcrumbs';
 
 const mockedNavigate = jest.fn();
 jest.mock('react-router-dom', () => {
@@ -21,7 +20,7 @@ jest.mock('../../hooks/useBreadcrumbs', () => {
 });
 
 describe('Test excercise', () => {
-  it('renders correctlyu', () => {
+  it('renders correctly', () => {
     const tree = renderer
       .create(
         <Provider store={mockStore()}>

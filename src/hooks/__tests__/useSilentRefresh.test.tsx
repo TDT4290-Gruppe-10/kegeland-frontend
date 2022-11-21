@@ -1,14 +1,15 @@
 import React from 'react';
-import * as storage from '../../utils/storage';
 import { cloneDeep, map, set } from 'lodash';
+import { renderHook, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+
+import * as storage from '../../utils/storage';
 import * as apiCaller from '../../utils/apiCaller';
 import { AuthState } from '../../state/ducks/auth/auth.interface';
 import { initialState } from '../../state/ducks/auth/auth.reducer';
 import { initialStore, mockStore } from '../../state/mocks/store.mock';
-import useSilentRefresh, { REFRESH_INTERVAL_MS } from '../useSilentRefresh';
-import { act, renderHook, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { refresh, signOutUser } from '../../state/ducks/auth/auth.actions';
+import useSilentRefresh from '../useSilentRefresh';
+import { refresh } from '../../state/ducks/auth/auth.actions';
 
 jest.useFakeTimers();
 
@@ -21,7 +22,6 @@ const mockTokens = {
 
 describe('Test useilentRefresh-hook', () => {
   const setIntervalSpy = jest.spyOn(global, 'setInterval');
-  const clearIntervalSpy = jest.spyOn(global, 'clearInterval');
 
   beforeEach(() => {
     jest

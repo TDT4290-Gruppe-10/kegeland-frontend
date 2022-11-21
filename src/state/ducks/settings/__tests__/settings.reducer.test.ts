@@ -1,7 +1,5 @@
-import { getXLabels } from '../../../../utils/graph.utils';
 import { store } from '../../../store';
 import { SensorType } from '../../sensors/sensors.interface';
-import sessionByIdResponce from '../../sessions/mocks/sessionByIdResponce.mock';
 import graphProfileMocks from '../mocks/graphProfile.mocks';
 import { initialState, setGraphProfile } from '../settings.reducer';
 

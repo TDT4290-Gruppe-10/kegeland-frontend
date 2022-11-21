@@ -1,4 +1,3 @@
-import { ChartType } from 'chart.js';
 import { merge } from 'lodash';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
@@ -8,7 +7,6 @@ import graphProfileMocks from '../../../state/ducks/settings/mocks/graphProfile.
 import { SettingsState } from '../../../state/ducks/settings/settings.interface';
 import { initialState } from '../../../state/ducks/settings/settings.reducer';
 import { initialStore, mockStore } from '../../../state/mocks/store.mock';
-import { store } from '../../../state/store';
 import GraphOptionsModal from '../GraphOptionsModal';
 
 describe('Test graph options modal', () => {
