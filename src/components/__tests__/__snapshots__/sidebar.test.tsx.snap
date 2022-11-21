@@ -137,7 +137,7 @@ exports[`Test Sidebar renders correctly closed 1`] = `
           />
         </svg>
         <a
-          href="/foo0"
+          href="/not-implemented"
           onClick={[Function]}
         >
           <p
@@ -171,7 +171,7 @@ exports[`Test Sidebar renders correctly closed 1`] = `
           />
         </svg>
         <a
-          href="/foo1"
+          href="/not-implemented"
           onClick={[Function]}
         >
           <p
@@ -205,7 +205,7 @@ exports[`Test Sidebar renders correctly closed 1`] = `
           />
         </svg>
         <a
-          href="/foo2"
+          href="/not-implemented"
           onClick={[Function]}
         >
           <p
@@ -372,7 +372,7 @@ exports[`Test Sidebar renders correctly open 1`] = `
           />
         </svg>
         <a
-          href="/foo0"
+          href="/not-implemented"
           onClick={[Function]}
         >
           <p
@@ -406,7 +406,7 @@ exports[`Test Sidebar renders correctly open 1`] = `
           />
         </svg>
         <a
-          href="/foo1"
+          href="/not-implemented"
           onClick={[Function]}
         >
           <p
@@ -440,7 +440,7 @@ exports[`Test Sidebar renders correctly open 1`] = `
           />
         </svg>
         <a
-          href="/foo2"
+          href="/not-implemented"
           onClick={[Function]}
         >
           <p

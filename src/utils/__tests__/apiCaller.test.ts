@@ -5,7 +5,6 @@ import {
   httpInstance,
   interceptFulfilled,
   interceptRejected,
-  baseURL as API_URL,
 } from '../apiCaller';
 import * as storage from '../storage';
 
@@ -18,7 +17,7 @@ describe('Test apiCaller', () => {
     await apiCaller(config);
     const reqConfig = httpMock.mock.calls[0][0];
     expect(reqConfig).toStrictEqual({
-      baseURL: API_URL,
+      baseURL: process.env.REACT_APP_API_URL + '/api/',
       url: 'test',
       method: 'POST',
     });
@@ -32,7 +31,7 @@ describe('Test apiCaller', () => {
     await apiCaller(config);
     const reqConfig = httpMock.mock.calls[0][0];
     expect(reqConfig).toStrictEqual({
-      baseURL: API_URL,
+      baseURL: process.env.REACT_APP_API_URL + '/api/',
       ...config,
     });
   });
@@ -45,7 +44,7 @@ describe('Test apiCaller', () => {
     await apiCaller(config);
     const reqConfig = httpMock.mock.calls[0][0];
     expect(reqConfig).toStrictEqual({
-      baseURL: API_URL,
+      baseURL: process.env.REACT_APP_API_URL + '/api/',
       ...config,
     });
   });

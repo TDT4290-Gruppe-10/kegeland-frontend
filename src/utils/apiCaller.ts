@@ -6,7 +6,7 @@ import { isApiError } from './isApiError';
 import { retrieveToken } from './storage';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
-const httpInstance = axios.create({
+export const httpInstance = axios.create({
   timeout: 5000,
   withCredentials: false,
   headers: {
