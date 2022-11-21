@@ -18,6 +18,10 @@ type PatientPageParams = {
   patientId: string;
 };
 
+/**
+ * Patient page for displaying data for a patient,
+ * with a graph of exercises the latest weeks and key values
+ */
 const PatientPage: React.FC = () => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const { patientId } = useParams<PatientPageParams>();

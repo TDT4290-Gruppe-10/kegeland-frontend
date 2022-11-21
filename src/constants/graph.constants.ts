@@ -1,3 +1,6 @@
+/**
+ * graph colors
+ */
 export const GRAPH_COLORS = [
   '#008FFB',
   '#00E396',

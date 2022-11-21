@@ -12,6 +12,12 @@ type MenuItemProps = {
   icon?: IconType;
 };
 
+/**
+ * Component that renders a menu item in menu
+ *
+ * @param props the props
+ * @see {@link MenuItemProps}
+ */
 const Item: React.FC<MenuItemProps> = ({ title, mode, to, icon }) => {
   const isDark = mode === 'dark';
   return (
@@ -34,6 +40,9 @@ const Item: React.FC<MenuItemProps> = ({ title, mode, to, icon }) => {
   );
 };
 
+/**
+ * Default mode dark
+ */
 Item.defaultProps = {
   mode: 'dark',
 };
@@ -49,6 +58,13 @@ type MenuProps = {
   children?: React.ReactNode;
 } & ComponentProps<typeof VStack>;
 
+/**
+ * Component that renders the menu
+ *
+ * @param props the props
+ * @see {@link MenuProps}
+ * @see {@link item}
+ */
 const Menu: React.FunctionComponent<MenuProps> & MenuComponents = ({
   title,
   mode,

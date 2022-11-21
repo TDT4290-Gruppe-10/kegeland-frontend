@@ -10,6 +10,9 @@ import {
 import { fetchSessionById, fetchSessions } from './sessions.actions';
 import { SessionsState } from './sessions.interface';
 
+/**
+ * Initial state session state
+ */
 export const initialState: SessionsState = {
   loading: false,
   session: undefined,
@@ -17,6 +20,9 @@ export const initialState: SessionsState = {
   error: undefined,
 };
 
+/**
+ * Reducer for session state
+ */
 const sessionsSlice = createSlice({
   name: 'sessions',
   initialState,

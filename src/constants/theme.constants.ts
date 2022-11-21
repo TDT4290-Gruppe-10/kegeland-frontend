@@ -1,5 +1,8 @@
 import { extendTheme, withDefaultColorScheme } from '@chakra-ui/react';
 
+/**
+ * Color theme for the web application
+ */
 const theme = extendTheme(
   {
     colors: {

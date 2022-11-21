@@ -14,6 +14,12 @@ type ExerciseTableProps = {
   patientId: string;
 };
 
+/**
+ * Component that renders the exercise table
+ *
+ * @param props the props
+ * @
+ */
 const ExerciseTable: React.FC<ExerciseTableProps> = ({
   sessions,
   patientId,

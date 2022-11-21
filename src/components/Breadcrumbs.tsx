@@ -11,6 +11,12 @@ type BreadcrumbsProps = {
   crumbs: RoutePath[];
 } & React.ComponentProps<typeof Breadcrumb>;
 
+/**
+ * Components for rendering breadcrumbs naviagtion
+ * @param props the props
+ * @see {@link BreadcrumbsProps}
+ * @see {@link }
+ */
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ crumbs, ...props }) => {
   return (
     <Breadcrumb {...props}>

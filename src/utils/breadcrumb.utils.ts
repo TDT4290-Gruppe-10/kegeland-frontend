@@ -3,9 +3,19 @@ import { matchPath, PathMatch } from 'react-router-dom';
 
 import { RoutePath, RoutePathDefinition } from '../routes';
 
+/**
+ * Join paths with / and replace // with /
+ * @param paths the paths to join
+ * @returns string
+ */
 export const joinPaths = (paths: string[]) =>
   paths.join('/').replace(/\/\/+/g, '/');
 
+/**
+ * Exteact route params
+ * @param routeMatch the route match
+ * @returns string |null
+ */
 export const extractRouteParam = (routeMatch: PathMatch<string>) => {
   const matches = [...routeMatch.pathname.matchAll(/(?=)\/(\w*)$/gm)];
   if (matches) {
@@ -14,6 +24,13 @@ export const extractRouteParam = (routeMatch: PathMatch<string>) => {
   return undefined;
 };
 
+/**
+ * Generate param path title
+ * @param definition the route definition
+ * @param match the match
+ * @see {@link RoutePathDefinition}
+ * @returns string
+ */
 export const generateParamPathTitle = (
   definition: RoutePathDefinition,
   match: PathMatch<string>,
@@ -22,9 +39,23 @@ export const generateParamPathTitle = (
   return `${definition.title}-${param || ''}`;
 };
 
+/**
+ * If the path active
+ * @param match the match
+ * @param currPath the path to check if active
+ * @returns boolean
+ */
 export const isPathActive = (match: PathMatch<string>, currPath: string) =>
   match.pathname === currPath;
 
+/**
+ * Match the route definitions
+ * @param definitions the route definition
+ * @param pathname the pathname
+ * @param parentPath the parent path
+ * @see {@link RoutePathDefinition}
+ * @returns
+ */
 export const matchRouteDefinitions = (
   definitions: RoutePathDefinition[],
   pathname: string,

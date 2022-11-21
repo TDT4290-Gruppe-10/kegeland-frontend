@@ -9,6 +9,11 @@ import {
   Questionnaire,
 } from './questionnaires.interface';
 
+/**
+ * Thunk for fething assigned questionnaire for a sensor and patient
+ * @param data the request params
+ * @see {@link Questionnaire}
+ */
 export const fetchAssignedQuestionnaire = createAsyncThunk(
   'questionnaires/fetchAssignedQuestionnaire',
   async (data: FetchAssignedQuestionnaireDTO) => {
@@ -21,6 +26,11 @@ export const fetchAssignedQuestionnaire = createAsyncThunk(
   },
 );
 
+/**
+ * Thunk for tething answers for a questionnaire
+ * @param data the request params
+ * @see {@link Answer}
+ */
 export const fetchQuestionnaireAnswers = createAsyncThunk(
   'questionnaires/fetchQuestionnaireAnswers',
   async (data: FetchQuestionnaireAnswersDTO) => {

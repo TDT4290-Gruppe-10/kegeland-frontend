@@ -1,6 +1,11 @@
 import { Token } from '../state/ducks/auth/auth.helpers';
 import { AuthTokens } from '../state/ducks/auth/auth.interface';
 
+/**
+ * Stores auth tokens in async storage for persistent storage.
+ * @param param0 the auth tokens to store
+ * @see {@link AuthTokens}
+ */
 export const storeTokens = async ({
   accessToken,
   idToken,
@@ -11,11 +16,22 @@ export const storeTokens = async ({
   localStorage.setItem('refresh_token', refreshToken);
 };
 
+/**
+ * Retrieves a token from storage if it exists
+ * @param token key of the token to retrieve
+ * @returns token if found, else null
+ * @see {@link Token}
+ */
 export const retrieveToken = async (token: Token) => {
   const res = localStorage.getItem(token);
   return res;
 };
 
+/**
+ * Retrieves all auth tokens stored in async storage
+ * @returns all auth tokens in storage
+ * @see {@link AuthTokens}
+ */
 export const retrieveTokens = async () => {
   const accessToken = localStorage.getItem('access_token');
   const idToken = localStorage.getItem('id_token');
@@ -31,6 +47,9 @@ export const retrieveTokens = async () => {
   };
 };
 
+/**
+ * Removes all tokens stored in async storage
+ */
 export const removeTokens = async () => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('id_token');

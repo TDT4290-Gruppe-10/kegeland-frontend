@@ -9,6 +9,12 @@ type RejectedAction = ReturnType<GenericAsyncThunk['rejected']>;
 
 type FulfilledAction = ReturnType<GenericAsyncThunk['fulfilled']>;
 
+/**
+ * Checks if a thunk action is pending
+ * @param action thunk action
+ * @param reducer the reducer to use
+ * @returns true if the state of the thunk action matches pattern '/pending'
+ */
 export function isPendingAction(
   action: AnyAction,
   reducer: string,
@@ -18,6 +24,12 @@ export function isPendingAction(
   );
 }
 
+/**
+ * Checks if a thunk action is rejected
+ * @param action thunk action
+ * @param reducer the reducer to use
+ * @returns true if the state of the thunk action matches pattern '/rejected'
+ */
 export function isRejectedAction(
   action: AnyAction,
   reducer: string,
@@ -27,6 +39,12 @@ export function isRejectedAction(
   );
 }
 
+/**
+ * Checks if a thunk action is fulfilled
+ * @param action thunk action
+ * @param reducer the reducer to use
+ * @returns true if the state of the thunk action matches pattern '/fulfilled'
+ */
 export function isFulfilledAction(
   action: AnyAction,
   reducer: string,

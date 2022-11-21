@@ -18,6 +18,9 @@ import { clearError } from '../../state/ducks/auth/auth.reducer';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 
+/**
+ * From data
+ */
 type FormData = {
   firstName: string;
   lastName: string;
@@ -26,6 +29,9 @@ type FormData = {
   confirmPassword: string;
 };
 
+/**
+ * Validation schema
+ */
 const validationSchema = Yup.object({
   email: Yup.string().required().email('Email is not valid').label('Email'),
   firstName: Yup.string().required().label('First name'),
@@ -40,6 +46,9 @@ const validationSchema = Yup.object({
   }),
 });
 
+/**
+ * Register page
+ */
 const RegisterPage = () => {
   const { error, loading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();

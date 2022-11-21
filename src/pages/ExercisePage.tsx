@@ -12,6 +12,9 @@ type ExercisePageParams = {
   exerciseId: string;
 };
 
+/**
+ * ExercisePage. Shows an exercise for a patient, with a graph over the sensor datapoints
+ */
 const ExercisePage: React.FC = () => {
   const { patientId, exerciseId } = useParams<ExercisePageParams>();
   const { answers, questionnaire, sensor, session, loading } = useExercise(

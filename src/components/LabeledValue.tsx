@@ -9,6 +9,12 @@ type LabeledValueProps = {
   iconProps?: ComponentProps<typeof Icon>;
 } & ComponentProps<typeof HStack>;
 
+/**
+ * Component that renders labeled value
+ *
+ * @param props the props
+ * @see {@link LabeledValueProps}
+ */
 const LabeledValue: React.FC<LabeledValueProps> = ({
   label,
   value,

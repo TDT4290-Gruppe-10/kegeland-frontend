@@ -6,6 +6,13 @@ type CardProps = {
   containerProps?: ComponentProps<typeof Skeleton>;
 } & ComponentProps<typeof Box>;
 
+/**
+ * Component for rendering Card
+ * It has inbuilt functionality for loading
+ *
+ * @param props the props
+ * @see {@link CardProps}
+ */
 const Card: React.FC<CardProps> = ({
   loading,
   children,

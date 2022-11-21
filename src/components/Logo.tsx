@@ -1,5 +1,9 @@
 import { Heading } from '@chakra-ui/react';
 
+/**
+ * Component that renders logo
+ * @returns logo
+ */
 const Logo: React.FC = () => {
   return (
     <Heading

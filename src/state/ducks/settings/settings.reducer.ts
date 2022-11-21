@@ -4,6 +4,9 @@ import { SensorType } from '../sensors/sensors.interface';
 
 import { GraphProfile, SettingsState } from './settings.interface';
 
+/**
+ * Initial state for setting state
+ */
 export const initialState: SettingsState = {
   graph: {
     femfit: undefined,
@@ -12,6 +15,9 @@ export const initialState: SettingsState = {
   },
 };
 
+/**
+ * Reducer and action for setting state
+ */
 const settingsSlice = createSlice({
   name: 'settings',
   initialState,

@@ -11,6 +11,14 @@ type HeaderProps = {
   toggleSidebar: () => void;
 };
 
+/**
+ * Component that renders header
+ * Has built in functionality to open/close sidebar
+ *
+ * @param props the props
+ * @see {@link  HeaderProps}
+ * @returns
+ */
 const Header: React.FC<HeaderProps> = ({ toggleSidebar, isSidebarOpen }) => {
   const navigate = useNavigate();
   const { crumbs } = useBreadcrumbs();

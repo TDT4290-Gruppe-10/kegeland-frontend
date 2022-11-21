@@ -10,6 +10,11 @@ type UserAvatarProps = {
   mode?: ThemeMode;
 };
 
+/**
+ * Component that renders the user avatar
+ * @param props the props
+ * @see {@link UserAvatarProps}
+ */
 const UserAvatar: React.FC<UserAvatarProps> = ({ user, mode }) => {
   const isDark = mode === 'dark';
   return (

@@ -5,6 +5,9 @@ import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import usePatientList from '../hooks/usePatientList';
 
+/**
+ * Patient list page for displaying all the phycisions patients
+ */
 const PatientListPage: React.FC = () => {
   const { patients, loading, filterData } = usePatientList();
 

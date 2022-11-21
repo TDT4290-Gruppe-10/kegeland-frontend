@@ -4,6 +4,11 @@ import { apiCaller } from '../../../utils/apiCaller';
 
 import { Patient } from './patients.interface';
 
+/**
+ * Thunk action for fetchin a patients from id from the database
+ * @param data the request params
+ * @see {@link Patient}
+ */
 export const fetchPatientById = createAsyncThunk(
   'patients/fetchPatientById',
   async (id: string) =>
@@ -13,6 +18,10 @@ export const fetchPatientById = createAsyncThunk(
     }),
 );
 
+/**
+ * Thunk action from fetching a list of patients from the database
+ * @see {@link Patient}
+ */
 export const fetchPatients = createAsyncThunk(
   'patients/fetchPatients',
   async () =>

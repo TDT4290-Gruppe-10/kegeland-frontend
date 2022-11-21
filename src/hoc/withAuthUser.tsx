@@ -9,6 +9,12 @@ export type WithAuthUserProps = {
   user: User;
 };
 
+/**
+ * Higher-order component to check if user is logged in
+ * Wrapps the component so the user gets redirectet to login if not logged in
+ * @param Component the component to wrap
+ * @returns component | null
+ */
 const withAuthUser =
   <P extends WithAuthUserProps>(
     Component: ComponentType<P>,

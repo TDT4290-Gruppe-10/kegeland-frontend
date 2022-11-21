@@ -10,6 +10,12 @@ import {
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
 
+/**
+ * Custom hook to retrive the patient from the database
+ *
+ * @param patientId id for a patient
+ * @returns patient data, loading and details for a patient
+ */
 const usePatient = (patientId: string) => {
   const dispatch = useAppDispatch();
 

@@ -22,6 +22,10 @@ export type RoutePath = {
   match: PathMatch<string>;
 };
 
+/**
+ * The route definitions
+ * @see {@link RoutePathDefinition}
+ */
 const routes: RoutePathDefinition[] = [
   {
     title: 'Home',

@@ -17,6 +17,11 @@ import {
   ResetPasswordDTO,
 } from './auth.interface';
 
+/**
+ * Thunk action for signin a user
+ * @param data the request params
+ * @see {@link LoginResponse}
+ */
 export const signInUser = createAsyncThunk(
   'auth/signInUser',
   async (data: LoginDTO) =>
@@ -28,6 +33,11 @@ export const signInUser = createAsyncThunk(
     ),
 );
 
+/**
+ * Thunk action for refreshin the auth tokens
+ * @param data the request params
+ * @see {@link AuthTokens}
+ */
 export const refresh = createAsyncThunk('auth/refresh', async () => {
   const token = await retrieveToken(Token.REFRESH_TOKEN);
   if (!token) {
@@ -42,6 +52,9 @@ export const refresh = createAsyncThunk('auth/refresh', async () => {
   }).then(async (res) => storeTokens(res));
 });
 
+/**
+ * Thunk action for signing out a user
+ */
 export const signOutUser = createAsyncThunk('auth/signOutUser', async () =>
   apiCaller<void>({ url: 'auth/logout', method: 'POST' }).then(async (res) => {
     await removeTokens();
@@ -49,6 +62,11 @@ export const signOutUser = createAsyncThunk('auth/signOutUser', async () =>
   }),
 );
 
+/**
+ * Thunk action for signing up a user
+ * @param data the request params
+ * @see {@link RegisterResponse}
+ */
 export const signUpUser = createAsyncThunk(
   'auth/signUpUser',
   async (data: RegisterDTO) =>
@@ -62,6 +80,11 @@ export const signUpUser = createAsyncThunk(
     }),
 );
 
+/**
+ * Thunk action for reseting the password
+ * @param data the request params
+ * @see {@link ResetPasswordDTO}
+ */
 export const resetPassword = createAsyncThunk(
   'auth/resetPassword',
   async (data: ResetPasswordDTO) => {

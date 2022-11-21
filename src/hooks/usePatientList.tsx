@@ -8,12 +8,20 @@ import { clearPatientsState } from '../state/ducks/patients/patients.reducer';
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
 
+/**
+ * Custom hook to fetch patients from the database
+ * @returns list of patients, loading and afilter
+ */
 const usePatientList = () => {
   const dispatch = useAppDispatch();
   const prevSearchStr = useRef<string>();
   const [patients, setPatients] = useState<Patient[]>([]);
   const { data, loading } = useAppSelector((state) => state.patients);
 
+  /**
+   * For filtering data in search
+   * @see {@link filter}
+   */
   const filterData = useCallback(
     (value: string) => {
       const searchStr = value.toLowerCase();

@@ -38,6 +38,14 @@ export type DataTableProps<T extends object> = {
   columns: ColumnDef<T, any>[];
 };
 
+/**
+ * Components that renders the DataTable
+ * Both PatientTable and ExerciseTable
+ *
+ * @param props the props
+ * @see {@link DataTableProps}
+ * @see {@link useReactTable}
+ */
 const DataTable = <T extends object>({ data, columns }: DataTableProps<T>) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const table = useReactTable<T>({

@@ -21,6 +21,11 @@ type SidebarProps = {
   isOpen: boolean;
 };
 
+/**
+ * Component that renders the sidebar
+ * @param props the props
+ * @see {@link SidebarProps}
+ */
 const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
   const dispatch = useAppDispatch();
   const isDark = mode === 'dark';

@@ -12,6 +12,9 @@ import {
 } from './questionnaires.actions';
 import { QuestionnaireState } from './questionnaires.interface';
 
+/**
+ * Initial state for questionnaire state
+ */
 export const initialState: QuestionnaireState = {
   loading: false,
   error: undefined,
@@ -20,6 +23,9 @@ export const initialState: QuestionnaireState = {
   answers: [],
 };
 
+/**
+ * Reducer for questionnaire state
+ */
 const questionnairesSlice = createSlice({
   name: 'questionnaires',
   initialState,

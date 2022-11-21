@@ -20,6 +20,11 @@ type GraphHeaderProps = {
   toggleSettings: () => void;
 };
 
+/**
+ * Component that renders the graph header
+ * @param props the props
+ * @see {@link GraphHeaderProps}
+ */
 const GraphHeader: React.FC<GraphHeaderProps> = ({
   sensor,
   session,
