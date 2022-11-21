@@ -16,4 +16,4 @@ RUN npm install -g serve
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD [ "npx", "serve", "build" ]
