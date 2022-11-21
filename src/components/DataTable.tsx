@@ -181,7 +181,7 @@ const DataTable = <T extends object>({ data, columns }: DataTableProps<T>) => {
             <IconButton
               aria-label="Go to last page"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-              isDisabled={!!table.getCanNextPage()}
+              isDisabled={!table.getCanNextPage()}
               icon={<ArrowRightIcon h={3} w={3} />}
               ml={4}
             />
