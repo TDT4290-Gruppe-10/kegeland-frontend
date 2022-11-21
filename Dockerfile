@@ -8,9 +8,9 @@ RUN npm install --force
 
 RUN npm run lint
 
-RUN npm run build
-
 ENV REACT_APP_API_URL "https://tdt4290-api.herokuapp.com/"
+
+RUN npm run build
 
 RUN npm install -g serve
 
