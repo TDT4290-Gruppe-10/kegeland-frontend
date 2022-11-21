@@ -4,6 +4,7 @@ import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
 import ExercisePage from '../pages/ExercisePage';
 import NotFoundPage from '../pages/NotFound';
+import NotImplemented from '../pages/NotImplemented';
 import PatientsPage from '../pages/PatientListPage';
 import PatientPage from '../pages/PatientPage';
 
@@ -36,6 +37,11 @@ const routes: RoutePathDefinition[] = [
     title: 'Register',
     path: '/register',
     element: <RegisterPage />,
+  },
+  {
+    title: 'Not Implemented',
+    path: 'not-implemented',
+    element: <NotImplemented />,
   },
   {
     path: '/patients/:patientId',

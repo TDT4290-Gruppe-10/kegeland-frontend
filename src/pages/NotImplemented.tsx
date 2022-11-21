@@ -1,7 +1,15 @@
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Text,
+  Wrap,
+  WrapItem,
+} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-
-const NotFoundPage: React.FC = () => {
+import { MdConstruction } from 'react-icons/md';
+const NotImplemented: React.FC = () => {
   const navigate = useNavigate();
   return (
     <Flex
@@ -11,11 +19,16 @@ const NotFoundPage: React.FC = () => {
       alignItems="center"
       textAlign="center"
       flexDirection="column">
-      <Heading fontSize="9xl" as="h1" color="gray.700">
-        404
+      <Heading fontSize="9xl" as="h1">
+        <Wrap align="center" color="gray.700">
+          <WrapItem>
+            <MdConstruction />
+          </WrapItem>
+          <WrapItem>501</WrapItem>
+        </Wrap>
       </Heading>
       <Text fontSize={26} fontWeight="semibold" color="gray.600">
-        Oops, this page could not be found!
+        This page is a planned feature in the future.
       </Text>
 
       <Box>
@@ -27,4 +40,4 @@ const NotFoundPage: React.FC = () => {
   );
 };
 
-export default NotFoundPage;
+export default NotImplemented;

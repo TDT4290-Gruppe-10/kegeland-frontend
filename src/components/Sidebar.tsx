@@ -54,19 +54,19 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
           <Menu.Item
             mode={mode}
             title="Edit Questionnaires"
-            to={'/foo0'}
+            to={'/not-implemented'}
             icon={AiOutlineProfile}
           />
           <Menu.Item
             mode={mode}
             title="Edit Exercises"
-            to={'/foo1'}
+            to={'/not-implemented'}
             icon={AiOutlineRise}
           />
           <Menu.Item
             mode={mode}
             title="Settings"
-            to={'/foo2'}
+            to={'/not-implemented'}
             icon={AiOutlineSetting}
           />
         </Menu>
